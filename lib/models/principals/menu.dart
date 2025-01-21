@@ -1,43 +1,43 @@
 // To parse this JSON data, do
 //
-//     final plat = platFromJson(jsonString);
+//     final menu = menuFromJson(jsonString);
 
-import 'package:meta/meta.dart';
+import 'package:jenos_app/models/principals/plat.dart';
 import 'dart:convert';
 
-Plat platFromJson(String str) => Plat.fromJson(json.decode(str));
+Menu menuFromJson(String str) => Menu.fromJson(json.decode(str));
 
-String platToJson(Plat data) => json.encode(data.toJson());
+String menuToJson(Menu data) => json.encode(data.toJson());
 
-class Plat {
+class Menu {
     int id;
     String nom;
     String details;
     String photo;
-    int prix;
     int like;
     bool status;
+    List<Plat> plats;
     DateTime createdAt;
 
-    Plat({
+    Menu({
         required this.id,
         required this.nom,
         required this.details,
         required this.photo,
-        required this.prix,
-        this.like = 0,
-        this.status = false,
+        required this.like,
+        required this.status,
+        required this.plats,
         required this.createdAt,
     });
 
-    factory Plat.fromJson(Map<String, dynamic> json) => Plat(
+    factory Menu.fromJson(Map<String, dynamic> json) => Menu(
         id: json["id"],
         nom: json["nom"],
         details: json["details"],
         photo: json["photo"],
-        prix: json["prix"],
         like: json["like"],
         status: json["status"],
+        plats: List<Plat>.from(json["plats"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
     );
 
@@ -46,9 +46,9 @@ class Plat {
         "nom": nom,
         "details": details,
         "photo": photo,
-        "prix": prix,
         "like": like,
         "status": status,
+        "plats": List<dynamic>.from(plats.map((x) => x)),
         "created_at": "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
     };
 }
