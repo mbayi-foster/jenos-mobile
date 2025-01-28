@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jenos_app/views/components/primary_button.dart';
 import 'package:jenos_app/views/components/secondary_button.dart';
 
@@ -25,16 +26,27 @@ class _AccessPageState extends State<AccessPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  textAlign: TextAlign.center,
+                  "Découvrez les meilleurs plats de plus de 5000 restaurants et une livraison rapide à votre porte",
+                style: TextStyle(
+                    fontSize: width * 0.04,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black54
+                ),),
+                SizedBox(height: 55),
                 PrimaryButton(
-                    onPressed: () {},
-                    fontSize: width * 0.06,
-                    padding: width * 0.27,
+                    onPressed: () {
+                      Get.toNamed("/login");
+                    },
+                    fontSize: width * 0.04,
+                    padding: width * 0.3,
                     title: "Se connecter"),
                 SizedBox(height: 25),
                 SecondaryButton(
                     onPressed: () {},
-                    fontSize: width * 0.06,
-                    padding: width * 0.23,
+                    fontSize: width * 0.04,
+                    padding: width * 0.26,
                     title: "Créer un compte")
               ],
             ),

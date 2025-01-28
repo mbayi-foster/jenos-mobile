@@ -3,11 +3,12 @@ import 'package:jenos_app/utils/colors.dart';
 
 class PrimaryButton extends StatefulWidget {
   final String title;
-  Color bg;
-  double fontSize;
-  double padding;
+  final Color bg;
+  final double fontSize;
+  final double padding;
   final VoidCallback onPressed;
-  PrimaryButton({
+  
+  const PrimaryButton({
     super.key,
     required this.onPressed,
     required this.fontSize,
@@ -27,7 +28,8 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       onPressed: widget.onPressed,
       child: Text(
         widget.title,
-        style: TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
+        style:
+            TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
       ),
       style: ElevatedButton.styleFrom(
         backgroundColor: widget.bg,
