@@ -7,7 +7,7 @@ class MyInput extends StatefulWidget {
   final TextInputType keyboardType;
   final double size;
   final bool isPassword;
-   final String? Function(String?)? validator;
+  final String? Function(String?)? validator;
 
   const MyInput(
       {super.key,
