@@ -17,7 +17,8 @@ class MyIconButton extends StatefulWidget {
       required this.fontSize,
       required this.padding,
       required this.onPressed,
-      required this.icon, required this.sizeLabel});
+      required this.icon,
+      required this.sizeLabel});
 
   @override
   State<MyIconButton> createState() => _MyIconButtonState();
@@ -33,9 +34,12 @@ class _MyIconButtonState extends State<MyIconButton> {
         style:
         TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
       )*/
-      icon: Icon(widget.icon, color: Colors.white,),
+      icon: Icon(
+        widget.icon,
+        color: Colors.white,
+      ),
       label: Padding(
-        padding:EdgeInsets.only(left: widget.sizeLabel),
+        padding: EdgeInsets.only(left: widget.sizeLabel),
         child: Text(
           widget.title,
           style:
@@ -45,7 +49,8 @@ class _MyIconButtonState extends State<MyIconButton> {
       style: ElevatedButton.styleFrom(
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: widget.padding),
+        minimumSize: Size(double.infinity, 45),
+        // padding: EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(75),
         ),

@@ -44,7 +44,9 @@ class _AccessPageState extends State<AccessPage> {
                     title: "Se connecter"),
                 SizedBox(height: 25),
                 SecondaryButton(
-                    onPressed: () {},
+                    onPressed: () {
+                       Get.toNamed("/register");
+                    },
                     fontSize: width * 0.04,
                     padding: width * 0.26,
                     title: "Créer un compte")

@@ -7,7 +7,7 @@ class PrimaryButton extends StatefulWidget {
   final double fontSize;
   final double padding;
   final VoidCallback onPressed;
-  
+
   const PrimaryButton({
     super.key,
     required this.onPressed,
@@ -32,9 +32,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
             TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
       ),
       style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 45),
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: widget.padding),
+        //padding: EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(75),
         ),

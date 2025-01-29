@@ -7,12 +7,14 @@ class SecondaryButton extends StatefulWidget {
   double fontSize;
   double padding;
   final VoidCallback onPressed;
-SecondaryButton({    super.key,
+  SecondaryButton({
+    super.key,
     required this.onPressed,
     required this.fontSize,
     required this.padding,
     this.color = MyColors.primary,
-    required this.title,});
+    required this.title,
+  });
 
   @override
   State<SecondaryButton> createState() => _SecondaryButtonState();
@@ -29,17 +31,15 @@ class _SecondaryButtonState extends State<SecondaryButton> {
             TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
       ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        foregroundColor: widget.color,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: widget.padding),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(75),
-        ),
-        side: BorderSide(
-          color: widget.color,
-          width: 2
-        )
-      ),
+          backgroundColor: Colors.white,
+          foregroundColor: widget.color,
+          minimumSize: Size(double.infinity, 45),
+          /* padding:
+              EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding), */
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(75),
+          ),
+          side: BorderSide(color: widget.color, width: 2)),
     );
   }
 }
