@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _platMostPop(width) {
+    double _width = width * 0.65;
     return Column(
       children: [
         Padding(
@@ -114,7 +115,8 @@ class _HomePageState extends State<HomePage> {
           height: 16.00,
         ),
         Container(
-          height: 200, // Hauteur fixe pour le ListView
+          height: 200,
+          width: double.infinity,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 10,
@@ -123,8 +125,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   PlatsPop(
                     fit: BoxFit.cover,
-                    heigth: 150,
-                    width: width * 0.65,
+                    heigth: 125,
+                    width: _width,
                     offre: "items $index",
                     tap: () {},
                   ),

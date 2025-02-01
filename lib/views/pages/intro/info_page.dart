@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/primary_button.dart';
-import 'package:jenos_app/views/pages/intro/intro_page.dart';
+import 'package:jenos_app/views/components/text_title.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -14,17 +16,17 @@ class _InfoPageState extends State<InfoPage> {
   final PageController _controller = PageController();
   final List<Map<String, String>> _content = [
     {
-      'image': 'assets/images/01.png',
+      'image': ImagePaths.info1,
       'nom': 'Find Food You Love',
       'text': 'Découvrez les meilleurs plats de plus de 1000 restaurants!',
     },
     {
-      'image': 'assets/images/image2.png',
+      'image': ImagePaths.info2,
       'nom': 'Find Food You Love',
       'text': 'Profitez d\'une livraison rapide à votre porte!',
     },
     {
-      'image': 'assets/images/image3.png',
+      'image': ImagePaths.info3,
       'nom': 'Find Food You Love',
       'text': 'Trouvez des plats que vous aimez!',
     },
@@ -40,9 +42,7 @@ class _InfoPageState extends State<InfoPage> {
       );
     } else {
       // Naviguer vers la page suivante
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => IntroPage(), // Remplacez par votre page suivante
-      ));
+      Get.toNamed("/enter");
     }
   }
 
@@ -71,26 +71,22 @@ class _InfoPageState extends State<InfoPage> {
               itemCount: _content.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: 0, horizontal: width * 0.1),
+                  padding: EdgeInsets.only(
+                      left: width * 0.05, right: width * 0.05, top: 25),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.network(
-                          'https://cdn.pixabay.com/photo/2023/10/17/11/18/beetle-8320899_960_720.jpg'),
+                      Image.asset(_content[index]['image']!),
                       SizedBox(height: 50),
-                      Text(
-                        _content[index]['nom']!,
-                        style: TextStyle(
-                            fontSize: 30.00,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black54),
-                      ),
+                      TextTitle(title: _content[index]['nom']!),
                       SizedBox(height: 20),
                       Text(
                         _content[index]['text']!,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                            fontSize: width * 0.04,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black54),
                       ),
                     ],
                   ),
@@ -99,8 +95,15 @@ class _InfoPageState extends State<InfoPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: width * 0.30),
-            child: PrimaryButton(onPressed: _nextPage, fontSize: width * 0.06, padding: width * 0.35, title: "Suivant"),
+            padding: EdgeInsets.only(
+                left: width * 0.0375,
+                right: width * 0.0375,
+                bottom: width * 0.1),
+            child: PrimaryButton(
+                onPressed: _nextPage,
+                fontSize: width * 0.06,
+                padding: width * 0.35,
+                title: "Suivant"),
           ),
         ],
       ),

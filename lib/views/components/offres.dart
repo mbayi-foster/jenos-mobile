@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/components/text_title.dart';
 
 class Offres extends StatefulWidget {
   final String offre;
