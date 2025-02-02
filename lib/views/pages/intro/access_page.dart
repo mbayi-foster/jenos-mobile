@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/primary_button.dart';
 import 'package:jenos_app/views/components/secondary_button.dart';
@@ -52,7 +53,7 @@ class _AccessPageState extends State<AccessPage> {
                         },
                         fontSize: width * 0.04,
                         padding: width * 0.3,
-                        title: "Se connecter"),
+                        title: LocalisationService.of(context)!.translate("btnLog")),
                     SizedBox(height: 25),
                     SecondaryButton(
                         onPressed: () {
@@ -60,7 +61,7 @@ class _AccessPageState extends State<AccessPage> {
                         },
                         fontSize: width * 0.04,
                         padding: width * 0.26,
-                        title: "Créer un compte")
+                        title: LocalisationService.of(context)!.translate("reg"))
                   ],
                 ),
               ),
