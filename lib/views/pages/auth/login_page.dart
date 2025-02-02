@@ -48,9 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: height * 0.035,
                 ),
                 MyInput(
-                  validator: (value){
-                    
-                  },
+                  validator: (value) {},
                   hint: "Email",
                   size: width * 0.04,
                   ctrl: _emailCtrl,
@@ -71,7 +69,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 PrimaryButton(
                     onPressed: () {
-                      // Get.toNamed("/login");
+                      String email = _emailCtrl.text;
+                      String pasword = _passwordCtrl.text;
+                      if (email == "rolly@gmail.com" && pasword == "123456") {
+                         Get.toNamed("/home");
+                      }
+                     
                     },
                     fontSize: width * 0.04,
                     padding: width * 0.3,

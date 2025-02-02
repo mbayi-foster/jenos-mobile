@@ -18,7 +18,7 @@ class _IntroPageState extends State<IntroPage> {
     super.initState();
     // Démarrer le timer pour changer de page après 10 secondes
     Timer(Duration(seconds: 5), () {
-      Get.toNamed("/info-page");_
+      Get.toNamed("/info-page");
     });
   }
 

@@ -22,6 +22,7 @@ class AppRoutes {
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/otp', page: () => const VerifyOtp()),
     GetPage(name: '/new-password', page: () => const NewPassword()),
-    GetPage(name: '/', page: () => const IntroPage())
+    GetPage(name: '/', page: () => const IntroPage()),
+    GetPage(name: '/home', page: () => const HomePage()),
   ];
 }
