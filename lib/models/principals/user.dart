@@ -14,7 +14,7 @@ class User {
     String nom;
     String prenom;
     String email;
-    double phone;
+    String phone;
     String photo;
     bool status;
     DateTime createdAt;
@@ -35,7 +35,7 @@ class User {
         nom: json["nom"],
         prenom: json["prenom"],
         email: json["email"],
-        phone: json["phone"].toDouble(),
+        phone: json["phone"],
         photo: json["photo"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
