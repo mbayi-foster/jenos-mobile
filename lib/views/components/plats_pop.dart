@@ -50,6 +50,20 @@ class _PlatsPopState extends State<PlatsPop> {
             TextTitle(title: "Orangina"),
             Row(
               children: [
+                Expanded(
+                  child: Text(
+                    "Café . Western Food",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                        fontSize: width * 0.04,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black54),
+                  ),
+                ),
+                SizedBox(
+                  width: 7.5,
+                ),
                 ImageIcon(
                   AssetImage(IconsPath.start),
                   color: MyColors.primary,
@@ -63,20 +77,6 @@ class _PlatsPopState extends State<PlatsPop> {
                       fontWeight: FontWeight.bold,
                       color: MyColors.primary),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                  child: Text(
-                    "Ajoutez vos coordonnées pour vous connecter",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontSize: width * 0.04,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black54),
-                  ),
-                )
               ],
             ),
             SizedBox(

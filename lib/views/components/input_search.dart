@@ -1,41 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
 
-class MyInput extends StatefulWidget {
-  final String hint;
-  final TextEditingController ctrl;
-  final TextInputType keyboardType;
+class InputSearch extends StatefulWidget {
   final double size;
-  final bool isPassword;
-  final String? Function(String?)? validator;
-
-  const MyInput(
+  final GestureTapCallback tap;
+  const InputSearch(
       {super.key,
-      this.isPassword = false,
-      required this.size,
-      this.validator,
-      required this.hint,
-      required this.ctrl,
-      required this.keyboardType});
+      required this.tap,
+      required this.size,});
 
   @override
-  State<MyInput> createState() => _MyInputState();
+  State<InputSearch> createState() => _InputSearchState();
 }
 
-class _MyInputState extends State<MyInput> {
+class _InputSearchState extends State<InputSearch> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.ctrl,
-      validator: widget.validator,
-      obscureText: widget.isPassword,
-      keyboardType: widget.keyboardType,
+      readOnly: true,
+      onTap: widget.tap,
       style: TextStyle(
           color: Colors.black54,
           fontSize: widget.size,
           fontWeight: FontWeight.w400),
       decoration: InputDecoration(
-        hintText: widget.hint,
+        prefixIcon: Icon(Icons.search),
+        hintText: "Recherche...",
         filled: true,
         fillColor: Colors.grey[200],
         enabledBorder: OutlineInputBorder(
