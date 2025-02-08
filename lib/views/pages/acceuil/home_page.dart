@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/views/components/input_search.dart';
+import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
+import 'package:jenos_app/views/components/my_floating_button.dart';
 import 'package:jenos_app/views/components/offres.dart';
 import 'package:jenos_app/views/components/plat_recent.dart';
 import 'package:jenos_app/views/components/plats.dart';
@@ -16,8 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  bool _isFloatingButtonPressed = false;
+  int _selectedIndex = -1;
   List plats = [1, 2, 3, 4, 5, 6, 7];
 
   @override
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: TextTitle(title: "Bonjour Rolly !"),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_basket))
         ],
@@ -48,52 +50,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: MyColors.primary,
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        iconSize: 16.0,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_outlined),
-            label: 'Menu',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_sharp),
-            label: 'Offres',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_vert),
-            label: 'More',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
-        backgroundColor: MyColors.primary,
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: ImageIcon(
-            AssetImage(IconsPath.home),
-            color: Colors.white,
-          ),
-        ),
-        onPressed: () {
-          setState(() {
-            _selectedIndex = -1; // Désactive la sélection des éléments
-          });
-        },
-      ),
+      bottomNavigationBar: MyBottomNavigationBar(),
+      floatingActionButton: MyFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

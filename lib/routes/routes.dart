@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/views/pages/acceuil/home_page.dart';
+import 'package:jenos_app/views/pages/acceuil/profile_page.dart';
 import 'package:jenos_app/views/pages/auth/forget_password.dart';
 import 'package:jenos_app/views/pages/auth/new_password.dart';
 import 'package:jenos_app/views/pages/auth/register_page.dart';
@@ -24,5 +25,6 @@ class AppRoutes {
     GetPage(name: '/new-password', page: () => const NewPassword()),
     GetPage(name: '/', page: () => const IntroPage()),
     GetPage(name: '/home', page: () => const HomePage()),
+    GetPage(name: '/profile', page: () => const ProfilePage()),
   ];
 }

@@ -56,7 +56,7 @@ class _PlatsState extends State<Plats> {
                     ),
                     Expanded(
                       child: Text(
-                        "Ajoutez vos coordonnées pour vous connecter",
+                        "Café . Western Food",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(

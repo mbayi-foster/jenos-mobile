@@ -3,5 +3,6 @@
     "message": "Welcome to our application",
     "btnLog":"Login",
     "btnReg":"Register",
-    "reg":"Creat an acount"
+    "reg":"Creat an acount",
+    "btnSave":"Save"
 }
