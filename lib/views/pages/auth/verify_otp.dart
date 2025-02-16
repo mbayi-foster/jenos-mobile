@@ -60,7 +60,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                     fontSize: width * 0.04,
                     padding: width * 0.3,
                     title: "Suivant"),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextButton(

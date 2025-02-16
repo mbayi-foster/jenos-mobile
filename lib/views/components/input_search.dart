@@ -24,19 +24,19 @@ class _InputSearchState extends State<InputSearch> {
           fontSize: widget.size,
           fontWeight: FontWeight.w400),
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search),
+        prefixIcon: const Icon(Icons.search),
         hintText: "Recherche...",
         filled: true,
         fillColor: Colors.grey[200],
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
       ),
     );
   }

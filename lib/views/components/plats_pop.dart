@@ -29,7 +29,7 @@ class _PlatsPopState extends State<PlatsPop> {
     double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: widget.tap,
-      child: Container(
+      child: SizedBox(
         width: widget.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,10 +61,10 @@ class _PlatsPopState extends State<PlatsPop> {
                         color: Colors.black54),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 7.5,
                 ),
-                ImageIcon(
+                const ImageIcon(
                   AssetImage(IconsPath.start),
                   color: MyColors.primary,
                 ),
@@ -79,7 +79,7 @@ class _PlatsPopState extends State<PlatsPop> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             )
           ],

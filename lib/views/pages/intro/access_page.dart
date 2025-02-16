@@ -46,7 +46,7 @@ class _AccessPageState extends State<AccessPage> {
                           fontWeight: FontWeight.w400,
                           color: Colors.black54),
                     ),
-                    SizedBox(height: 55),
+                    const SizedBox(height: 55),
                     PrimaryButton(
                         onPressed: () {
                           Get.toNamed("/login");
@@ -54,7 +54,7 @@ class _AccessPageState extends State<AccessPage> {
                         fontSize: width * 0.04,
                         padding: width * 0.3,
                         title: LocalisationService.of(context)!.translate("btnLog")),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     SecondaryButton(
                         onPressed: () {
                           Get.toNamed("/register");

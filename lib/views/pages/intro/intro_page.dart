@@ -17,7 +17,7 @@ class _IntroPageState extends State<IntroPage> {
   void initState() {
     super.initState();
     // Démarrer le timer pour changer de page après 10 secondes
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       Get.toNamed("/info-page");
     });
   }
@@ -31,8 +31,8 @@ class _IntroPageState extends State<IntroPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(width: width * 0.5, child: Image.asset(ImagePaths.logo)),
-          Text(
+          SizedBox(width: width * 0.5, child: Image.asset(ImagePaths.logo)),
+          const Text(
             "FOOD DELIVERY",
             style: TextStyle(
                 fontSize: 16.00,

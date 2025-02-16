@@ -15,10 +15,10 @@ class _MyFloatingButtonState extends State<MyFloatingButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      shape: CircleBorder(),
+      shape: const CircleBorder(),
       backgroundColor: widget.index == -1 ? MyColors.primary : Colors.blueGrey,
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
+      child: const Padding(
+        padding: EdgeInsets.all(18.0),
         child: ImageIcon(
           AssetImage(IconsPath.home),
           color: Colors.white,

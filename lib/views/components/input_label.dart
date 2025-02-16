@@ -51,13 +51,13 @@ class _InputLabelState extends State<InputLabel> {
         fillColor: Colors.grey[200],
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
       ),
     );
   }

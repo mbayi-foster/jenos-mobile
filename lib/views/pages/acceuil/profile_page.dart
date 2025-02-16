@@ -19,16 +19,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool _edit = true;
-  TextEditingController _nomCtrl =
+  final bool _edit = true;
+  final TextEditingController _nomCtrl =
       TextEditingController(text: "Diercy Tshibuabua");
-  TextEditingController _emailCtrl =
+  final TextEditingController _emailCtrl =
       TextEditingController(text: "diercytshibuabua@gmail.com");
-  TextEditingController _phoneCtrl = TextEditingController(text: "0998115482");
-  TextEditingController _adresseCtrl =
+  final TextEditingController _phoneCtrl = TextEditingController(text: "0998115482");
+  final TextEditingController _adresseCtrl =
       TextEditingController(text: "No9A Nzoloko, Limeté");
-  TextEditingController _passwordCtrl = TextEditingController(text: "123456");
-  TextEditingController _confirmPasswordCtrl =
+  final TextEditingController _passwordCtrl = TextEditingController(text: "123456");
+  final TextEditingController _confirmPasswordCtrl =
       TextEditingController(text: "123456");
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: TextTitle(title: "Profile"),
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_basket))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_basket))
         ],
       ),
       body: SingleChildScrollView(
@@ -51,10 +51,10 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
+      bottomNavigationBar: const MyBottomNavigationBar(
         index: 2,
       ),
-      floatingActionButton: MyFloatingButton(
+      floatingActionButton: const MyFloatingButton(
         index: 2,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -71,17 +71,17 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               // Get.toNamed("/forget-password");
             },
-            child: Container(
+            child: SizedBox(
               width: 100,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.edit,
                     color: MyColors.primary,
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Text(
                     "Editer le profile",
                     style: TextStyle(
@@ -116,7 +116,9 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           InputLabel(
             edit: _edit,
-            validator: (value) {},
+            validator: (value) {
+              return null;
+            },
             hint: "Nom",
             label: "Nom",
             size: width * 0.03,
@@ -128,7 +130,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InputLabel(
             edit: _edit,
-            validator: (value) {},
+            validator: (value) {
+              return null;
+            },
             hint: "Email",
             label: "Email",
             size: width * 0.03,
@@ -140,7 +144,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InputLabel(
             edit: _edit,
-            validator: (value) {},
+            validator: (value) {
+              return null;
+            },
             hint: "Phone",
             label: "Phone",
             size: width * 0.03,
@@ -152,7 +158,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InputLabel(
             edit: _edit,
-            validator: (value) {},
+            validator: (value) {
+              return null;
+            },
             hint: "Adresse",
             label: "Adresse",
             size: width * 0.03,
@@ -164,7 +172,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InputLabel(
             edit: _edit,
-            validator: (value) {},
+            validator: (value) {
+              return null;
+            },
             hint: "Mot de passe",
             label: "Mot de passe",
             isPassword: true,

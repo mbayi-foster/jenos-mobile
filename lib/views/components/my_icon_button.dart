@@ -49,7 +49,7 @@ class _MyIconButtonState extends State<MyIconButton> {
       style: ElevatedButton.styleFrom(
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,
-        minimumSize: Size(double.infinity, 45),
+        minimumSize: const Size(double.infinity, 45),
         // padding: EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(75),

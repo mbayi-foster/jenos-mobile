@@ -37,7 +37,7 @@ class _PlatRecentState extends State<PlatRecent> {
                     ImagePaths.pizza,
                   )),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20.00,
             ),
             Column(
@@ -45,7 +45,7 @@ class _PlatRecentState extends State<PlatRecent> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextTitle(title: "Pizza"),
-                SizedBox(
+                const SizedBox(
                   height: 2.5,
                 ),
                 Text(
@@ -57,12 +57,12 @@ class _PlatRecentState extends State<PlatRecent> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 2.5,
                 ),
                 Row(
                   children: [
-                    ImageIcon(
+                    const ImageIcon(
                       AssetImage(IconsPath.start),
                       color: MyColors.primary,
                     ),

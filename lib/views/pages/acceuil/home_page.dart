@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = -1;
+  final int _selectedIndex = -1;
   List plats = [1, 2, 3, 4, 5, 6, 7];
 
   @override
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         title: TextTitle(title: "Bonjour Rolly !"),
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_basket))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_basket))
         ],
       ),
       body: SingleChildScrollView(
@@ -50,14 +50,14 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(),
-      floatingActionButton: MyFloatingButton(),
+      bottomNavigationBar: const MyBottomNavigationBar(),
+      floatingActionButton: const MyFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
   _offres() {
-    return Container(
+    return SizedBox(
       height: 150, // Hauteur fixe pour le ListView
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 offre: "items $index",
                 tap: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 width: 25,
               )
             ],
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16.00,
         ),
         for (var i = 0; i < 5; i++) Plats(tap: () {})
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _platMostPop(width) {
-    double _width = width * 0.65;
+    double width0 = width * 0.65;
     return Column(
       children: [
         Padding(
@@ -134,10 +134,10 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16.00,
         ),
-        Container(
+        SizedBox(
           height: 200,
           width: double.infinity,
           child: ListView.builder(
@@ -149,11 +149,11 @@ class _HomePageState extends State<HomePage> {
                   PlatsPop(
                     fit: BoxFit.cover,
                     heigth: 125,
-                    width: _width,
+                    width: width0,
                     offre: "items $index",
                     tap: () {},
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 25,
                   )
                 ],
@@ -188,14 +188,14 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16.00,
         ),
         for (var i = 0; i < 3; i++)
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.00),
+            padding: const EdgeInsets.symmetric(horizontal: 16.00),
             child: Column(
-              children: [PlatRecent(tap: () {}), SizedBox(height: 25.00)],
+              children: [PlatRecent(tap: () {}), const SizedBox(height: 25.00)],
             ),
           ),
       ],

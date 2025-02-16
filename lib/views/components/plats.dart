@@ -22,7 +22,7 @@ class _PlatsState extends State<Plats> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             width: double.infinity, // Prendre toute la largeur
             height: 170,
             child: Image.asset(
@@ -31,14 +31,14 @@ class _PlatsState extends State<Plats> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.00),
+            padding: const EdgeInsets.symmetric(horizontal: 16.00),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextTitle(title: "Orangina"),
                 Row(
                   children: [
-                    ImageIcon(
+                    const ImageIcon(
                       AssetImage(IconsPath.start),
                       color: MyColors.primary,
                     ),
@@ -51,7 +51,7 @@ class _PlatsState extends State<Plats> {
                           fontWeight: FontWeight.bold,
                           color: MyColors.primary),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Expanded(
@@ -67,7 +67,7 @@ class _PlatsState extends State<Plats> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 )
               ],

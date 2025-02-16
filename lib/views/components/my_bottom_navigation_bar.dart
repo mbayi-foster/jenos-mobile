@@ -13,10 +13,10 @@ class MyBottomNavigationBar extends StatefulWidget {
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    int _index = widget.index;
+    int index = widget.index;
 
     return BottomNavigationBar(
-      selectedItemColor: _index == -1 ? Colors.blueGrey : MyColors.primary,
+      selectedItemColor: index == -1 ? Colors.blueGrey : MyColors.primary,
       unselectedItemColor: Colors.blueGrey,
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
@@ -39,7 +39,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           label: 'More',
         ),
       ],
-      currentIndex: _index == -1 ? 0 : _index,
+      currentIndex: index == -1 ? 0 : index,
       onTap: (int index) {
         print("l'index cliqué est : $index");
         switch (index) {

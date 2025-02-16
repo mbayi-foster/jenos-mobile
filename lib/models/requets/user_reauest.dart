@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 String userRequestToJson(UserRequest data) => json.encode(data.toJson());
 

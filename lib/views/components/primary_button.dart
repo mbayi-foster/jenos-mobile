@@ -26,19 +26,19 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: widget.onPressed,
-      child: Text(
-        widget.title,
-        style:
-            TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
-      ),
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(double.infinity, 45),
+        minimumSize: const Size(double.infinity, 45),
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,
         //padding: EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(75),
         ),
+      ),
+      child: Text(
+        widget.title,
+        style:
+            TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
       ),
     );
   }

@@ -55,7 +55,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: height * 0.035,
                 ),
                 MyInput(
-                  validator: (value) {},
+                  validator: (value) {
+                    return null;
+                  },
                   hint: "Email",
                   size: width * 0.04,
                   ctrl: _emailCtrl,
@@ -102,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.black54),
                       )),
                 if (ctrl.state.loading)
-                  CircularProgressIndicator(
+                  const CircularProgressIndicator(
                     color: MyColors.primary,
                   ),
                 SizedBox(

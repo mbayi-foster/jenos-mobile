@@ -14,7 +14,7 @@ class LoginCtrl extends GetxController {
     AuthServiceNetworkImpl ctrl = AuthServiceNetworkImpl();
     User? user = await ctrl.login(email, password);
     print("$email & $password");
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       if (user != null) {
         state = state.copyWith(loading: false, error: false);
         update();

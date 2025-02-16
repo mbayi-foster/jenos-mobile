@@ -37,7 +37,7 @@ class _InfoPageState extends State<InfoPage> {
   void _nextPage() {
     if (_currentIndex < _content.length - 1) {
       _controller.nextPage(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeIn,
       );
     } else {
@@ -77,9 +77,9 @@ class _InfoPageState extends State<InfoPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(_content[index]['image']!),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       TextTitle(title: _content[index]['nom']!),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         _content[index]['text']!,
                         textAlign: TextAlign.center,

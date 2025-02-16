@@ -25,13 +25,13 @@ class _MyAppState extends State<MyApp> {
       title: "Jenos-Food",
       initialRoute: '/',
       getPages: AppRoutes.routes,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         LocalisationService.delegate
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', ''), // Anglais
         Locale('fr', ''), // Français
       ],

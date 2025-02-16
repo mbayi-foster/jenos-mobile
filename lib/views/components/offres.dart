@@ -35,7 +35,7 @@ class _OffresState extends State<Offres> {
           ),
           Text(
             widget.offre,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.w500,
                 color: Colors.black),
