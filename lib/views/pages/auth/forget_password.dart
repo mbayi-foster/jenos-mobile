@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/views/components/my_input.dart';
-import 'package:jenos_app/views/components/primary_button.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/inputs/my_input.dart';
+import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});

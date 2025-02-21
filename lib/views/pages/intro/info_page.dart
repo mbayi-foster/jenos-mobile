@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/components/primary_button.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -59,7 +58,6 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -96,13 +94,11 @@ class _InfoPageState extends State<InfoPage> {
           ),
           Padding(
             padding: EdgeInsets.only(
-                left: width * 0.0375,
-                right: width * 0.0375,
-                bottom: width * 0.1),
+                left: 25,
+                right: 25,
+                bottom: 25),
             child: PrimaryButton(
                 onPressed: _nextPage,
-                fontSize: width * 0.06,
-                padding: width * 0.35,
                 title: "Suivant"),
           ),
         ],

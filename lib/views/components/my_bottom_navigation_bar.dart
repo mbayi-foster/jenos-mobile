@@ -44,7 +44,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         print("l'index cliqué est : $index");
         switch (index) {
           case 0:
-            Get.toNamed('/menu');
+            Get.toNamed('/menus');
             break;
           case 1:
             Get.toNamed('/offres');
@@ -56,7 +56,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             Get.toNamed('/more');
             break;
           default:
-             Get.toNamed('/menu');
+            Get.toNamed('/menus');
         }
       },
     );

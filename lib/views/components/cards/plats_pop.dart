@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class PlatsPop extends StatefulWidget {
   final String offre;

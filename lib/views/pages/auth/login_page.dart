@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:jenos_app/controllers/auth/controllers/login_ctrl.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
-import 'package:jenos_app/views/components/my_icon_button.dart';
-import 'package:jenos_app/views/components/my_input.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/buttons/my_icon_button.dart';
+import 'package:jenos_app/views/components/inputs/my_input.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
-import '../../components/primary_button.dart';
+import '../../components/buttons/primary_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -83,8 +83,6 @@ class _LoginPageState extends State<LoginPage> {
                         String password = _passwordCtrl.text;
                         ctrl.login(email, password);
                       },
-                      fontSize: width * 0.04,
-                      padding: width * 0.3,
                       title:
                           LocalisationService.of(context)!.translate("btnLog")),
                 if (state.error && !state.loading)
@@ -123,8 +121,6 @@ class _LoginPageState extends State<LoginPage> {
                 MyIconButton(
                   title: "Facebook",
                   bg: Colors.blue,
-                  fontSize: width * 0.04,
-                  padding: width * 0.25,
                   onPressed: () {},
                   icon: Icons.facebook,
                   sizeLabel: 30,
@@ -135,8 +131,6 @@ class _LoginPageState extends State<LoginPage> {
                 MyIconButton(
                   title: "Google",
                   bg: Colors.red,
-                  fontSize: width * 0.04,
-                  padding: width * 0.26,
                   onPressed: () {},
                   icon: Icons.g_mobiledata,
                   sizeLabel: 30,

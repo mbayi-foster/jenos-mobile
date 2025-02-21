@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
-import 'package:jenos_app/utils/icons_path.dart';
-import 'package:jenos_app/views/components/input_search.dart';
+import 'package:jenos_app/views/components/buttons/panier_button.dart';
+import 'package:jenos_app/views/components/inputs/input_search.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
-import 'package:jenos_app/views/components/my_floating_button.dart';
-import 'package:jenos_app/views/components/offres.dart';
-import 'package:jenos_app/views/components/plat_recent.dart';
-import 'package:jenos_app/views/components/plats.dart';
-import 'package:jenos_app/views/components/plats_pop.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
+import 'package:jenos_app/views/components/cards/offres.dart';
+import 'package:jenos_app/views/components/cards/plat_recent.dart';
+import 'package:jenos_app/views/components/cards/plats.dart';
+import 'package:jenos_app/views/components/cards/plats_pop.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,23 +23,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: TextTitle(title: "Bonjour Rolly !"),
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_basket))
-        ],
+        // ignore: prefer_const_literals_to_create_immutables
+        actions: [const PanierButton()],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(width * 0.075),
+              padding: const EdgeInsets.only(
+                  bottom: 45.00, top: 25, left: 25.00, right: 25.00),
               child: InputSearch(
-                size: width * 0.04,
+                size: 22.5,
                 tap: () {},
               ),
             ),
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.00),
+          padding: const EdgeInsets.symmetric(horizontal: 25.00),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

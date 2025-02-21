@@ -11,8 +11,8 @@ class PrimaryButton extends StatefulWidget {
   const PrimaryButton({
     super.key,
     required this.onPressed,
-    required this.fontSize,
-    required this.padding,
+    this.fontSize = 22.5,
+    this.padding = 16.00,
     this.bg = MyColors.primary,
     required this.title,
   });
@@ -27,6 +27,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     return ElevatedButton(
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: widget.padding),
         minimumSize: const Size(double.infinity, 45),
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,

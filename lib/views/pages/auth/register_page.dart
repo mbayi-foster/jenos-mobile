@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
-import 'package:jenos_app/views/components/my_input.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/inputs/my_input.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
-import '../../components/primary_button.dart';
+import '../../components/buttons/primary_button.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

@@ -14,8 +14,8 @@ class MyIconButton extends StatefulWidget {
       {super.key,
       required this.title,
       required this.bg,
-      required this.fontSize,
-      required this.padding,
+      this.fontSize = 22.5,
+      this.padding = 16.00,
       required this.onPressed,
       required this.icon,
       required this.sizeLabel});
@@ -39,7 +39,7 @@ class _MyIconButtonState extends State<MyIconButton> {
         color: Colors.white,
       ),
       label: Padding(
-        padding: EdgeInsets.only(left: widget.sizeLabel),
+        padding: EdgeInsets.symmetric(vertical: widget.padding),
         child: Text(
           widget.title,
           style:

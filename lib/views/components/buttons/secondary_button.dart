@@ -10,8 +10,8 @@ class SecondaryButton extends StatefulWidget {
   SecondaryButton({
     super.key,
     required this.onPressed,
-    required this.fontSize,
-    required this.padding,
+    this.fontSize = 22.5,
+    this.padding = 16.00,
     this.color = MyColors.primary,
     required this.title,
   });
@@ -26,6 +26,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
     return ElevatedButton(
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: widget.padding),
           backgroundColor: Colors.white,
           foregroundColor: widget.color,
           minimumSize: const Size(double.infinity, 45),

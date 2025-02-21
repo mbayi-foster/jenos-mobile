@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/components/text_title.dart';
+import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class Plats extends StatefulWidget {
   final GestureTapCallback tap;
@@ -15,7 +15,6 @@ class Plats extends StatefulWidget {
 class _PlatsState extends State<Plats> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: widget.tap,

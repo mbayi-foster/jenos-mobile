@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/components/primary_button.dart';
-import 'package:jenos_app/views/components/secondary_button.dart';
+import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/components/buttons/secondary_button.dart';
 
 class AccessPage extends StatefulWidget {
   const AccessPage({super.key});
@@ -16,7 +16,6 @@ class _AccessPageState extends State<AccessPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +32,7 @@ class _AccessPageState extends State<AccessPage> {
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+                padding: EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -51,17 +50,15 @@ class _AccessPageState extends State<AccessPage> {
                         onPressed: () {
                           Get.toNamed("/login");
                         },
-                        fontSize: width * 0.04,
-                        padding: width * 0.3,
-                        title: LocalisationService.of(context)!.translate("btnLog")),
+                        title: LocalisationService.of(context)!
+                            .translate("btnLog")),
                     const SizedBox(height: 25),
                     SecondaryButton(
                         onPressed: () {
                           Get.toNamed("/register");
                         },
-                        fontSize: width * 0.04,
-                        padding: width * 0.26,
-                        title: LocalisationService.of(context)!.translate("reg"))
+                        title:
+                            LocalisationService.of(context)!.translate("reg"))
                   ],
                 ),
               ),
