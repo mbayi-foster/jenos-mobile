@@ -54,11 +54,19 @@ class _DetailsMenuPageState extends State<DetailsMenuPage> {
   _plats() {
     return Column(
       children: [
-        PlatMenu(
-          tap: () {},
-          nom: "French Apple pie",
-          details: "La mangue douce",
-        )
+        for (var i = 0; i < 4; i++)
+          Column(
+            children: [
+              PlatMenu(
+                tap: () {},
+                nom: "French Apple pie",
+                details: "La mangue douce",
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
       ],
     );
   }

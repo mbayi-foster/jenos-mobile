@@ -3,6 +3,7 @@ import 'package:jenos_app/utils/colors.dart';
 
 class PrimaryButton extends StatefulWidget {
   final String title;
+  final bool long;
   final Color bg;
   final double fontSize;
   final double padding;
@@ -10,6 +11,7 @@ class PrimaryButton extends StatefulWidget {
 
   const PrimaryButton({
     super.key,
+    this.long = true,
     required this.onPressed,
     this.fontSize = 22.5,
     this.padding = 16.00,
@@ -27,8 +29,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     return ElevatedButton(
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: widget.padding),
-        minimumSize: const Size(double.infinity, 45),
+        padding: EdgeInsets.symmetric(
+            vertical: (widget.long) ? 5 : widget.padding,
+            horizontal: (!widget.long) ? 45 : 2),
+        minimumSize: Size((widget.long) ? double.infinity : 45, 45),
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,
         //padding: EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding),
