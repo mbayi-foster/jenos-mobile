@@ -30,7 +30,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(
-            vertical: (widget.long) ? 5 : widget.padding,
+            vertical: widget.padding, 
             horizontal: (!widget.long) ? 45 : 2),
         minimumSize: Size((widget.long) ? double.infinity : 45, 45),
         backgroundColor: widget.bg,

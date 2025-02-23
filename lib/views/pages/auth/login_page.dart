@@ -78,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 if (!state.loading)
                   PrimaryButton(
+                      padding: 23,
                       onPressed: () {
                         String email = _emailCtrl.text;
                         String password = _passwordCtrl.text;
@@ -123,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                   bg: Colors.blue,
                   onPressed: () {},
                   icon: Icons.facebook,
-                  sizeLabel: 30,
+                  padding: 20,
                 ),
                 SizedBox(
                   height: height * 0.015,
@@ -133,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                   bg: Colors.red,
                   onPressed: () {},
                   icon: Icons.g_mobiledata,
-                  sizeLabel: 30,
+                  padding: 20,
                 ),
                 SizedBox(
                   height: height * 0.05,

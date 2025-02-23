@@ -8,17 +8,15 @@ class MyIconButton extends StatefulWidget {
   final VoidCallback onPressed;
   final IconData icon;
 
-  final double sizeLabel;
-
-  const MyIconButton(
-      {super.key,
-      required this.title,
-      required this.bg,
-      this.fontSize = 22.5,
-      this.padding = 16.00,
-      required this.onPressed,
-      required this.icon,
-      required this.sizeLabel});
+  const MyIconButton({
+    super.key,
+    required this.title,
+    required this.bg,
+    this.fontSize = 22.5,
+    this.padding = 16.00,
+    required this.onPressed,
+    required this.icon,
+  });
 
   @override
   State<MyIconButton> createState() => _MyIconButtonState();
@@ -38,15 +36,14 @@ class _MyIconButtonState extends State<MyIconButton> {
         widget.icon,
         color: Colors.white,
       ),
-      label: Padding(
-        padding: EdgeInsets.symmetric(vertical: widget.padding),
-        child: Text(
-          widget.title,
-          style:
-              TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
-        ),
+      label: Text(
+        widget.title,
+        style:
+            TextStyle(fontSize: widget.fontSize, fontWeight: FontWeight.w800),
       ),
       style: ElevatedButton.styleFrom(
+         padding: EdgeInsets.symmetric(
+            vertical: widget.padding,),
         backgroundColor: widget.bg,
         foregroundColor: Colors.white,
         minimumSize: const Size(double.infinity, 45),

@@ -37,9 +37,11 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextTitle(title: LocalisationService.of(context)!.translate("btnReg")),
-                SizedBox(
-                  height: height * 0.015,
+                TextTitle(
+                    title:
+                        LocalisationService.of(context)!.translate("btnReg")),
+                const SizedBox(
+                  height: 25,
                 ),
                 Text(
                   "Ajoutez vos coordonnées pour vous inscrire",
@@ -48,8 +50,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-                SizedBox(
-                  height: height * 0.025,
+                const SizedBox(
+                  height: 30,
                 ),
                 MyInput(
                   hint: "Nom",
@@ -57,8 +59,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ctrl: _nomCtrl,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   hint: "Email",
@@ -66,8 +68,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ctrl: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   hint: "Téléphone",
@@ -75,8 +77,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ctrl: _phoneCtrl,
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   hint: "Adresse",
@@ -84,8 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ctrl: _adresseCtrl,
                   keyboardType: TextInputType.text,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   isPassword: true,
@@ -94,8 +96,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ctrl: _passwordCtrl,
                   keyboardType: TextInputType.text,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   isPassword: true,
@@ -104,15 +106,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   ctrl: _passwordVerifyCtrl,
                   keyboardType: TextInputType.text,
                 ),
-                SizedBox(
-                  height: height * 0.025,
+                const SizedBox(
+                  height: 30,
                 ),
                 PrimaryButton(
                     onPressed: () {
                       // Get.toNamed("/login");
                     },
-                    fontSize: width * 0.04,
-                    padding: width * 0.35,
+                    padding: 23,
                     title: "S'inscrire"),
                 SizedBox(
                   height: height * 0.05,
