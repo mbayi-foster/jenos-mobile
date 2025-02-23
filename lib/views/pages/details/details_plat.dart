@@ -165,9 +165,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
           const SizedBox(
             height: 25,
           ),
-          const Divider(
+          Container(
             height: 10,
-            color: Colors.black12,
+            color: Colors.black45
           ),
           const SizedBox(
             height: 20,
