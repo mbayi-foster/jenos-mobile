@@ -3,6 +3,7 @@ import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
+import 'package:jenos_app/views/components/buttons/my_icon_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -58,9 +59,31 @@ class _DetailsPlatState extends State<DetailsPlat> {
             Positioned(
                 right: 0,
                 left: 0,
-                bottom: 80,
-                top: height * 0.62,
+                bottom: 50,
+                top: height * 0.65,
                 child: _price(height)),
+            Positioned(
+              right: 15, // Positionné à l'extrême gauche, ajusté pour dépasser
+              top: height * 0.21, // Ajuster la position verticale
+              child: Center(
+                child: Material(
+                  elevation: 8, // Élévation pour donner de la profondeur
+                  shape: const CircleBorder(), // Forme circulaire
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(300)),
+                    child: Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.all(
+                            10), // Espace autour de l'icône
+                        child: Icon(
+                          Icons.favorite,
+                          color: MyColors.primary,
+                          size: 40,
+                        )),
+                  ),
+                ),
+              ),
+            ),
           ],
         ));
   }
@@ -136,14 +159,14 @@ class _DetailsPlatState extends State<DetailsPlat> {
             height: 5,
           ),
           Text(
-            "fnuwrnioffbiorhja rfhirjgeif rufhirpe rughiorgjope ruighpojfir erigirhgoer",
+            "fnuwrnioffbiorhjuuwehf krfeuirhfu fuerjfoe freifhepriof rfreuigferoifger ferbuerguer erbgurhogia rfhirjgeif rufhirpe rughiorgjope ruighpojfir erigirhgoer",
             style: TextStyle(fontWeight: FontWeight.w400),
           ),
           const SizedBox(
             height: 25,
           ),
           const Divider(
-            height: 5,
+            height: 10,
             color: Colors.black12,
           ),
           const SizedBox(
@@ -155,7 +178,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
             children: [
               const Text(
                 "Quantité",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.5),
               ),
               Row(
                 children: [
@@ -176,7 +199,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
                       child: const Text(
                         "-",
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                            fontSize: 17.5,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -194,7 +219,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
                     child: Text(
                       "${_qte}",
                       style: const TextStyle(
-                          color: MyColors.primary, fontWeight: FontWeight.bold),
+                          fontSize: 17.5,
+                          color: MyColors.primary,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -215,7 +242,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
                       child: const Text(
                         "+",
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                            fontSize: 17.5,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -243,7 +272,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 topRight: Radius.circular(50),
                 bottomRight: Radius.circular(50)),
             child: Container(
-              width: 130,
+              width: 150,
               height: height,
               decoration: BoxDecoration(color: MyColors.primary),
             ),
@@ -251,9 +280,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
         ),
         Positioned(
           left: 65,
-          right: 45,
-          top: hei * 0.025,
-          bottom: hei * 0.025,
+          right: 30,
+          top: hei * 0.02,
+          bottom: hei * 0.02,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(60),
@@ -285,7 +314,17 @@ class _DetailsPlatState extends State<DetailsPlat> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 5,
+                  ),
+                  SizedBox(
+                    width: 230,
+                    child: MyIconButton(
+                        title: "Ajouter au panier",
+                        bg: MyColors.primary,
+                        onPressed: () {},
+                        icon: Icons.shopping_basket,
+                        fontSize: 15,
+                        sizeLabel: 5),
                   )
                 ],
               ),
@@ -300,7 +339,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
           ),
         ),
         Positioned(
-          right: 25, // Positionné à l'extrême gauche, ajusté pour dépasser
+          right: 10, // Positionné à l'extrême gauche, ajusté pour dépasser
           top: (height / 2) - 35, // Ajuster la position verticale
           child: Center(
             child: Material(
