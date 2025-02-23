@@ -30,8 +30,8 @@ class _VerifyOtpState extends State<VerifyOtp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextTitle(title: "Vérification OTP"),
-                SizedBox(
-                  height: height * 0.025,
+                const SizedBox(
+                  height: 20,
                 ),
                 Text(
                   "Veillez saisir votre adresse email pour recevoir un code afin de créer un nouveau mot de passe",
@@ -41,24 +41,22 @@ class _VerifyOtpState extends State<VerifyOtp> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-                SizedBox(
-                  height: height * 0.035,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   hint: "OTP",
-                  size: width * 0.04,
                   ctrl: _controller,
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(
-                  height: height * 0.025,
+                const SizedBox(
+                  height: 20,
                 ),
                 PrimaryButton(
                     onPressed: () {
                       Get.toNamed("/new-password");
                     },
-                    fontSize: width * 0.04,
-                    padding: width * 0.3,
+                    padding: 23,
                     title: "Suivant"),
                 const SizedBox(
                   height: 10,

@@ -41,8 +41,8 @@ class _LoginPageState extends State<LoginPage> {
                 TextTitle(
                     title:
                         LocalisationService.of(context)!.translate("btnLog")),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 Text(
                   "Ajoutez vos coordonnées pour vous connecter",
@@ -51,30 +51,28 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-                SizedBox(
-                  height: height * 0.035,
+               const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   validator: (value) {
                     return null;
                   },
                   hint: "Email",
-                  size: width * 0.04,
                   ctrl: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+               const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   isPassword: true,
                   hint: "Mot de passe",
-                  size: width * 0.04,
                   ctrl: _passwordCtrl,
                   keyboardType: TextInputType.text,
                 ),
-                SizedBox(
-                  height: height * 0.025,
+                const SizedBox(
+                  height: 20,
                 ),
                 if (!state.loading)
                   PrimaryButton(
@@ -87,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                       title:
                           LocalisationService.of(context)!.translate("btnLog")),
                 if (state.error && !state.loading)
-                  SizedBox(
-                    height: height * 0.025,
-                  ),
+                 const SizedBox(
+                  height: 20,
+                ),
                 if (state.error && !state.loading)
                   TextButton(
                       onPressed: () {
@@ -106,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
                   const CircularProgressIndicator(
                     color: MyColors.primary,
                   ),
-                SizedBox(
-                  height: height * 0.05,
+                const SizedBox(
+                  height: 20,
                 ),
                 Text(
                   "Ou connecter vous avec",
@@ -116,8 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-                SizedBox(
-                  height: height * 0.01,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyIconButton(
                   title: "Facebook",
@@ -126,8 +124,8 @@ class _LoginPageState extends State<LoginPage> {
                   icon: Icons.facebook,
                   padding: 20,
                 ),
-                SizedBox(
-                  height: height * 0.015,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyIconButton(
                   title: "Google",
@@ -136,8 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                   icon: Icons.g_mobiledata,
                   padding: 20,
                 ),
-                SizedBox(
-                  height: height * 0.05,
+                const SizedBox(
+                  height: 20,
                 ),
                 TextButton(
                     onPressed: () {

@@ -12,8 +12,8 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-   final TextEditingController _controller = TextEditingController();
-   final _keyForm = GlobalKey<FormState>();
+  final TextEditingController _controller = TextEditingController();
+  final _keyForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -46,7 +46,6 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
                 MyInput(
                   hint: "Email",
-                  size: width * 0.04,
                   ctrl: _controller,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -57,8 +56,7 @@ class _NewPasswordState extends State<NewPassword> {
                     onPressed: () {
                       Get.toNamed("/otp");
                     },
-                    fontSize: width * 0.04,
-                    padding: width * 0.3,
+                    padding: 23,
                     title: "Envoyer"),
               ],
             ),
@@ -67,5 +65,4 @@ class _NewPasswordState extends State<NewPassword> {
       ),
     );
   }
-
 }

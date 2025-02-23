@@ -55,7 +55,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Nom",
-                  size: width * 0.04,
                   ctrl: _nomCtrl,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -64,7 +63,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Email",
-                  size: width * 0.04,
                   ctrl: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -73,7 +71,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Téléphone",
-                  size: width * 0.04,
                   ctrl: _phoneCtrl,
                   keyboardType: TextInputType.number,
                 ),
@@ -82,7 +79,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Adresse",
-                  size: width * 0.04,
                   ctrl: _adresseCtrl,
                   keyboardType: TextInputType.text,
                 ),
@@ -92,7 +88,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 MyInput(
                   isPassword: true,
                   hint: "Mot de passe",
-                  size: width * 0.04,
                   ctrl: _passwordCtrl,
                   keyboardType: TextInputType.text,
                 ),
@@ -102,7 +97,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 MyInput(
                   isPassword: true,
                   hint: "Confirmer mot de passe",
-                  size: width * 0.04,
                   ctrl: _passwordVerifyCtrl,
                   keyboardType: TextInputType.text,
                 ),

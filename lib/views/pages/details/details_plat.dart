@@ -323,8 +323,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                         bg: MyColors.primary,
                         onPressed: () {},
                         icon: Icons.shopping_basket,
-                        fontSize: 15,
-                        sizeLabel: 5),
+                        padding: 23),
                   )
                 ],
               ),

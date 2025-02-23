@@ -13,7 +13,7 @@ class ForgetPassword extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPassword> {
   final TextEditingController _controller = TextEditingController();
-   final _keyForm = GlobalKey<FormState>();
+  final _keyForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -30,8 +30,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextTitle(title: "Réinitialiser le mot de passe"),
-                SizedBox(
-                  height: height * 0.025,
+                const SizedBox(
+                  height: 20,
                 ),
                 Text(
                   "Veillez saisir votre adresse email pour recevoir un code afin de créer un nouveau mot de passe",
@@ -41,12 +41,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-                SizedBox(
-                  height: height * 0.035,
+                const SizedBox(
+                  height: 20,
                 ),
                 MyInput(
                   hint: "Email",
-                  size: width * 0.04,
                   ctrl: _controller,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -57,8 +56,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     onPressed: () {
                       Get.toNamed("/otp");
                     },
-                    fontSize: width * 0.04,
-                    padding: width * 0.3,
+                    padding: 23,
                     title: "Envoyer"),
               ],
             ),
