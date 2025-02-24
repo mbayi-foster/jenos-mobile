@@ -20,7 +20,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final bool _edit = true;
+  bool _edit = true;
   final TextEditingController _nomCtrl =
       TextEditingController(text: "Diercy Tshibuabua");
   final TextEditingController _emailCtrl =
@@ -36,7 +36,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return GetBuilder<ProfileCtrl>(builder: (ctrl) {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -52,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               children: [
                 _photo(width),
-                SizedBox(height: height * 0.03),
+                const SizedBox(height: 30),
                 _data(width)
               ],
             ),
@@ -76,7 +75,11 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Image.asset(IconsPath.profile),
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                _edit = (_edit == true) ? false : true;
+              });
+            },
             child: SizedBox(
               width: 150,
               child: Row(
@@ -115,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _data(width) {
-    double height = 20;
+    double height = 25;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
       child: Column(
@@ -127,7 +130,6 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Nom",
             label: "Nom",
-            size: width * 0.03,
             ctrl: _nomCtrl,
             keyboardType: TextInputType.text,
           ),
@@ -141,7 +143,6 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Email",
             label: "Email",
-            size: width * 0.03,
             ctrl: _emailCtrl,
             keyboardType: TextInputType.emailAddress,
           ),
@@ -155,7 +156,6 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Phone",
             label: "Phone",
-            size: width * 0.03,
             ctrl: _phoneCtrl,
             keyboardType: TextInputType.number,
           ),
@@ -169,7 +169,6 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Adresse",
             label: "Adresse",
-            size: width * 0.03,
             ctrl: _adresseCtrl,
             keyboardType: TextInputType.text,
           ),
@@ -178,6 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           if (_edit)
             PrimaryButton(
+                padding: 23,
                 onPressed: () {},
                 title: LocalisationService.of(context)!.translate("btnSave")),
           const SizedBox(

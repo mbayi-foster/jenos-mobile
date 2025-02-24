@@ -14,7 +14,7 @@ class InputLabel extends StatefulWidget {
       {super.key,
       this.isPassword = false,
       this.edit = true,
-      required this.size,
+     this.size = 22.5,
       this.validator,
       required this.hint,
       required this.label,
