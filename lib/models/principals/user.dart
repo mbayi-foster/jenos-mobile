@@ -16,7 +16,6 @@ class User {
     String email;
     String phone;
     String photo;
-    bool status;
     DateTime createdAt;
 
     User({
@@ -26,7 +25,6 @@ class User {
         required this.email,
         required this.phone,
         this.photo = "",
-        required this.status,
         required this.createdAt,
     });
 
@@ -37,7 +35,6 @@ class User {
         email: json["email"],
         phone: json["phone"],
         photo: json["photo"],
-        status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
     );
 
@@ -48,7 +45,6 @@ class User {
         "email": email,
         "phone": phone,
         "photo": photo,
-        "status": status,
         "created_at": "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
     };
 }

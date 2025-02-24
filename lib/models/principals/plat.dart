@@ -15,7 +15,6 @@ class Plat {
     String photo;
     int prix;
     int like;
-    bool status;
     DateTime createdAt;
 
     Plat({
@@ -25,7 +24,6 @@ class Plat {
         required this.photo,
         required this.prix,
         this.like = 0,
-        this.status = false,
         required this.createdAt,
     });
 
@@ -36,7 +34,6 @@ class Plat {
         photo: json["photo"],
         prix: json["prix"],
         like: json["like"],
-        status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
     );
 
@@ -47,7 +44,6 @@ class Plat {
         "photo": photo,
         "prix": prix,
         "like": like,
-        "status": status,
         "created_at": "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
     };
 }
