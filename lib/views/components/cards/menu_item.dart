@@ -62,13 +62,13 @@ class _MenuItemState extends State<MenuItem> {
                           widget.nom,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 22.5,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "${widget.qte} plats",
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 13,
                               fontWeight: FontWeight.w400,
                               color: Colors.black54),
                         ),

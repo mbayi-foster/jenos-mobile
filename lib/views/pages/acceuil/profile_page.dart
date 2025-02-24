@@ -92,10 +92,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: MyColors.primary,
                   ),
                   const SizedBox(width: 5),
-                  Text(
+                 Text(
                     "Editer le profile",
                     style: TextStyle(
-                        fontSize: width * 0.03,
+                        fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: MyColors.primary),
                   ),
@@ -110,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Text(
               "Se déconnecter",
               style: TextStyle(
-                  fontSize: width * 0.05,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: Colors.black54),
             )),
@@ -118,8 +118,8 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _data(width, bool edit) {
-    double height = 25;
+  _data(width, {required bool edit}) {
+    double height = 20;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
       child: Column(
@@ -178,7 +178,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           if (!edit)
             PrimaryButton(
-                padding: 23,
                 onPressed: () {},
                 title: LocalisationService.of(context)!.translate("btnSave")),
           const SizedBox(

@@ -87,7 +87,7 @@ class _InfoItemState extends State<InfoItem> {
                             const SizedBox(
                               width: 15,
                             ),
-                            TextTitle(title: widget.text)
+                            TextTitle(title: widget.text, fontSize: 15,)
                           ],
                         ),
                         if (widget.notifications >= 1)
@@ -95,10 +95,12 @@ class _InfoItemState extends State<InfoItem> {
                             child: Container(
                                 color: MyColors.primary,
                                 padding: const EdgeInsets.all(
-                                    8.5), // Espace autour de l'icône
+                                    5), // Espace autour de l'icône
                                 child: Text(
                                   "${widget.notifications}",
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(
+                                    color: Colors.white, 
+                                    fontSize: 12),
                                 )),
                           ),
                       ],

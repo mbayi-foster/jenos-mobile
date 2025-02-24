@@ -44,9 +44,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 25,
                 ),
                 Text(
-                  "Ajoutez vos coordonnées pour vous inscrire",
+                  "Ajoutez vos coordonnées pour vous inscrire",textAlign:TextAlign.center,
                   style: TextStyle(
-                      fontSize: width * 0.04,
+                    
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
@@ -107,7 +108,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     onPressed: () {
                       // Get.toNamed("/login");
                     },
-                    padding: 23,
                     title: "S'inscrire"),
                 SizedBox(
                   height: height * 0.05,
@@ -118,8 +118,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     child: Text(
                       "Vous avez déjà un comptes ? Se connecter",
+                      textAlign:TextAlign.center,
                       style: TextStyle(
-                          fontSize: width * 0.04,
+                          fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Colors.black54),
                     )),

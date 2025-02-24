@@ -46,8 +46,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Text(
                   "Ajoutez vos coordonnées pour vous connecter",
+                  textAlign:TextAlign.center,
                   style: TextStyle(
-                      fontSize: width * 0.04,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
@@ -76,7 +77,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 if (!state.loading)
                   PrimaryButton(
-                      padding: 23,
                       onPressed: () {
                         String email = _emailCtrl.text;
                         String password = _passwordCtrl.text;
@@ -122,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                   bg: Colors.blue,
                   onPressed: () {},
                   icon: Icons.facebook,
-                  padding: 20,
                 ),
                 const SizedBox(
                   height: 20,
@@ -132,7 +131,6 @@ class _LoginPageState extends State<LoginPage> {
                   bg: Colors.red,
                   onPressed: () {},
                   icon: Icons.g_mobiledata,
-                  padding: 20,
                 ),
                 const SizedBox(
                   height: 20,
@@ -143,8 +141,9 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       "Vous n'avez pas des comptes, inscrivez vous!",
+                      textAlign:TextAlign.center,
                       style: TextStyle(
-                          fontSize: width * 0.04,
+                          fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Colors.black54),
                     )),

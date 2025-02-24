@@ -14,8 +14,8 @@ class PlatsPop extends StatefulWidget {
       {super.key,
       required this.offre,
       required this.tap,
-      this.heigth = 100,
-      this.width = 100,
+      this.heigth = 150,
+      this.width = 250,
       this.fit = BoxFit.contain});
 
   @override
@@ -25,8 +25,6 @@ class PlatsPop extends StatefulWidget {
 class _PlatsPopState extends State<PlatsPop> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: widget.tap,
       child: SizedBox(
@@ -56,7 +54,7 @@ class _PlatsPopState extends State<PlatsPop> {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
-                        fontSize: width * 0.04,
+                        fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: Colors.black54),
                   ),
@@ -73,7 +71,7 @@ class _PlatsPopState extends State<PlatsPop> {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
-                      fontSize: width * 0.04,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: MyColors.primary),
                 ),

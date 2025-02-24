@@ -41,7 +41,7 @@ class _AccessPageState extends State<AccessPage> {
                       textAlign: TextAlign.center,
                       "Découvrez les meilleurs plats de plus de 5000 restaurants et une livraison rapide à votre porte",
                       style: TextStyle(
-                          fontSize: width * 0.04,
+                          fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Colors.black54),
                     ),
@@ -52,10 +52,9 @@ class _AccessPageState extends State<AccessPage> {
                         },
                         title: LocalisationService.of(context)!
                             .translate("btnLog"),
-                            padding:23),
+                        ),
                     const SizedBox(height: 25),
                     SecondaryButton(
-                      padding: 23,
                         onPressed: () {
                           Get.toNamed("/register");
                         },

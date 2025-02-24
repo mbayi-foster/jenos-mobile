@@ -10,8 +10,8 @@ class SecondaryButton extends StatefulWidget {
   SecondaryButton({
     super.key,
     required this.onPressed,
-    this.fontSize = 22.5,
-    this.padding = 16.00,
+    this.fontSize = 15,
+    this.padding = 12,
     this.color = MyColors.primary,
     required this.title,
   });

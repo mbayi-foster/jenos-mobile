@@ -31,13 +31,13 @@ class _NewPasswordState extends State<NewPassword> {
               children: [
                 TextTitle(title: "Nouveau mot de passe"),
                 SizedBox(
-                  height: height * 0.025,
+                  height: 25,
                 ),
                 Text(
                   "Veillez créer un nouveau mot de passe sur d'au moins 6 caractère",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: width * 0.04,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
@@ -45,18 +45,25 @@ class _NewPasswordState extends State<NewPassword> {
                   height: height * 0.035,
                 ),
                 MyInput(
-                  hint: "Email",
+                  hint: "Mot de passe",
                   ctrl: _controller,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(
-                  height: height * 0.025,
+                  height: 20,
+                ),
+                MyInput(
+                  hint: "Confirmez mot de passe",
+                  ctrl: _controller,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 PrimaryButton(
                     onPressed: () {
                       Get.toNamed("/otp");
                     },
-                    padding: 23,
                     title: "Envoyer"),
               ],
             ),

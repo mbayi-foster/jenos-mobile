@@ -12,7 +12,7 @@ class MyInput extends StatefulWidget {
   const MyInput(
       {super.key,
       this.isPassword = false,
-      this.size = 22.5,
+      this.size = 15,
       this.validator,
       required this.hint,
       required this.ctrl,

@@ -13,8 +13,8 @@ class PrimaryButton extends StatefulWidget {
     super.key,
     this.long = true,
     required this.onPressed,
-    this.fontSize = 22.5,
-    this.padding = 16.00,
+    this.fontSize = 15,
+    this.padding = 12.00,
     this.bg = MyColors.primary,
     required this.title,
   });

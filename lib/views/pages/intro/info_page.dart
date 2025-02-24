@@ -82,7 +82,7 @@ class _InfoPageState extends State<InfoPage> {
                         _content[index]['text']!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: width * 0.04,
+                            fontSize: 15,
                             fontWeight: FontWeight.w400,
                             color: Colors.black54),
                       ),
@@ -97,7 +97,6 @@ class _InfoPageState extends State<InfoPage> {
             child: PrimaryButton(
               onPressed: _nextPage,
               title: "Suivant",
-              padding: 23,
             ),
           ),
         ],

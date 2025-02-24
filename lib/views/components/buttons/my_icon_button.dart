@@ -12,8 +12,8 @@ class MyIconButton extends StatefulWidget {
     super.key,
     required this.title,
     required this.bg,
-    this.fontSize = 22.5,
-    this.padding = 16.00,
+    this.fontSize = 15,
+    this.padding = 12.00,
     required this.onPressed,
     required this.icon,
   });

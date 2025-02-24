@@ -7,7 +7,7 @@ class InputSearch extends StatefulWidget {
   const InputSearch(
       {super.key,
       required this.tap,
-      required this.size,});
+     this.size = 15,});
 
   @override
   State<InputSearch> createState() => _InputSearchState();

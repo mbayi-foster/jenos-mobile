@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(
                     bottom: 45.00, top: 25, left: 25.00, right: 25.00),
                 child: InputSearch(
-                  size: 22.5,
                   tap: () {},
                 ),
               ),
@@ -143,7 +142,7 @@ class _HomePageState extends State<HomePage> {
           height: 16.00,
         ),
         SizedBox(
-          height: 200,
+          height: 230,
           width: double.infinity,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -153,8 +152,6 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   PlatsPop(
                     fit: BoxFit.cover,
-                    heigth: 125,
-                    width: width0,
                     offre: "items $index",
                     tap: () {},
                   ),

@@ -14,7 +14,7 @@ class InputLabel extends StatefulWidget {
       {super.key,
       this.isPassword = false,
       this.edit = true,
-     this.size = 22.5,
+     this.size = 15,
       this.validator,
       required this.hint,
       required this.label,
@@ -39,12 +39,15 @@ class _InputLabelState extends State<InputLabel> {
           fontSize: widget.size,
           fontWeight: FontWeight.w400),
       decoration: InputDecoration(
-        label: Text(
-          widget.label,
-          style: TextStyle(
-              fontSize: widget.size,
-              fontWeight: FontWeight.w400,
-              color: Colors.black54),
+        label: Padding(
+          padding: const EdgeInsets.only(top: 20.0,left: 10),
+          child: Text(
+            widget.label,
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: Colors.black54),
+          ),
         ),
         hintText: widget.hint,
         filled: true,

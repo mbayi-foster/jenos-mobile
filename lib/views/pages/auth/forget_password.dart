@@ -56,7 +56,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     onPressed: () {
                       Get.toNamed("/otp");
                     },
-                    padding: 23,
                     title: "Envoyer"),
               ],
             ),

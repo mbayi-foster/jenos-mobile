@@ -16,12 +16,10 @@ class _VerifyOtpState extends State<VerifyOtp> {
   final _keyForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: height * 0.08, horizontal: width * 0.05),
+            vertical: 50, horizontal:20),
         child: SingleChildScrollView(
           child: Form(
             key: _keyForm,
@@ -37,7 +35,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   "Veillez saisir votre adresse email pour recevoir un code afin de créer un nouveau mot de passe",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: width * 0.04,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
@@ -56,7 +54,6 @@ class _VerifyOtpState extends State<VerifyOtp> {
                     onPressed: () {
                       Get.toNamed("/new-password");
                     },
-                    padding: 23,
                     title: "Suivant"),
                 const SizedBox(
                   height: 10,
@@ -66,7 +63,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                     child: Text(
                       "Renvoyez le code",
                       style: TextStyle(
-                          fontSize: width * 0.04,
+                          fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Colors.black54),
                     )),

@@ -64,7 +64,6 @@ class _MenuPageState extends State<MenuPage> {
                   padding: const EdgeInsets.only(
                       bottom: 45.00, top: 25, left: 25.00, right: 25.00),
                   child: InputSearch(
-                    size: 22.5,
                     tap: () {},
                   ),
                 ),
