@@ -7,8 +7,10 @@ class ProfileCtrl extends GetxController {
   void edit() {
     if (state.edit == true) {
       state = state.copyWith(edit: false);
+      update();
     } else {
       state = state.copyWith(edit: true);
+      update();
     }
   }
 }

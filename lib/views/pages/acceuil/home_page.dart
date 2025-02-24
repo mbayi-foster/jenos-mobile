@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jenos_app/controllers/home/controllers/home_ctrl.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/inputs/input_search.dart';
@@ -18,43 +20,45 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final int _selectedIndex = -1;
+  HomeCtrl ctrl = Get.put(HomeCtrl());
   List plats = [1, 2, 3, 4, 5, 6, 7];
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return GetBuilder<HomeCtrl>(builder: (ctrl) {
+      return Scaffold(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Bonjour Rolly !"),
-        automaticallyImplyLeading: false,
-        // ignore: prefer_const_literals_to_create_immutables
-        actions: [const PanierButton()],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 45.00, top: 25, left: 25.00, right: 25.00),
-              child: InputSearch(
-                size: 22.5,
-                tap: () {},
-              ),
-            ),
-            _offres(),
-            _platPop(width),
-            _platMostPop(width),
-            _recents(width)
-          ],
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: TextTitle(title: "Bonjour Rolly !"),
+          automaticallyImplyLeading: false,
+          // ignore: prefer_const_literals_to_create_immutables
+          actions: [const PanierButton()],
         ),
-      ),
-      bottomNavigationBar: const MyBottomNavigationBar(),
-      floatingActionButton: const MyFloatingButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 45.00, top: 25, left: 25.00, right: 25.00),
+                child: InputSearch(
+                  size: 22.5,
+                  tap: () {},
+                ),
+              ),
+              _offres(),
+              _platPop(width),
+              _platMostPop(width),
+              _recents(width)
+            ],
+          ),
+        ),
+        bottomNavigationBar: const MyBottomNavigationBar(),
+        floatingActionButton: const MyFloatingButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      );
+    });
   }
 
   _offres() {

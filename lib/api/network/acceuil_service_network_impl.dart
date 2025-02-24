@@ -1,13 +1,25 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/services/acceuil_service_network.dart';
+import 'package:http/http.dart' as http;
 
 class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
+  var baseUrl = dotenv.env['BASE_URL'] ?? "";
+
   @override
-  Future home() {
-    // TODO: implement home
-    throw UnimplementedError();
+  Future home() async {
+    List<dynamic> response = [];
+
+    var url = Uri.parse("$baseUrl/login");
+    var res = await http.get(
+      url,
+    );
+
+    print('Response status: ${res.statusCode}');
+    print('Response body: ${res.body}');
+    return response;
   }
 
   @override

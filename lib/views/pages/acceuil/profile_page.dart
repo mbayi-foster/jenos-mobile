@@ -20,7 +20,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool _edit = true;
+  // bool _edit = true;
   final TextEditingController _nomCtrl =
       TextEditingController(text: "Diercy Tshibuabua");
   final TextEditingController _emailCtrl =
@@ -29,14 +29,13 @@ class _ProfilePageState extends State<ProfilePage> {
       TextEditingController(text: "0998115482");
   final TextEditingController _adresseCtrl =
       TextEditingController(text: "No9A Nzoloko, Limeté");
-  final TextEditingController _passwordCtrl =
-      TextEditingController(text: "123456");
   final ProfileCtrl ctrl = Get.put(ProfileCtrl());
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return GetBuilder<ProfileCtrl>(builder: (ctrl) {
+      var state = ctrl.state;
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -52,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 _photo(width),
                 const SizedBox(height: 30),
-                _data(width)
+                _data(width, edit: state.edit)
               ],
             ),
           ),
@@ -76,9 +75,11 @@ class _ProfilePageState extends State<ProfilePage> {
         Image.asset(IconsPath.profile),
         TextButton(
             onPressed: () {
-              setState(() {
+              /*  setState(() {
                 _edit = (_edit == true) ? false : true;
-              });
+              }); */
+
+              ctrl.edit();
             },
             child: SizedBox(
               width: 150,
@@ -117,14 +118,14 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _data(width) {
+  _data(width, bool edit) {
     double height = 25;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
       child: Column(
         children: [
           InputLabel(
-            edit: _edit,
+            edit: edit,
             validator: (value) {
               return null;
             },
@@ -137,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: height,
           ),
           InputLabel(
-            edit: _edit,
+            edit: edit,
             validator: (value) {
               return null;
             },
@@ -150,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: height,
           ),
           InputLabel(
-            edit: _edit,
+            edit: edit,
             validator: (value) {
               return null;
             },
@@ -163,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: height,
           ),
           InputLabel(
-            edit: _edit,
+            edit: edit,
             validator: (value) {
               return null;
             },
@@ -175,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(
             height: height,
           ),
-          if (!_edit)
+          if (!edit)
             PrimaryButton(
                 padding: 23,
                 onPressed: () {},
