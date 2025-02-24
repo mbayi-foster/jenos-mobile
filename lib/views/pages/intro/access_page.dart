@@ -51,9 +51,11 @@ class _AccessPageState extends State<AccessPage> {
                           Get.toNamed("/login");
                         },
                         title: LocalisationService.of(context)!
-                            .translate("btnLog")),
+                            .translate("btnLog"),
+                            padding:23),
                     const SizedBox(height: 25),
                     SecondaryButton(
+                      padding: 23,
                         onPressed: () {
                           Get.toNamed("/register");
                         },

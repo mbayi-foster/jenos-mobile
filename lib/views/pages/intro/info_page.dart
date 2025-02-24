@@ -93,13 +93,12 @@ class _InfoPageState extends State<InfoPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-                left: 25,
-                right: 25,
-                bottom: 25),
+            padding: EdgeInsets.only(left: 25, right: 25, bottom: 25),
             child: PrimaryButton(
-                onPressed: _nextPage,
-                title: "Suivant"),
+              onPressed: _nextPage,
+              title: "Suivant",
+              padding: 23,
+            ),
           ),
         ],
       ),
