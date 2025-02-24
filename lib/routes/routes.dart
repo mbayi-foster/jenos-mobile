@@ -8,6 +8,7 @@ import 'package:jenos_app/views/pages/auth/forget_password.dart';
 import 'package:jenos_app/views/pages/auth/new_password.dart';
 import 'package:jenos_app/views/pages/auth/register_page.dart';
 import 'package:jenos_app/views/pages/auth/verify_otp.dart';
+import 'package:jenos_app/views/pages/commandes/ma_commade.dart';
 import 'package:jenos_app/views/pages/details/details_menu_page.dart';
 import 'package:jenos_app/views/pages/details/details_plat.dart';
 import 'package:jenos_app/views/pages/intro/access_page.dart';
@@ -28,11 +29,13 @@ class AppRoutes {
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/otp', page: () => const VerifyOtp()),
     GetPage(name: '/new-password', page: () => const NewPassword()),
-    GetPage(name: '/', page: () => const DetailsPlat()),
+    GetPage(name: '/', page: () => const IntroPage()),
     GetPage(name: '/menus', page: () => const MenuPage()),
     GetPage(name: '/offres', page: () => const OffrePage()),
     GetPage(name: '/more', page: () => const MorePage()),
     GetPage(name: '/home', page: () => const HomePage()),
     GetPage(name: '/profile', page: () => const ProfilePage()),
+    GetPage(name: '/commande', page: () => const MaCommade()),
+
   ];
 }
