@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/routes/routes.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 
 Future main() async {
- // await dotenv.load(fileName: ".env");
+ await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

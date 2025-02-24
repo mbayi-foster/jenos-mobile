@@ -5,5 +5,5 @@ abstract class AuthServiceNetwork {
   Future<User?> login(String email, String password);
   Future<bool> register(UserRequest user);
   Future<bool> verifyEmail(String email);
-  Future<bool> verifyOtp(int opt);
+  Future<bool> changePassword(int opt);
 }

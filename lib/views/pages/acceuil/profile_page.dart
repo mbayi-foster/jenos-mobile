@@ -175,7 +175,7 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(
             height: height,
           ),
-          if (_edit)
+          if (!_edit)
             PrimaryButton(
                 padding: 23,
                 onPressed: () {},

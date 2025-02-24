@@ -5,6 +5,7 @@ import 'package:jenos_app/services/auth_service_network.dart';
 class AuthServiceNetworkImpl implements AuthServiceNetwork {
   @override
   Future<User?> login(String email, String password) async {
+
     User user = User(
         id: 1,
         nom: "Kalala",
@@ -35,7 +36,7 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   }
 
   @override
-  Future<bool> verifyOtp(int opt) {
+  Future<bool> changePassword(int opt) {
     // TODO: implement verifyOtp
     throw UnimplementedError();
   }
