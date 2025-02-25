@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/models/principals/plat.dart';
@@ -9,16 +11,19 @@ class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
   var baseUrl = dotenv.env['BASE_URL'] ?? "";
 
   @override
-  Future home() async {
-    List<dynamic> response = [];
-
-    var url = Uri.parse("$baseUrl/login");
+  Future<dynamic> home() async {
+    var response = null;
+    var url = Uri.parse("${baseUrl}mobile-home");
     var res = await http.get(
       url,
     );
 
-    print('Response status: ${res.statusCode}');
-    print('Response body: ${res.body}');
+    if (res.statusCode == 200) {
+      // Décodez la réponse JSON
+      final Map<String, dynamic> jsonData = json.decode(res.body);
+      response = jsonData;
+    } 
+
     return response;
   }
 
