@@ -14,7 +14,6 @@ class Menu {
   String nom;
   String details;
   String photo;
-  int like;
   List<Plat?> plats;
   DateTime createdAt;
 
@@ -23,19 +22,19 @@ class Menu {
     required this.nom,
     required this.details,
     required this.photo,
-    required this.like,
     required this.plats,
     required this.createdAt,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-        id: json["id"],
+        id: json["id"] ?? 0,
         nom: json["nom"],
         details: json["details"],
         photo: json["photo"],
-        like: json["like"],
         plats: List<Plat>.from(json["plats"].map((x) => x)),
-        createdAt: DateTime.parse(json["created_at"]),
+        createdAt: json["created_at"] != null
+            ? DateTime.parse(json["created_at"])
+            : DateTime.now(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,7 +42,6 @@ class Menu {
         "nom": nom,
         "details": details,
         "photo": photo,
-        "like": like,
         "plats": List<dynamic>.from(plats.map((x) => x)),
         "created_at":
             "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
