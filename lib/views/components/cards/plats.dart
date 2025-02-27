@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
@@ -6,7 +7,8 @@ import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class Plats extends StatefulWidget {
   final GestureTapCallback tap;
-  const Plats({super.key, required this.tap});
+  final Plat plat;
+  const Plats({super.key, required this.tap, required this.plat });
 
   @override
   State<Plats> createState() => _PlatsState();
@@ -24,8 +26,8 @@ class _PlatsState extends State<Plats> {
           SizedBox(
             width: double.infinity, // Prendre toute la largeur
             height: 170,
-            child: Image.asset(
-              ImagePaths.pizza,
+            child: Image.network(
+              widget.plat.photo,
               fit: BoxFit.cover,
             ),
           ),
@@ -34,7 +36,7 @@ class _PlatsState extends State<Plats> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextTitle(title: "Orangina"),
+                TextTitle(title: widget.plat.nom),
                 Row(
                   children: [
                     const ImageIcon(
@@ -55,7 +57,7 @@ class _PlatsState extends State<Plats> {
                     ),
                     Expanded(
                       child: Text(
-                        "Café . Western Food",
+                        "${widget.plat.prix} FC",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(

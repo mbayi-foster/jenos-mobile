@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
@@ -10,12 +11,14 @@ class PlatsPop extends StatefulWidget {
   final double heigth;
   final GestureTapCallback tap;
   final BoxFit fit;
+  final Plat plat;
   const PlatsPop(
       {super.key,
       required this.offre,
       required this.tap,
       this.heigth = 150,
       this.width = 250,
+      required this.plat,
       this.fit = BoxFit.contain});
 
   @override
@@ -40,17 +43,17 @@ class _PlatsPopState extends State<PlatsPop> {
               width: double.infinity,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(
-                    ImagePaths.pizza,
+                  child: Image.network(
+                    widget.plat.photo,
                     fit: widget.fit,
                   )),
             ),
-            TextTitle(title: "Orangina"),
+            TextTitle(title: widget.plat.nom),
             Row(
               children: [
                 Expanded(
                   child: Text(
-                    "Café . Western Food",
+                    "${widget.plat.prix} FC",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(

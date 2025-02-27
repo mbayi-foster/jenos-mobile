@@ -53,6 +53,8 @@ class _HomePageState extends State<HomePage> {
       body: Obx(() {
         if (state.value.visible) {
           List<Plat> recents = state.value.platRecents;
+          List<Plat> platsPop = state.value.platPops;
+          List<Plat> mostPops = state.value.platMostPops;
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -64,8 +66,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 _offres(),
-                _platPop(width),
-                _platMostPop(width),
+                _platPop(width, plats: platsPop),
+                _platMostPop(width, plats: mostPops),
                 _recents(width, plats: recents)
               ],
             ),
@@ -87,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       height: 150, // Hauteur fixe pour le ListView
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: 5,
         itemBuilder: (context, index) {
           return Row(
             children: [
@@ -105,7 +107,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _platPop(width) {
+  _platPop(width, {List<Plat> plats = const []}) {
     return Column(
       children: [
         Padding(
@@ -131,13 +133,12 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(
           height: 16.00,
         ),
-        for (var i = 0; i < 5; i++) Plats(tap: () {})
+        for (Plat plat in plats) Plats(tap: () {}, plat: plat,)
       ],
     );
   }
 
-  _platMostPop(width) {
-    double width0 = width * 0.65;
+  _platMostPop(width, {List<Plat> plats = const []}) {
     return Column(
       children: [
         Padding(
@@ -168,11 +169,12 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: plats.length,
             itemBuilder: (context, index) {
               return Row(
                 children: [
                   PlatsPop(
+                    plat: plats[index],
                     fit: BoxFit.cover,
                     offre: "items $index",
                     tap: () {},
@@ -190,7 +192,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // ignore: unused_element
-  _recents(width, {List<Plat> plats =const []}) {
+  _recents(width, {List<Plat> plats = const []}) {
     return Column(
       children: [
         Padding(
@@ -220,7 +222,13 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.00),
             child: Column(
-              children: [PlatRecent(tap: () {}, plat: plat,), const SizedBox(height: 25.00)],
+              children: [
+                PlatRecent(
+                  tap: () {},
+                  plat: plat,
+                ),
+                const SizedBox(height: 25.00)
+              ],
             ),
           ),
       ],
