@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   HomeCtrl ctrl = Get.put(HomeCtrl());
 
-  List plats = [1, 2, 3, 4, 5, 6, 7];
+  // List plats = [1, 2, 3, 4, 5, 6, 7];
 
   /*  @override
   void initState() {
@@ -32,6 +32,11 @@ class _HomePageState extends State<HomePage> {
     ctrl.fetchData();
   }
  */
+
+  _goPlat(id) {
+    Get.toNamed('/plat/$id');
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -133,7 +138,13 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(
           height: 16.00,
         ),
-        for (Plat plat in plats) Plats(tap: () {}, plat: plat,)
+        for (Plat plat in plats)
+          Plats(
+            tap: () {
+              _goPlat(plat.id);
+            },
+            plat: plat,
+          )
       ],
     );
   }
@@ -171,13 +182,16 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             itemCount: plats.length,
             itemBuilder: (context, index) {
+              //print("le tableau contient ${plats.length} elements");
               return Row(
                 children: [
                   PlatsPop(
                     plat: plats[index],
                     fit: BoxFit.cover,
                     offre: "items $index",
-                    tap: () {},
+                    tap: () {
+                      _goPlat(plats[index].id);
+                    },
                   ),
                   const SizedBox(
                     width: 25,
@@ -224,7 +238,9 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 PlatRecent(
-                  tap: () {},
+                  tap: () {
+                    _goPlat(plat.id);
+                  },
                   plat: plat,
                 ),
                 const SizedBox(height: 25.00)

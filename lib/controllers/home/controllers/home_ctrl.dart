@@ -20,48 +20,32 @@ class HomeCtrl extends GetxController {
       List<dynamic> platsPops = data['plat_pops'];
       List<dynamic> platsMostPops = data['plat_most_pops'];
 
-      List<Plat> recents =
-          platsRecents.map((plat) => Plat.fromJson(plat)).toList();
-      List<Plat> pops = platsPops.map((plat) => Plat.fromJson(plat)).toList();
-      List<Plat> mostPops =
-          platsMostPops.map((plat) => Plat.fromJson(plat)).toList();
-      /* // Traitez les plats récents
-      print("Plats récents:");
-      for (var plat in platsRecents) {
-        recents.add(Plat.fromJson(plat));
-        print('ID: ${plat['id']}, Nom: ${plat['nom']}, Prix: ${plat['prix']}');
+      if (platsMostPops.isNotEmpty &&
+          platsPops.isNotEmpty &&
+          platsRecents.isNotEmpty) {
+        List<Plat> recents =
+            platsRecents.map((plat) => Plat.fromJson(plat)).toList();
+        List<Plat> pops = platsPops.map((plat) => Plat.fromJson(plat)).toList();
+        List<Plat> mostPops =
+            platsMostPops.map((plat) => Plat.fromJson(plat)).toList();
+        state.update((val) {
+          val?.loading = false;
+          val?.hasData = true;
+          val?.visible = true;
+          val?.platRecents = recents;
+          val?.platPops = pops;
+          val?.platMostPops = mostPops;
+        });
+      } else {
+        state.update((val) {
+          val?.loading = false;
+          val?.hasData = false;
+          val?.visible = false;
+          val?.platRecents = const [];
+          val?.platPops = const [];
+          val?.platMostPops = const [];
+        });
       }
-
-      // Traitez les plats populaires
-      print("\nPlats populaires:");
-      for (var plat in platsPops) {
-        pops.add(Plat.fromJson(plat));
-        print('ID: ${plat['id']}, Nom: ${plat['nom']}, Prix: ${plat['prix']}');
-      }
- */
-      // Traitez les plats les plus populaires
-      print("\nPlats les plus populaires:");
-      for (var plat in platsMostPops) {
-        mostPops.add(Plat.fromJson(plat));
-        print('ID: ${plat['id']}, Nom: ${plat['nom']}, Prix: ${plat['prix']}, Photo : ${plat['photo']}');
-      }
-
-      /* state.copyWith(
-          loading: false,
-          hasData: true,
-          visible: true,
-          platMostPops: mostPops,
-          platPops: pops,
-          platRecents: recents);
-      update(); */
-      state.update((val) {
-        val?.loading = false;
-        val?.hasData = true;
-        val?.visible = true;
-        val?.platRecents = recents;
-        val?.platPops = pops;
-        val?.platMostPops = mostPops;
-      });
     }
   }
 }
