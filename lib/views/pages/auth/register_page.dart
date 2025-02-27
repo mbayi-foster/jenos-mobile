@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 25,
                 ),
-                Text(
+                const Text(
                   "Ajoutez vos coordonnées pour vous inscrire",textAlign:TextAlign.center,
                   style: TextStyle(
                     
