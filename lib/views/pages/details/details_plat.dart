@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jenos_app/controllers/details/plat/details_plat_ctrl.dart';
+import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/my_icon_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
+import 'package:jenos_app/views/components/chargement.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
@@ -16,10 +20,19 @@ class DetailsPlat extends StatefulWidget {
 }
 
 class _DetailsPlatState extends State<DetailsPlat> {
+  DetailsPlatCtrl ctrl = Get.put(DetailsPlatCtrl());
   int _qte = 1;
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Mettez à jour l'état ici
+      final String id = Get.parameters['id'] ?? '0';
+      ctrl.getPlat(id);
+    });
+    var state = ctrl.state;
+    /* final String id = Get.parameters['id'] ?? '0';
+    print("voici l'id du plat c'est $id"); */
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -30,70 +43,81 @@ class _DetailsPlatState extends State<DetailsPlat> {
           index: -1,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: Stack(
-          children: [
-            SizedBox(
-              height: height,
-            ),
-            _photo(height),
-            Align(
-              alignment: Alignment.topCenter,
-              child: _appBar(),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                height: height * 0.70,
-                width: double.infinity,
-                child: Container(
-                  width: double.infinity,
-                  child: _content(),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50))),
+        body: Obx(() {
+          if (state.value.visible) {
+            return Stack(
+              children: [
+                SizedBox(
+                  height: height,
                 ),
-              ),
-            ),
-            Positioned(
-                right: 0,
-                left: 0,
-                bottom: 50,
-                top: height * 0.65,
-                child: _price(height)),
-            Positioned(
-              right: 15, // Positionné à l'extrême gauche, ajusté pour dépasser
-              top: height * 0.21, // Ajuster la position verticale
-              child: Center(
-                child: Material(
-                  elevation: 8, // Élévation pour donner de la profondeur
-                  shape: const CircleBorder(), // Forme circulaire
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(300)),
+                _photo(height, state.value.plat?.photo),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: _appBar(),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    height: height * 0.70,
+                    width: double.infinity,
                     child: Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(
-                            10), // Espace autour de l'icône
-                        child: Icon(
-                          Icons.favorite,
-                          color: MyColors.primary,
-                          size: 40,
-                        )),
+                      width: double.infinity,
+                      child: _content(
+                          plat: state.value.plat, qte: state.value.qte),
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50))),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ],
-        ));
+                Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: 50,
+                    top: height * 0.65,
+                    child: _price(height, state.value.plat?.prix, state.value.qte)),
+                Positioned(
+                  right:
+                      15, // Positionné à l'extrême gauche, ajusté pour dépasser
+                  top: height * 0.21, // Ajuster la position verticale
+                  child: Center(
+                    child: Material(
+                      elevation: 8, // Élévation pour donner de la profondeur
+                      shape: const CircleBorder(), // Forme circulaire
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(300)),
+                        child: Container(
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(
+                                10), // Espace autour de l'icône
+                            child: Icon(
+                              Icons.favorite,
+                              color: MyColors.primary,
+                              size: 40,
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+          return Chargement(
+            loading: state.value.loading,
+            hasData: state.value.hasData,
+          );
+        }));
   }
 
-  _photo(height) {
+  _photo(height, photo) {
     return SizedBox(
       width: double.infinity, // Prendre toute la largeur
       height: height * 0.3,
-      child: Image.asset(
-        ImagePaths.pizza,
+      child: Image.network(
+        photo,
         fit: BoxFit.cover,
       ),
     );
@@ -122,7 +146,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
     );
   }
 
-  _content() {
+  _content({Plat? plat, int qte = 0}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -131,7 +155,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
           SizedBox(
             height: 30,
           ),
-          TextTitle(title: "Pizza Chicken Pizza"),
+          TextTitle(title: plat!.nom),
           SizedBox(
             height: 10,
           ),
@@ -143,7 +167,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Text("4 étoiles", style: TextStyle(color: Colors.red))
               ]),
               Text(
-                "FC 45000",
+                "FC ${plat.prix}",
                 style: TextStyle(fontSize: 27.5, fontWeight: FontWeight.bold),
               )
             ],
@@ -159,16 +183,13 @@ class _DetailsPlatState extends State<DetailsPlat> {
             height: 5,
           ),
           Text(
-            "fnuwrnioffbiorhjuuwehf krfeuirhfu fuerjfoe freifhepriof rfreuigferoifger ferbuerguer erbgurhogia rfhirjgeif rufhirpe rughiorgjope ruighpojfir erigirhgoer",
+            plat.details,
             style: TextStyle(fontWeight: FontWeight.w400),
           ),
           const SizedBox(
             height: 25,
           ),
-          Container(
-            height: 10,
-            color: Colors.black45
-          ),
+          Container(height: 10, color: Colors.black45),
           const SizedBox(
             height: 20,
           ),
@@ -184,11 +205,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 children: [
                   InkWell(
                     onTap: () {
-                      if (_qte > 1) {
-                        setState(() {
-                          _qte--;
-                        });
-                      }
+                      ctrl.changeQte(false);
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -217,7 +234,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 17.5, vertical: 2),
                     child: Text(
-                      "${_qte}",
+                      "$qte",
                       style: const TextStyle(
                           fontSize: 17.5,
                           color: MyColors.primary,
@@ -229,9 +246,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                   ),
                   InkWell(
                     onTap: () {
-                      setState(() {
-                        _qte++;
-                      });
+                      ctrl.changeQte(true);
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -257,7 +272,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
     );
   }
 
-  _price(hei) {
+  _price(hei, prix, qte) {
     double height = hei * 0.25;
     return Stack(
       children: [
@@ -307,7 +322,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                         color: Colors.black54),
                   ),
                   Text(
-                    "${_qte * 400}",
+                    "${prix * qte}",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.5,

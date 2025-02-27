@@ -37,5 +37,7 @@ class AppRoutes {
     GetPage(name: '/profile', page: () => const ProfilePage()),
     GetPage(name: '/commande', page: () => const MaCommade()),
 
+    //routes details
+    GetPage(name: '/plat/:id', page: () => const DetailsPlat())
   ];
 }
