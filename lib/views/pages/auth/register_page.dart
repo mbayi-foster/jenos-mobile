@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/controllers/auth/register/register_page_ctrl.dart';
+import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
+import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
-
 import '../../components/buttons/primary_button.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,20 +16,23 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _nomCtrl = TextEditingController();
-  final TextEditingController _phoneCtrl = TextEditingController();
-  final TextEditingController _adresseCtrl = TextEditingController();
-  final TextEditingController _passwordVerifyCtrl = TextEditingController();
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _passwordCtrl = TextEditingController();
+  String? _nom;
+  String? _email;
+  String? _phone;
+  String? _adresse;
+  String? _password;
+  String? _confirmPassword;
+
   final _keyForm = GlobalKey<FormState>();
+  RegisterPageCtrl ctrl = Get.put(RegisterPageCtrl());
 
   @override
   Widget build(BuildContext context) {
+    var state = ctrl.state;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Padding(
+    return Scaffold(body: Obx(() {
+      return Padding(
         padding: EdgeInsets.symmetric(
             vertical: height * 0.08, horizontal: width * 0.05),
         child: SingleChildScrollView(
@@ -44,9 +49,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 25,
                 ),
                 const Text(
-                  "Ajoutez vos coordonnées pour vous inscrire",textAlign:TextAlign.center,
+                  "Ajoutez vos coordonnées pour vous inscrire",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
@@ -56,7 +61,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Nom",
-                  ctrl: _nomCtrl,
+                  validator: _validateNom,
+                  onSaved: (value) {
+                    _nom = value;
+                  },
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(
@@ -64,7 +72,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Email",
-                  ctrl: _emailCtrl,
+                  validator: _validateEmail,
+                  onSaved: (value) {
+                    _email = value;
+                  },
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(
@@ -72,7 +83,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Téléphone",
-                  ctrl: _phoneCtrl,
+                  validator: _validatePhone,
+                  onSaved: (value) {
+                    _phone = value;
+                  },
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(
@@ -80,7 +94,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   hint: "Adresse",
-                  ctrl: _adresseCtrl,
+                  onSaved: (value) {
+                    _adresse = value;
+                  },
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(
@@ -88,8 +104,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   isPassword: true,
+                  showPassword: state.value.showPassword,
+                  showPasswordOnTap: () {
+                    ctrl.showPassword();
+                  },
                   hint: "Mot de passe",
-                  ctrl: _passwordCtrl,
+                  validator: _validatePassword,
+                  onSaved: (value) {
+                    _password = value;
+                  },
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(
@@ -97,18 +120,41 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 MyInput(
                   isPassword: true,
+                  showPassword: state.value.showPassword,
+                  showPasswordOnTap: () {
+                    ctrl.showPassword();
+                  },
+                  validator: _validateConfirmPassword,
                   hint: "Confirmer mot de passe",
-                  ctrl: _passwordVerifyCtrl,
+                  onSaved: (value) {
+                    _confirmPassword = value;
+                  },
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                PrimaryButton(
-                    onPressed: () {
-                      // Get.toNamed("/login");
-                    },
-                    title: "S'inscrire"),
+                if (!state.value.loading)
+                  PrimaryButton(
+                      onPressed: () {
+                        if (_keyForm.currentState!.validate()) {
+                          _keyForm.currentState!.save();
+                          _showCustomToast(context, "valide");
+                          _submit(
+                              User(
+                                  id: 0,
+                                  nom: _nom ?? "Kalala",
+                                  email: _email ?? "mbayifoster@gmail.com",
+                                  adresse: _adresse ?? "null",
+                                  phone: _phone ?? "00000000"),
+                              _password ?? "");
+                        }
+                      },
+                      title: "S'inscrire"),
+                if (state.value.loading)
+                  const CircularProgressIndicator(
+                    color: MyColors.primary,
+                  ),
                 SizedBox(
                   height: height * 0.05,
                 ),
@@ -118,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     child: Text(
                       "Vous avez déjà un comptes ? Se connecter",
-                      textAlign:TextAlign.center,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -128,7 +174,90 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
+      );
+    }));
+  }
+
+  _submit(User user, String password) async {
+    await ctrl.sendData(user, password);
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Veuillez entrer une adresse email';
+    }
+    const pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    final regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Veuillez entrer une adresse email valide';
+    }
+    return null;
+  }
+
+  String? _validateNom(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Veuillez entrer un nom';
+    }
+  }
+
+  String? _validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Veuillez entrer un numéro de téléphone';
+    }
+    const pattern =
+        r'^\+?[0-9]{10,15}$'; // Exemple pour un numéro international
+    final regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Veuillez entrer un numéro de téléphone valide';
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if (value != _password) {
+      return 'Les mots de passe ne correspondent pas';
+    }
+    return null;
+  }
+
+  // Fonction de validation du mot de passe
+  String? _validatePassword(String? value) {
+    if (value == null || value.length < 6) {
+      return 'Le mot de passe doit avoir au moins 6 caractères';
+    }
+    return null;
+  }
+
+  _showCustomToast(BuildContext context, String msg) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 100.0, // Position verticale
+        left: MediaQuery.of(context).size.width / 2 -
+            75, // Centrer horizontalement
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Text(
+              msg,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 15),
+            ),
+          ),
+        ),
       ),
     );
+
+    overlay.insert(overlayEntry);
+
+    // Supprimez l'overlay après quelques secondes
+    Future.delayed(Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
   }
 }
