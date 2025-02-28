@@ -6,4 +6,5 @@ abstract class AuthServiceNetwork {
   Future<bool> register(UserRequest user);
   Future<bool> verifyEmail(String email);
   Future<bool> changePassword(int opt);
+  Future<dynamic> newUser(String nom, String email);
 }
