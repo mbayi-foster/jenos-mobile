@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/models/requets/user_reauest.dart';
@@ -19,7 +21,6 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
         id: 1,
         nom: "Kalala",
         email: "mbayifoster@gmail.com",
-        prenom: "Foster",
         phone: "0998115482",
         photo: "",
         createdAt: DateTime.now());
@@ -47,5 +48,19 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   Future<bool> changePassword(int opt) {
     // TODO: implement verifyOtp
     throw UnimplementedError();
+  }
+
+  @override
+  Future<dynamic> newUser(String nom, String email) async {
+    var url = Uri.parse("${baseUrl}new-client");
+    var response = await http.post(url, body: {'nom': nom, 'email': email});
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> res = json.decode(response.body);
+
+      return res;
+    }
+
+    return null;
   }
 }

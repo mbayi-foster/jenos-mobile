@@ -23,8 +23,8 @@ class Menu {
     required this.details,
     required this.photo,
     required this.plats,
-    required this.createdAt,
-  });
+    DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now();
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
         id: json["id"] ?? 0,
