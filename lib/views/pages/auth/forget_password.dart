@@ -46,8 +46,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 ),
                 MyInput(
                   hint: "Email",
-                  ctrl: _controller,
                   keyboardType: TextInputType.emailAddress,
+                  onSaved: (value) {},
                 ),
                 SizedBox(
                   height: height * 0.025,

@@ -17,8 +17,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _passwordCtrl = TextEditingController();
+  late String? _email;
+  late String? _password;
   final _keyForm = GlobalKey<FormState>();
   final LoginCtrl ctrl = Get.put(LoginCtrl());
 
@@ -46,13 +46,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Text(
                   "Ajoutez vos coordonnées pour vous connecter",
-                  textAlign:TextAlign.center,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54),
                 ),
-               const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 MyInput(
@@ -60,16 +60,16 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                   hint: "Email",
-                  ctrl: _emailCtrl,
+                  onSaved: (value) {},
                   keyboardType: TextInputType.emailAddress,
                 ),
-               const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 MyInput(
                   isPassword: true,
                   hint: "Mot de passe",
-                  ctrl: _passwordCtrl,
+                  onSaved: (value) {},
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(
@@ -78,16 +78,16 @@ class _LoginPageState extends State<LoginPage> {
                 if (!state.loading)
                   PrimaryButton(
                       onPressed: () {
-                        String email = _emailCtrl.text;
+                        /* String email = _emailCtrl.text;
                         String password = _passwordCtrl.text;
-                        ctrl.login(email, password);
+                        ctrl.login(email, password); */
                       },
                       title:
                           LocalisationService.of(context)!.translate("btnLog")),
                 if (state.error && !state.loading)
-                 const SizedBox(
-                  height: 20,
-                ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                 if (state.error && !state.loading)
                   TextButton(
                       onPressed: () {
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       "Vous n'avez pas des comptes, inscrivez vous!",
-                      textAlign:TextAlign.center,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,

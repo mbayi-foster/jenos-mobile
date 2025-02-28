@@ -18,8 +18,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: 50, horizontal:20),
+        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
         child: SingleChildScrollView(
           child: Form(
             key: _keyForm,
@@ -44,7 +43,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                 ),
                 MyInput(
                   hint: "OTP",
-                  ctrl: _controller,
+                  onSaved: (value) {},
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(

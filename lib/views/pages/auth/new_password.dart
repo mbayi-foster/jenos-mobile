@@ -46,7 +46,7 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
                 MyInput(
                   hint: "Mot de passe",
-                  ctrl: _controller,
+                  onSaved: (value) {},
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(
@@ -54,7 +54,7 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
                 MyInput(
                   hint: "Confirmez mot de passe",
-                  ctrl: _controller,
+                  onSaved: (value) {},
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(
