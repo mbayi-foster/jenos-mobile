@@ -7,11 +7,13 @@ class DetailsPlatPageState {
   bool visible;
   Plat? plat;
   int qte;
+  double prix;
   DetailsPlatPageState(
       {this.loading = false,
       this.hasData = false,
       this.visible = false,
       this.qte = 1,
+      this.prix = 0,
       this.plat});
 
   DetailsPlatPageState copyWith({
@@ -19,12 +21,14 @@ class DetailsPlatPageState {
     bool? hasData,
     bool? visible,
     Plat? plat,
-    int? qte
+    int? qte,
+    double? prix,
   }) =>
       DetailsPlatPageState(
           loading: loading ?? this.loading,
           hasData: hasData ?? this.hasData,
           visible: visible ?? this.visible,
           plat: plat ?? this.plat,
-          qte: qte ?? this.qte);
+          qte: qte ?? this.qte,
+          prix: prix ?? this.prix);
 }

@@ -35,6 +35,7 @@ class _MyIconButtonState extends State<MyIconButton> {
       icon: Icon(
         widget.icon,
         color: Colors.white,
+        size: widget.fontSize,
       ),
       label: Text(
         widget.title,

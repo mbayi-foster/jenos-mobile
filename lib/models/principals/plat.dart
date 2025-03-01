@@ -13,7 +13,7 @@ class Plat {
   String nom;
   String details;
   String photo;
-  int prix;
+  double prix;
   int like;
   DateTime createdAt;
 
@@ -32,8 +32,8 @@ class Plat {
         nom: json["nom"],
         details: json["details"],
         photo: json["photo"],
-        prix: json["prix"] ?? 0,
-        like: json["like"] ?? 0,
+        prix: json["prix"].toDouble() ?? 0,
+        like: json["like"].toInt() ?? 0,
         createdAt: json["created_at"] != null
             ? DateTime.parse(json["created_at"])
             : DateTime.now(),

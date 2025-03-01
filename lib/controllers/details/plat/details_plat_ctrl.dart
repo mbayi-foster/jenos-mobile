@@ -18,11 +18,15 @@ class DetailsPlatCtrl extends GetxController {
     var data = await api.getPlat(id);
 
     if (data != null) {
+      Plat plat = Plat.fromJson(data as Map<String, dynamic>);
+      double prix = state.value.qte * plat.prix;
+      String prixArrondi = prix.toStringAsFixed(2);
       state.update((val) {
         val?.loading = false;
         val?.hasData = true;
         val?.visible = true;
-        val?.plat = Plat.fromJson(data as Map<String, dynamic>);
+        val?.plat = plat;
+        val?.prix = double.parse(prixArrondi);
       });
       //print("le nom du plat est : $data");
     } else {
@@ -35,18 +39,24 @@ class DetailsPlatCtrl extends GetxController {
     }
   }
 
-  void changeQte(bool plusOrMoins) {
+  void changeQte(bool plusOrMoins, double prix) {
     if (plusOrMoins) {
       state.update((val) {
         val?.qte++;
+        double price = state.value.qte * prix;
+        String prixArrondi = price.toStringAsFixed(2);
+        val?.prix = double.parse(prixArrondi);
       });
     }
     if (!plusOrMoins && state.value.qte > 1) {
       state.update((val) {
         val?.qte--;
+        double price = state.value.qte * prix;
+        String prixArrondi = price.toStringAsFixed(2);
+        val?.prix = double.parse(prixArrondi);
       });
     }
 
-    print("changement : ${state.value.qte} et valeur $plusOrMoins");
+    // print("changement : ${state.value.qte} et valeur $plusOrMoins");
   }
 }
