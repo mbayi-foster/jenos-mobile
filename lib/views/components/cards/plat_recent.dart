@@ -34,6 +34,7 @@ class _PlatRecentState extends State<PlatRecent> {
                 borderRadius: BorderRadius.circular(15), // Bords arrondis
               ),
               height: 100,
+              width: 100,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: Image.network(
@@ -54,6 +55,7 @@ class _PlatRecentState extends State<PlatRecent> {
                         StackTrace? stackTrace) {
                       return Text('Erreur de chargement de l\'image');
                     }, */
+                    fit: BoxFit.cover,
                   )),
             ),
             const SizedBox(

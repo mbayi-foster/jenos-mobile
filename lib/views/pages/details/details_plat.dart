@@ -21,7 +21,6 @@ class DetailsPlat extends StatefulWidget {
 
 class _DetailsPlatState extends State<DetailsPlat> {
   DetailsPlatCtrl ctrl = Get.put(DetailsPlatCtrl());
-  int _qte = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    height: height * 0.70,
+                    height: height * 0.67,
                     width: double.infinity,
                     child: Container(
                       width: double.infinity,
@@ -75,13 +74,13 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Positioned(
                     right: 0,
                     left: 0,
-                    bottom: 50,
-                    top: height * 0.65,
-                    child: _price(height, state.value.plat?.prix, state.value.qte)),
+                    bottom: 25,
+                    //top: height * 0.65,
+                    child: _price(height, state.value.prix)),
                 Positioned(
                   right:
                       15, // Positionné à l'extrême gauche, ajusté pour dépasser
-                  top: height * 0.21, // Ajuster la position verticale
+                  top: height * 0.21+7.5, // Ajuster la position verticale
                   child: Center(
                     child: Material(
                       elevation: 8, // Élévation pour donner de la profondeur
@@ -92,7 +91,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                         child: Container(
                             color: Colors.white,
                             padding: const EdgeInsets.all(
-                                10), // Espace autour de l'icône
+                                5), // Espace autour de l'icône
                             child: Icon(
                               Icons.favorite,
                               color: MyColors.primary,
@@ -115,7 +114,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
   _photo(height, photo) {
     return SizedBox(
       width: double.infinity, // Prendre toute la largeur
-      height: height * 0.3,
+      height: height * 0.35,
       child: Image.network(
         photo,
         fit: BoxFit.cover,
@@ -182,14 +181,19 @@ class _DetailsPlatState extends State<DetailsPlat> {
           SizedBox(
             height: 5,
           ),
-          Text(
-            plat.details,
-            style: TextStyle(fontWeight: FontWeight.w400),
+          Container(
+            height: 70,
+            child: SingleChildScrollView(
+              child: Text(
+                plat.details,
+                style: TextStyle(fontWeight: FontWeight.w400),
+              ),
+            ),
           ),
           const SizedBox(
             height: 25,
           ),
-          Container(height: 10, color: Colors.black45),
+          Container(height: 1, color: Colors.black45),
           const SizedBox(
             height: 20,
           ),
@@ -205,7 +209,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 children: [
                   InkWell(
                     onTap: () {
-                      ctrl.changeQte(false);
+                      ctrl.changeQte(false, plat.prix);
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -246,7 +250,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                   ),
                   InkWell(
                     onTap: () {
-                      ctrl.changeQte(true);
+                      ctrl.changeQte(true, plat.prix);
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -272,8 +276,8 @@ class _DetailsPlatState extends State<DetailsPlat> {
     );
   }
 
-  _price(hei, prix, qte) {
-    double height = hei * 0.25;
+  _price(hei, prix) {
+    double height = 150;
     return Stack(
       children: [
         SizedBox(
@@ -294,10 +298,10 @@ class _DetailsPlatState extends State<DetailsPlat> {
           ),
         ),
         Positioned(
-          left: 65,
+          left: 60,
           right: 30,
-          top: hei * 0.02,
-          bottom: hei * 0.02,
+          top: 7.5,
+          bottom:7.5,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(60),
@@ -306,13 +310,13 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 bottomRight: Radius.circular(15)),
             child: Card(
               color: Colors.white,
-              elevation: 5,
+              elevation: 1.5,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 25,
+                    height: 3.5,
                   ),
                   Text(
                     "Prix total",
@@ -322,23 +326,24 @@ class _DetailsPlatState extends State<DetailsPlat> {
                         color: Colors.black54),
                   ),
                   Text(
-                    "${prix * qte}",
+                    "FC $prix",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.5,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 3.5,
                   ),
                   SizedBox(
-                    width: 230,
+                    width: 150,
                     child: MyIconButton(
-                        title: "Ajouter au panier",
-                        bg: MyColors.primary,
-                        onPressed: () {},
-                        icon: Icons.shopping_basket,
-                        padding: 23),
+                      fontSize: 10.5,
+                      title: "Ajouter au panier",
+                      bg: MyColors.primary,
+                      onPressed: () {},
+                      icon: Icons.shopping_basket,
+                    ),
                   )
                 ],
               ),
@@ -354,7 +359,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
         ),
         Positioned(
           right: 10, // Positionné à l'extrême gauche, ajusté pour dépasser
-          top: (height / 2) - 35, // Ajuster la position verticale
+          top: 50, // Ajuster la position verticale
           child: Center(
             child: Material(
               elevation: 4, // Élévation pour donner de la profondeur
@@ -363,7 +368,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 child: Container(
                   color: Colors.white,
                   padding:
-                      EdgeInsets.all(height / 45), // Espace autour de l'icône
+                      EdgeInsets.all(0.5), // Espace autour de l'icône
                   child: PanierButton(
                     colorIcon: MyColors.primary,
                   ),

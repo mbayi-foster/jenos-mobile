@@ -15,7 +15,7 @@ class _ChargementState extends State<Chargement> {
   Widget build(BuildContext context) {
 
     return Visibility(
-      visible: (widget.loading || widget.hasData) ? true : false,
+      visible: (widget.loading || !widget.hasData) ? true : false,
       child: Center(
         child: Padding(
           padding: EdgeInsets.all(20.00),
