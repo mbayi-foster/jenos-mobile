@@ -11,6 +11,7 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   int id;
   String nom;
+  String prenom;
   String email;
   String adresse;
   String phone;
@@ -20,6 +21,7 @@ class User {
   User({
     required this.id,
     required this.nom,
+    this.prenom = "",
     required this.email,
     required this.phone,
     this.adresse = "",
@@ -30,10 +32,11 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"] ?? 0,
         nom: json["nom"],
+        prenom: json["prenom"] ?? "",
         email: json["email"],
-        phone: json["phone"],
-        photo: json["photo"],
-        adresse: json["adresse"],
+        phone: json["phone"] ?? "",
+        photo: json["photo"] ?? "",
+        adresse: json["adresse"] ?? "",
         createdAt: json["created_at"] != null
             ? DateTime.parse(json["created_at"])
             : DateTime.now(),
