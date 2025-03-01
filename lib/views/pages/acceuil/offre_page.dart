@@ -66,16 +66,16 @@ class _OffrePageState extends State<OffrePage> {
                 ],
               ),
             ),
-            _plats()
+          //  _plats()
           ],
         ),
       ),
     );
   }
-
+/* 
   _plats() {
     return Column(
-      children: [for (var i = 0; i < 5; i++) Plats(tap: () {})],
+      children: [for (var i = 0; i < 5; i++)  Plats(tap: () {})],
     );
-  }
+  } */
 }
