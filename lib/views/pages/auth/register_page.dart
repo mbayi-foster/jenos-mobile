@@ -17,6 +17,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   String? _nom;
+  String? _prenom;
   String? _email;
   String? _phone;
   String? _adresse;
@@ -60,6 +61,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 30,
                 ),
                 MyInput(
+                  hint: "Prénom",
+                  validator: _validatePrenom,
+                  onSaved: (value) {
+                    _prenom = value;
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                MyInput(
                   hint: "Nom",
                   validator: _validateNom,
                   onSaved: (value) {
@@ -92,13 +104,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                MyInput(
+                /* MyInput(
                   hint: "Adresse",
                   onSaved: (value) {
                     _adresse = value;
                   },
                   keyboardType: TextInputType.text,
-                ),
+                ), */
                 const SizedBox(
                   height: 20,
                 ),
@@ -136,18 +148,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 if (!state.value.loading)
                   PrimaryButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_keyForm.currentState!.validate()) {
                           _keyForm.currentState!.save();
                           _showCustomToast(context, "valide");
-                          _submit(
-                              User(
-                                  id: 0,
-                                  nom: _nom ?? "Kalala",
-                                  email: _email ?? "mbayifoster@gmail.com",
-                                  adresse: _adresse ?? "null",
-                                  phone: _phone ?? "00000000"),
-                              _password ?? "");
+                          User user = User(
+                              id: 0,
+                              nom: _nom ?? "Kalala",
+                              prenom: _prenom ?? "",
+                              email: _email ?? "mbayifoster@gmail.com",
+                              phone: _phone ?? "00000000");
+                          await ctrl.sendData(user, _password ?? "");
                         }
                       },
                       title: "S'inscrire"),
@@ -178,10 +189,6 @@ class _RegisterPageState extends State<RegisterPage> {
     }));
   }
 
-  _submit(User user, String password) async {
-    await ctrl.sendData(user, password);
-  }
-
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Veuillez entrer une adresse email';
@@ -197,6 +204,12 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _validateNom(String? value) {
     if (value == null || value.isEmpty) {
       return 'Veuillez entrer un nom';
+    }
+  }
+
+  String? _validatePrenom(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Veuillez entrer un prénom';
     }
   }
 
@@ -225,6 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (value == null || value.length < 6) {
       return 'Le mot de passe doit avoir au moins 6 caractères';
     }
+    _password = value;
     return null;
   }
 

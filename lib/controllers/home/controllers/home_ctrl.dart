@@ -14,7 +14,7 @@ class HomeCtrl extends GetxController {
     });
     AcceuilServiceNetworkImpl api = AcceuilServiceNetworkImpl();
     var data = await api.home();
-
+    //print("data : $data");
     if (data != null) {
       List<dynamic> platsRecents = data['plat_recents'];
       List<dynamic> platsPops = data['plat_pops'];
@@ -46,6 +46,15 @@ class HomeCtrl extends GetxController {
           val?.platMostPops = const [];
         });
       }
-    }
+    }else {
+        state.update((val) {
+          val?.loading = false;
+          val?.hasData = false;
+          val?.visible = false;
+          val?.platRecents = const [];
+          val?.platPops = const [];
+          val?.platMostPops = const [];
+        });
+      }
   }
 }
