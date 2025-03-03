@@ -6,7 +6,7 @@ import 'package:jenos_app/routes/routes.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 
 Future main() async {
- await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

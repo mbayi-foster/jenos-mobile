@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/models/principals/user.dart';
-import 'package:jenos_app/services/acceuil_service_network.dart';
+import 'package:jenos_app/services/network/acceuil_service_network.dart';
 import 'package:http/http.dart' as http;
 
 class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
