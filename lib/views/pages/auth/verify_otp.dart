@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/controllers/auth/otp/otp_ctrl.dart';
+import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -12,12 +14,15 @@ class VerifyOtp extends StatefulWidget {
 }
 
 class _VerifyOtpState extends State<VerifyOtp> {
-  final TextEditingController _controller = TextEditingController();
+  String? _code;
   final _keyForm = GlobalKey<FormState>();
+  OtpCtrl ctrl = Get.put(OtpCtrl());
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    var state = ctrl.state;
+    return Scaffold(body: Obx(() {
+      return Padding(
         padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
         child: SingleChildScrollView(
           child: Form(
@@ -31,7 +36,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   height: 20,
                 ),
                 Text(
-                  "Veillez saisir votre adresse email pour recevoir un code afin de créer un nouveau mot de passe",
+                  "Un code vous a été envoyé veillez le saisir ici pour continuer",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -43,17 +48,27 @@ class _VerifyOtpState extends State<VerifyOtp> {
                 ),
                 MyInput(
                   hint: "OTP",
-                  onSaved: (value) {},
+                  onSaved: (value) {
+                    _code = value;
+                  },
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                PrimaryButton(
-                    onPressed: () {
-                      Get.toNamed("/new-password");
-                    },
-                    title: "Suivant"),
+                if (!state.value.loading)
+                  PrimaryButton(
+                      onPressed: () {
+                        _keyForm.currentState!.save();
+                        int code = int.parse(_code!);
+                        print("bouton clique au code $code");
+                        ctrl.checkOtp(code);
+                      },
+                      title: "Suivant"),
+                if (state.value.loading)
+                  const CircularProgressIndicator(
+                    color: MyColors.primary,
+                  ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -70,7 +85,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    }));
   }
 }

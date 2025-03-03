@@ -11,7 +11,7 @@ class RegisterPageCtrl extends GetxController {
   var state = RegisterPageState().obs;
 
   Future<void> sendData(User user, String password) async {
-    print("utilisateur ${user.toJson()} et mot de passe $password");
+   // print("utilisateur ${user.toJson()} et mot de passe $password");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     state.update((val) {
       val?.loading = true;
@@ -21,10 +21,10 @@ class RegisterPageCtrl extends GetxController {
     var data = await api.newUser(user.nom, user.email);
 
     if (data != null) {
-      print("data : $data");
+    //  print("data : $data");
 
       if (data.containsKey("code")) {
-        print("la clef existe et c'est ${data["code"]}");
+      //  print("la clef existe et c'est ${data["code"]}");
         int code = data['code'];
         String userJson = jsonEncode(user.toJson());
         await prefs.setString('user', userJson);

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/models/principals/plat.dart';
-import 'package:jenos_app/services/details_service_network.dart';
+import 'package:jenos_app/services/network/details_service_network.dart';
 import 'package:http/http.dart' as http;
 
 class DetailsServiceNetworkImpl implements DetailsServiceNetwork {
