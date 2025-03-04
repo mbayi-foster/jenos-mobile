@@ -20,7 +20,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _prenom;
   String? _email;
   String? _phone;
-  String? _adresse;
   String? _password;
   String? _confirmPassword;
 
@@ -151,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () async {
                         if (_keyForm.currentState!.validate()) {
                           _keyForm.currentState!.save();
-                          _showCustomToast(context, "valide");
+                        //  _showCustomToast(context, "valide");
                           User user = User(
                               id: 0,
                               nom: _nom ?? "Kalala",

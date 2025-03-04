@@ -32,15 +32,15 @@ class OtpCtrl extends GetxController {
       // print("utilisateur : ${user.toJson()}");
 
       var data = await apiNetwork.register(user, passwordStore);
-      print("data : $data");
       if (data != null) {
+        await prefs.setString('user', jsonEncode(data.toJson()));
         state.update((val) {
           val?.loading = false;
           val?.error = false;
           val?.msg = "Félicitations ! Bienvenue chez Jenos-Food";
         });
         MyAlert.show(text: state.value.msg, bg: Colors.green);
-        // Get.toNamed('/home');
+         Get.toNamed('/home');
       } else {
         state.update((val) {
           val?.loading = false;
@@ -52,6 +52,7 @@ class OtpCtrl extends GetxController {
         Get.back();
       }
     } else {
+      await Future.delayed(Duration(seconds: 2));
       state.update((val) {
         val?.loading = false;
         val?.error = true;

@@ -42,10 +42,8 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
       "phone": user.phone,
       "password": password,
     });
-    print("reponse : ${response.body}");
     if (response.statusCode == 201) {
       Map<String, dynamic> res = json.decode(response.body);
-      print('succes $res');
       return User.fromJson(res);
     }
 
