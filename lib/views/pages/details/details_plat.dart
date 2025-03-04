@@ -74,7 +74,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Positioned(
                     right: 0,
                     left: 0,
-                    bottom: 25,
+                    bottom: 45,
                     //top: height * 0.65,
                     child: _price(height, state.value.prix)),
                 Positioned(
@@ -131,7 +131,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.back();
+                },
                 icon: const Icon(
                   Icons.arrow_back_ios,
                   color: Colors.white,
@@ -156,7 +158,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
           ),
           TextTitle(title: plat!.nom),
           SizedBox(
-            height: 10,
+            height: 1.5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,17 +174,17 @@ class _DetailsPlatState extends State<DetailsPlat> {
             ],
           ),
           SizedBox(
-            height: 15,
+            height: 5,
           ),
           Text(
             "Description",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
           SizedBox(
-            height: 5,
+            height: 1.5,
           ),
           Container(
-            height: 70,
+            height: 80,
             child: SingleChildScrollView(
               child: Text(
                 plat.details,
@@ -191,11 +193,11 @@ class _DetailsPlatState extends State<DetailsPlat> {
             ),
           ),
           const SizedBox(
-            height: 25,
+            height: 7.5,
           ),
           Container(height: 1, color: Colors.black45),
           const SizedBox(
-            height: 20,
+            height: 7.5,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
