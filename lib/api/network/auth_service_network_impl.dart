@@ -33,13 +33,19 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   }
 
   @override
-  Future<User?> register(User user) async {
+  Future<User?> register(User user, String password) async {
     var url = Uri.parse("${baseUrl}clients");
-    var response = await http.post(url, body: user.toJson());
-
+    var response = await http.post(url, body: {
+      "nom": user.nom,
+      "prenom": user.prenom,
+      "email": user.email,
+      "phone": user.phone,
+      "password": password,
+    });
+    print("reponse : ${response.body}");
     if (response.statusCode == 201) {
       Map<String, dynamic> res = json.decode(response.body);
-
+      print('succes $res');
       return User.fromJson(res);
     }
 

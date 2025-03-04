@@ -45,6 +45,7 @@ class User {
   Map<String, dynamic> toJson() => {
         "id": id,
         "nom": nom,
+        "prenom": prenom,
         "email": email,
         "phone": phone,
         "photo": photo,

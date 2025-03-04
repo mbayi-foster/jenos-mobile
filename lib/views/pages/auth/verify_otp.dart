@@ -57,18 +57,17 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   height: 20,
                 ),
                 if (!state.value.loading)
-                  PrimaryButton(
-                      onPressed: () {
-                        _keyForm.currentState!.save();
-                        int code = int.parse(_code!);
-                        print("bouton clique au code $code");
-                        ctrl.checkOtp(code);
-                      },
-                      title: "Suivant"),
+                PrimaryButton(
+                    onPressed: () {
+                      _keyForm.currentState!.save();
+                      int code = int.parse(_code!);
+                      ctrl.checkOtp(code);
+                    },
+                    title: "Suivant"),
                 if (state.value.loading)
                   const CircularProgressIndicator(
                     color: MyColors.primary,
-                  ),
+                  ), 
                 const SizedBox(
                   height: 10,
                 ),
