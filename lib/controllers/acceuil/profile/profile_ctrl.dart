@@ -2,15 +2,17 @@ import 'package:get/get.dart';
 import 'package:jenos_app/controllers/acceuil/profile/profile_page_state.dart';
 
 class ProfileCtrl extends GetxController {
-  ProfilePageState state = ProfilePageState();
+  var state = ProfilePageState().obs;
 
   void edit() {
-    if (state.edit == true) {
-      state = state.copyWith(edit: false);
-      update();
+    if (state.value.edit == true) {
+      state.update((val) {
+        val?.edit = false;
+      });
     } else {
-      state = state.copyWith(edit: true);
-      update();
+      state.update((val) {
+        val?.edit = true;
+      });
     }
   }
 }

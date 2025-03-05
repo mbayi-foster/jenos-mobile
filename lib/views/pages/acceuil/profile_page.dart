@@ -34,38 +34,38 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return GetBuilder<ProfileCtrl>(builder: (ctrl) {
-      var state = ctrl.state;
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
+    var state = ctrl.state;
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: TextTitle(title: "Profile"),
-          automaticallyImplyLeading: false,
-          // ignore: prefer_const_literals_to_create_immutables
-          actions: [const PanierButton()],
-        ),
-        body: SingleChildScrollView(
+        title: TextTitle(title: "Profile"),
+        automaticallyImplyLeading: false,
+        // ignore: prefer_const_literals_to_create_immutables
+        actions: [const PanierButton()],
+      ),
+      body: Obx(() {
+        return SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 _photo(width),
                 const SizedBox(height: 30),
-                _data(width, edit: state.edit)
+                _data(width, edit: state.value.edit)
               ],
             ),
           ),
-        ),
-        bottomNavigationBar: const MyBottomNavigationBar(
-          index: 2,
-        ),
-        floatingActionButton: const MyFloatingButton(
-          index: 2,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      );
-    });
+        );
+      }),
+      bottomNavigationBar: const MyBottomNavigationBar(
+        index: 2,
+      ),
+      floatingActionButton: const MyFloatingButton(
+        index: 2,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
   }
 
   _photo(width) {

@@ -5,10 +5,20 @@ import 'package:jenos_app/services/locale/auth_service_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServiceLocalImpl extends AuthServiceLocal {
-  late SharedPreferences _prefs;
+  static final AuthServiceLocalImpl _instance =
+      AuthServiceLocalImpl._internal();
+  SharedPreferences? _prefs;
+
+  factory AuthServiceLocalImpl() {
+    return _instance;
+  }
+
+  AuthServiceLocalImpl._internal();
   @override
-  User? getUser() {
-    String? userStore = _prefs.getString('user');
+  Future<User?> getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    ;
+    String? userStore = prefs.getString('user');
 
     if (userStore != null) {
       Map<String, dynamic> userMap = jsonDecode(userStore);
@@ -30,14 +40,18 @@ class AuthServiceLocalImpl extends AuthServiceLocal {
     }
   }
 
+  Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
   @override
   bool isAuthenticated() {
-    String? userStore = _prefs.getString('user');
+     String? userStore = _prefs?.getString('user');
 
     if (userStore != null) {
       return true;
     }
 
     return false;
-  }
+}
 }
