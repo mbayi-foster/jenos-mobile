@@ -9,6 +9,7 @@ import 'package:jenos_app/views/components/inputs/input_label.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/components/my_dialogue.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -106,7 +107,12 @@ class _ProfilePageState extends State<ProfilePage> {
         TextTitle(title: "Salut Diercy !"),
         TextButton(
             onPressed: () {
-              // Get.toNamed("/forget-password");
+              MyDialogue dialogue = MyDialogue();
+              dialogue.showSignOut(context, oui: () {
+                Navigator.of(context).pop();
+                ctrl.signOut();
+              });
+              // ctrl.signOut();
             },
             child: Text(
               "Se déconnecter",

@@ -46,12 +46,21 @@ class AuthServiceLocalImpl extends AuthServiceLocal {
 
   @override
   bool isAuthenticated() {
-     String? userStore = _prefs?.getString('user');
+    String? userStore = _prefs?.getString('user');
 
     if (userStore != null) {
       return true;
     }
 
     return false;
-}
+  }
+
+  @override
+  bool signOut() {
+    if (_prefs?.remove('user') != null) {
+      return true;
+    } else {
+     return false;
+    }
+  }
 }

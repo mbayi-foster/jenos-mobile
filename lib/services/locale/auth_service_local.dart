@@ -4,4 +4,5 @@ abstract class AuthServiceLocal {
   Future<bool> verifyOtp(int code);
   Future<User?> getUser();
   bool isAuthenticated();
+  bool signOut();
 }
