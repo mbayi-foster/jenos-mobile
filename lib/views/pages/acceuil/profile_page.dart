@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/home/controllers/profile_ctrl.dart';
+import 'package:jenos_app/controllers/acceuil/profile/profile_ctrl.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
@@ -37,6 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return GetBuilder<ProfileCtrl>(builder: (ctrl) {
       var state = ctrl.state;
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -92,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: MyColors.primary,
                   ),
                   const SizedBox(width: 5),
-                 Text(
+                  Text(
                     "Editer le profile",
                     style: TextStyle(
                         fontSize: 15,

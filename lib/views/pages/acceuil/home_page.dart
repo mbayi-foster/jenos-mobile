@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/home/controllers/home_ctrl.dart';
+import 'package:jenos_app/controllers/acceuil/home/home_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';

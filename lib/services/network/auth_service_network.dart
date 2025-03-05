@@ -7,4 +7,5 @@ abstract class AuthServiceNetwork {
   Future<bool> verifyEmail(String email);
   Future<bool> changePassword(int opt);
   Future<dynamic> newUser(String nom, String email);
+  Future<User?> updateUser(int id, User user);
 }

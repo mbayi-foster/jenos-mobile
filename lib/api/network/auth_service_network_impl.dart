@@ -75,4 +75,10 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
 
     return null;
   }
+  
+  @override
+  Future<User?> updateUser(int id, User user) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
 }

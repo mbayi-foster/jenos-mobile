@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
-import 'package:jenos_app/controllers/auth/states/login_page_state.dart';
+import 'package:jenos_app/controllers/auth/login/login_page_state.dart';
 import 'package:jenos_app/models/principals/user.dart';
 
 class LoginCtrl extends GetxController {

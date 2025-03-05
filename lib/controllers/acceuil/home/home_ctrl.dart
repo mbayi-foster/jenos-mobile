@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/api/network/acceuil_service_network_impl.dart';
-import 'package:jenos_app/controllers/home/states/home_page_state.dart';
+import 'package:jenos_app/controllers/acceuil/home/home_page_state.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 
 class HomeCtrl extends GetxController {

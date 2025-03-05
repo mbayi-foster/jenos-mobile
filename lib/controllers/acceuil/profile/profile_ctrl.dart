@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/home/states/profile_page_state.dart';
+import 'package:jenos_app/controllers/acceuil/profile/profile_page_state.dart';
 
 class ProfileCtrl extends GetxController {
   ProfilePageState state = ProfilePageState();
