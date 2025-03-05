@@ -10,26 +10,16 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   var baseUrl = dotenv.env['BASE_URL'] ?? "";
   @override
   Future<User?> login(String email, String password) async {
-    var url = Uri.parse("$baseUrl/login");
+    var url = Uri.parse("${baseUrl}login");
     var response =
         await http.post(url, body: {"email": email, "password": password});
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    User user = User(
-        id: 1,
-        nom: "Kalala",
-        email: "mbayifoster@gmail.com",
-        phone: "0998115482",
-        photo: "",
-        createdAt: DateTime.now());
-
-    if (email == "mbayifoster@gmail.com" && password == "123456") {
-      return user;
-    } else {
-      return null;
+    if (response.statusCode == 200) {
+      Map<String, dynamic> res = json.decode(response.body);
+      return User.fromJson(res);
     }
+
+    return null;
   }
 
   @override
@@ -75,7 +65,7 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
 
     return null;
   }
-  
+
   @override
   Future<User?> updateUser(int id, User user) {
     // TODO: implement updateUser

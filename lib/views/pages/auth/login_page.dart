@@ -24,13 +24,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(body: GetBuilder<LoginCtrl>(builder: (ctrl) {
-      var state = ctrl.state;
+    var state = ctrl.state;
+    return Scaffold(body: Obx(() {
       return Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: height * 0.08, horizontal: width * 0.05),
+        padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
         child: SingleChildScrollView(
           child: Form(
             key: _keyForm,
@@ -56,11 +54,11 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 MyInput(
-                  validator: (value) {
-                    return null;
-                  },
+                  validator: _validateEmail,
                   hint: "Email",
-                  onSaved: (value) {},
+                  onSaved: (value) {
+                    _email = value;
+                  },
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(
@@ -68,27 +66,31 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 MyInput(
                   isPassword: true,
+                  validator: _validatePassword,
                   hint: "Mot de passe",
-                  onSaved: (value) {},
+                  onSaved: (value) {
+                    _password = value;
+                  },
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                if (!state.loading)
+                if (!state.value.loading)
                   PrimaryButton(
                       onPressed: () {
-                        /* String email = _emailCtrl.text;
-                        String password = _passwordCtrl.text;
-                        ctrl.login(email, password); */
+                        if (_keyForm.currentState!.validate()) {
+                          _keyForm.currentState!.save();
+                          ctrl.login(_email!, _password!);
+                        }
                       },
                       title:
                           LocalisationService.of(context)!.translate("btnLog")),
-                if (state.error && !state.loading)
+                if (state.value.error && !state.value.loading)
                   const SizedBox(
                     height: 20,
                   ),
-                if (state.error && !state.loading)
+                if (state.value.error && !state.value.loading)
                   TextButton(
                       onPressed: () {
                         Get.toNamed("/forget-password");
@@ -100,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w400,
                             color: Colors.black54),
                       )),
-                if (ctrl.state.loading)
+                if (state.value.loading)
                   const CircularProgressIndicator(
                     color: MyColors.primary,
                   ),
@@ -153,5 +155,25 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     }));
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Veuillez entrer une adresse email';
+    }
+    const pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    final regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Veuillez entrer une adresse email valide';
+    }
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.length < 6) {
+      return 'Le mot de passe doit avoir au moins 6 caractères';
+    }
+    _password = value;
+    return null;
   }
 }
