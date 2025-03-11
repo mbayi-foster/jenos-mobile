@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PanierButton extends StatefulWidget {
   final Color colorIcon;
@@ -12,8 +13,10 @@ class _PanierButtonState extends State<PanierButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        onPressed: () {},
-        icon:  Icon(
+        onPressed: () {
+          Get.toNamed('panier');
+        },
+        icon: Icon(
           Icons.shopping_basket,
           color: widget.colorIcon,
         ));
