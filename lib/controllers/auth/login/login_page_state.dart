@@ -1,18 +1,14 @@
 class LoginPageState {
-    bool error;
-    bool loading;
+  bool error;
+  bool loading;
+  bool showPassword;
 
-    LoginPageState({
-        this.error = false,
-        this.loading = false,
-    });
+  LoginPageState(
+      {this.error = false, this.loading = false, this.showPassword = false});
 
-    LoginPageState copyWith({
-        bool? error,
-        bool? loading,
-    }) => 
-        LoginPageState(
-            error: error ?? this.error,
-            loading: loading ?? this.loading,
-        );
+  LoginPageState copyWith({bool? error, bool? loading, bool? showPassword}) =>
+      LoginPageState(
+          error: error ?? this.error,
+          loading: loading ?? this.loading,
+          showPassword: showPassword ?? this.showPassword);
 }

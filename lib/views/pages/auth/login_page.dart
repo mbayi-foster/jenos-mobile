@@ -65,6 +65,10 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 MyInput(
+                  showPasswordOnTap: (){
+                    ctrl.showPassword();
+                  },
+                  showPassword: state.value.showPassword,
                   isPassword: true,
                   validator: _validatePassword,
                   hint: "Mot de passe",
