@@ -22,20 +22,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   // bool _edit = true;
-  final TextEditingController _nomCtrl =
-      TextEditingController(text: "Diercy Tshibuabua");
-  final TextEditingController _emailCtrl =
-      TextEditingController(text: "diercytshibuabua@gmail.com");
-  final TextEditingController _phoneCtrl =
-      TextEditingController(text: "0998115482");
-  final TextEditingController _adresseCtrl =
-      TextEditingController(text: "No9A Nzoloko, Limeté");
+
   final ProfileCtrl ctrl = Get.put(ProfileCtrl());
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ctrl.getUser();
+    });
     double width = MediaQuery.of(context).size.width;
     var state = ctrl.state;
+   
+     TextEditingController nomCtrl = TextEditingController(text: state.value.user!.nom);
+     TextEditingController emailCtrl = TextEditingController(text: state.value.user!.email);
+     TextEditingController phoneCtrl = TextEditingController(text: state.value.user!.phone);
+     TextEditingController adresseCtrl = TextEditingController(text: state.value.user!.adresse);
+     List<TextEditingController> controllers = [
+      nomCtrl, emailCtrl, phoneCtrl, adresseCtrl
+    ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -53,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 _photo(width),
                 const SizedBox(height: 30),
-                _data(width, edit: state.value.edit)
+                _data(width, edit: state.value.edit, controllers:controllers)
               ],
             ),
           ),
@@ -125,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _data(width, {required bool edit}) {
+  _data(width, {required bool edit, required List<TextEditingController> controllers}) {
     double height = 20;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
@@ -138,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Nom",
             label: "Nom",
-            ctrl: _nomCtrl,
+            ctrl: controllers[0],
             keyboardType: TextInputType.text,
           ),
           SizedBox(
@@ -151,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Email",
             label: "Email",
-            ctrl: _emailCtrl,
+            ctrl: controllers[1],
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(
@@ -164,7 +168,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Phone",
             label: "Phone",
-            ctrl: _phoneCtrl,
+            ctrl: controllers[2],
             keyboardType: TextInputType.number,
           ),
           SizedBox(
@@ -177,7 +181,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Adresse",
             label: "Adresse",
-            ctrl: _adresseCtrl,
+            ctrl: controllers[3],
             keyboardType: TextInputType.text,
           ),
           SizedBox(
