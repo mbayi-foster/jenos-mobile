@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/routes/middlewares/middleware_auth.dart';
-import 'package:jenos_app/routes/middlewares/middleware_retour.dart';
 import 'package:jenos_app/views/pages/acceuil/home_page.dart';
 import 'package:jenos_app/views/pages/acceuil/menu_page.dart';
 import 'package:jenos_app/views/pages/acceuil/more_page.dart';
@@ -45,15 +44,15 @@ class AppRoutes {
     GetPage(
         name: '/menus',
         page: () => const MenuPage(),
-        middlewares: [MiddlewareAuth(), MiddlewareRetour()]),
+        middlewares: [MiddlewareAuth() ]),
     GetPage(
         name: '/offres',
         page: () => const OffrePage(),
-        middlewares: [MiddlewareAuth(), MiddlewareRetour()]),
+        middlewares: [MiddlewareAuth() ]),
     GetPage(
         name: '/more',
         page: () => const MorePage(),
-        middlewares: [MiddlewareAuth(), MiddlewareRetour()]),
+        middlewares: [MiddlewareAuth() ]),
     GetPage(
         name: '/home',
         page: () => const HomePage(),
@@ -61,7 +60,7 @@ class AppRoutes {
     GetPage(
         name: '/profile',
         page: () => const ProfilePage(),
-        middlewares: [MiddlewareAuth(), MiddlewareRetour()]),
+        middlewares: [MiddlewareAuth() ]),
     //fin routes acceuil
     GetPage(
         name: '/commande',

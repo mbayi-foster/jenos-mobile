@@ -6,7 +6,6 @@ class MiddlewareRetour extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     String? currentRoute = Get.currentRoute;
 
-    print("La route dans le middlware est $currentRoute ");
     // Vérifiez la route actuelle
     if (currentRoute == '/profile' ||
         currentRoute == '/menus' ||
