@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class MenuItem extends StatefulWidget {
   final String image;
+  final Menu menu;
   final GestureTapCallback tap;
-  final String nom;
-  final int qte;
   const MenuItem(
       {super.key,
+      required this.menu,
       required this.tap,
-      required this.image,
-      required this.nom,
-      required this.qte});
+      required this.image,});
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -27,7 +26,7 @@ class _MenuItemState extends State<MenuItem> {
       alignment: Alignment.center,
       children: [
         // La Card en arrière-plan
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           height: 100,
           child: Center(child: Text('Card')),
@@ -59,14 +58,14 @@ class _MenuItemState extends State<MenuItem> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.nom,
+                          widget.menu.nom,
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "${widget.qte} plats",
+                          "${widget.menu.count} plats",
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w400,

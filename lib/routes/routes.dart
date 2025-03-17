@@ -12,6 +12,7 @@ import 'package:jenos_app/views/pages/auth/register_page.dart';
 import 'package:jenos_app/views/pages/auth/verify_otp.dart';
 import 'package:jenos_app/views/pages/commandes/ma_commade.dart';
 import 'package:jenos_app/views/pages/commandes/panier_achat.dart';
+import 'package:jenos_app/views/pages/details/details_menu_page.dart';
 import 'package:jenos_app/views/pages/details/details_plat.dart';
 import 'package:jenos_app/views/pages/intro/access_page.dart';
 import 'package:jenos_app/views/pages/intro/info_page.dart';
@@ -72,6 +73,10 @@ class AppRoutes {
     GetPage(
         name: '/plat/:id',
         page: () => const DetailsPlat(),
+        middlewares: [MiddlewareAuth()]),
+    GetPage(
+        name: '/menu/:id',
+        page: () => const DetailsMenuPage(),
         middlewares: [MiddlewareAuth()]),
 
       //routes commandes

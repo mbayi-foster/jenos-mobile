@@ -12,15 +12,15 @@ String menuToJson(Menu data) => json.encode(data.toJson());
 class Menu {
   int id;
   String nom;
-  String details;
   String photo;
   List<Plat?> plats;
+  int count;
   DateTime createdAt;
 
   Menu({
     required this.id,
+    required this.count,
     required this.nom,
-    required this.details,
     required this.photo,
     required this.plats,
     DateTime? createdAt,
@@ -28,10 +28,12 @@ class Menu {
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
         id: json["id"] ?? 0,
-        nom: json["nom"],
-        details: json["details"],
-        photo: json["photo"],
-        plats: List<Plat>.from(json["plats"].map((x) => x)),
+        count: json["nbre_plats"] ?? 0,
+        nom: json["nom"] ?? "",
+        photo: json["photo"] ?? "",
+        plats: json['plats'] != null
+            ? List<Plat>.from(json["plats"].map((x) => x))
+            : [],
         createdAt: json["created_at"] != null
             ? DateTime.parse(json["created_at"])
             : DateTime.now(),
@@ -39,8 +41,8 @@ class Menu {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "nbre_plats": count,
         "nom": nom,
-        "details": details,
         "photo": photo,
         "plats": List<dynamic>.from(plats.map((x) => x)),
         "created_at":

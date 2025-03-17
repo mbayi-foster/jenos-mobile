@@ -22,15 +22,24 @@ class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
       // Décodez la réponse JSON
       final Map<String, dynamic> jsonData = json.decode(res.body);
       response = jsonData;
-    } 
+    }
 
     return response;
   }
 
   @override
-  Future<List<Menu>?> menu() {
-    // TODO: implement menu
-    throw UnimplementedError();
+  Future<List<Menu>?> getMenus() async {
+    List<Menu> menus = [];
+    var url = Uri.parse("${baseUrl}mobile-menu");
+    var res = await http.get(
+      url,
+    );
+    if (res.statusCode == 200) {
+      List<dynamic> jsonData = json.decode(res.body);
+      menus = jsonData.map((json) => Menu.fromJson(json)).toList();
+      return menus;
+    }
+    return null;
   }
 
   @override

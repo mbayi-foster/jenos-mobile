@@ -64,11 +64,17 @@ class _PlatPanierState extends State<PlatPanier> {
                     width: 10,
                   ),
                   Column(
-                    children: [
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:[
                       TextTitle(
-                        title: "Hello world",
+                        title: "Pizza",
                         fontSize: 15,
                       ),
+                      SizedBox(height:3),
+                      Text("Qte : 5"),
+                      SizedBox(height:3),
+                      Text("9000 FC"),
                     ],
                   ),
                 ],

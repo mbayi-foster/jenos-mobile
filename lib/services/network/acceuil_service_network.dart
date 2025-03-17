@@ -4,7 +4,7 @@ import 'package:jenos_app/models/principals/user.dart';
 
 abstract class AcceuilServiceNetwork {
   Future<dynamic> home();
-  Future<List<Menu>?> menu();
+  Future<List<Menu>?> getMenus();
   Future<List<Plat>?> platPops();
   Future<List<Plat>?> platMostPops();
   Future<List<Plat>?> platRecents();
