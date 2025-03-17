@@ -42,51 +42,51 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Mettez à jour l'état ici
       ctrl.fetchData();
+      ctrl.getUser();
     });
 
     var state = ctrl.state;
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return Obx(() {
+      List<Plat> recents = state.value.platRecents;
+      List<Plat> platsPop = state.value.platPops;
+      List<Plat> mostPops = state.value.platMostPops;
+      return Scaffold(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Bonjour Rolly !"),
-        automaticallyImplyLeading: false,
-        // ignore: prefer_const_literals_to_create_immutables
-        actions: [const PanierButton()],
-      ),
-      body: Obx(() {
-        if (state.value.visible) {
-          List<Plat> recents = state.value.platRecents;
-          List<Plat> platsPop = state.value.platPops;
-          List<Plat> mostPops = state.value.platMostPops;
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 45.00, top: 25, left: 25.00, right: 25.00),
-                  child: InputSearch(
-                    tap: () {},
-                  ),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: TextTitle(title: "Bonjour ${state.value.user?.prenom ?? ""} !"),
+          automaticallyImplyLeading: false,
+          // ignore: prefer_const_literals_to_create_immutables
+          actions: [const PanierButton()],
+        ),
+        body: state.value.visible
+            ? SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 45.00, top: 25, left: 25.00, right: 25.00),
+                      child: InputSearch(
+                        tap: () {},
+                      ),
+                    ),
+                    _offres(),
+                    _platPop(width, plats: platsPop),
+                    _platMostPop(width, plats: mostPops),
+                    _recents(width, plats: recents)
+                  ],
                 ),
-                _offres(),
-                _platPop(width, plats: platsPop),
-                _platMostPop(width, plats: mostPops),
-                _recents(width, plats: recents)
-              ],
-            ),
-          );
-        }
-        return Chargement(
-          loading: state.value.loading,
-          hasData: state.value.hasData,
-        );
-      }),
-      bottomNavigationBar: const MyBottomNavigationBar(),
-      floatingActionButton: const MyFloatingButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
+              )
+            : Chargement(
+                loading: state.value.loading,
+                hasData: state.value.hasData,
+              ),
+        bottomNavigationBar: const MyBottomNavigationBar(),
+        floatingActionButton: const MyFloatingButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      );
+    });
   }
 
   _offres() {

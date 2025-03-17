@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/controllers/acceuil/profile/profile_ctrl.dart';
+import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
@@ -13,8 +14,7 @@ import 'package:jenos_app/views/components/my_dialogue.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class ProfilePage extends StatefulWidget {
-  final int index;
-  const ProfilePage({super.key, this.index = -1});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -23,7 +23,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   // bool _edit = true;
 
-  final ProfileCtrl ctrl = Get.put(ProfileCtrl());
+   ProfileCtrl ctrl = Get.put(ProfileCtrl());
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,10 @@ class _ProfilePageState extends State<ProfilePage> {
     double width = MediaQuery.of(context).size.width;
     var state = ctrl.state;
    
-     TextEditingController nomCtrl = TextEditingController(text: state.value.user!.nom);
-     TextEditingController emailCtrl = TextEditingController(text: state.value.user!.email);
-     TextEditingController phoneCtrl = TextEditingController(text: state.value.user!.phone);
-     TextEditingController adresseCtrl = TextEditingController(text: state.value.user!.adresse);
+     TextEditingController nomCtrl = TextEditingController(text: state.value.user?.nom);
+     TextEditingController emailCtrl = TextEditingController(text: state.value.user?.email);
+     TextEditingController phoneCtrl = TextEditingController(text: state.value.user?.phone);
+     TextEditingController adresseCtrl = TextEditingController(text: state.value.user?.adresse);
      List<TextEditingController> controllers = [
       nomCtrl, emailCtrl, phoneCtrl, adresseCtrl
     ];
@@ -55,9 +55,9 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Center(
             child: Column(
               children: [
-                _photo(width),
+                _photo(width, user: state.value.user),
                 const SizedBox(height: 30),
-                _data(width, edit: state.value.edit, controllers:controllers)
+                _data(width, edit: state.value.edit, user:state.value.user)
               ],
             ),
           ),
@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _photo(width) {
+  _photo(width, {required User? user}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -81,10 +81,6 @@ class _ProfilePageState extends State<ProfilePage> {
         Image.asset(IconsPath.profile),
         TextButton(
             onPressed: () {
-              /*  setState(() {
-                _edit = (_edit == true) ? false : true;
-              }); */
-
               ctrl.edit();
             },
             child: SizedBox(
@@ -108,7 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             )),
-        TextTitle(title: "Salut Diercy !"),
+        TextTitle(title: "Salut ${user?.prenom} !"),
+        TextTitle(title: "${user?.email}"),
         TextButton(
             onPressed: () {
               MyDialogue dialogue = MyDialogue();
@@ -129,7 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _data(width, {required bool edit, required List<TextEditingController> controllers}) {
+  _data(width, {required bool edit, required User? user}) {
     double height = 20;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
@@ -142,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Nom",
             label: "Nom",
-            ctrl: controllers[0],
+            ctrl: TextEditingController(text: user?.nom),
             keyboardType: TextInputType.text,
           ),
           SizedBox(
@@ -153,9 +150,9 @@ class _ProfilePageState extends State<ProfilePage> {
             validator: (value) {
               return null;
             },
-            hint: "Email",
-            label: "Email",
-            ctrl: controllers[1],
+            hint: "Prénom",
+            label: "Prénom",
+            ctrl: TextEditingController(text: user?.prenom),
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(
@@ -168,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Phone",
             label: "Phone",
-            ctrl: controllers[2],
+            ctrl: TextEditingController(text: user?.phone),
             keyboardType: TextInputType.number,
           ),
           SizedBox(
@@ -181,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             hint: "Adresse",
             label: "Adresse",
-            ctrl: controllers[3],
+            ctrl: TextEditingController(text: user?.adresse),
             keyboardType: TextInputType.text,
           ),
           SizedBox(

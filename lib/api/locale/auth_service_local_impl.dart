@@ -19,10 +19,10 @@ class AuthServiceLocalImpl extends AuthServiceLocal {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     ;
     String? userStore = prefs.getString('user');
-
     if (userStore != null) {
       Map<String, dynamic> userMap = jsonDecode(userStore);
-      return User.fromJson(userMap);
+      User user = User.fromJson(userMap);
+      return user;
     }
 
     return null;
@@ -60,7 +60,7 @@ class AuthServiceLocalImpl extends AuthServiceLocal {
     if (_prefs?.remove('user') != null) {
       return true;
     } else {
-     return false;
+      return false;
     }
   }
 }
