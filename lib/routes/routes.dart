@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/routes/middlewares/middleware_auth.dart';
-import 'package:jenos_app/routes/middlewares/middleware_retour.dart';
 import 'package:jenos_app/views/pages/acceuil/home_page.dart';
 import 'package:jenos_app/views/pages/acceuil/menu_page.dart';
 import 'package:jenos_app/views/pages/acceuil/more_page.dart';
