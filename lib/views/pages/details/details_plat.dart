@@ -4,7 +4,6 @@ import 'package:jenos_app/controllers/details/plat/details_plat_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
-import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/my_icon_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';

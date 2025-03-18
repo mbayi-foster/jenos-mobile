@@ -3,5 +3,5 @@ import 'package:jenos_app/models/principals/plat.dart';
 
 abstract class DetailsServiceNetwork {
   Future<dynamic> getPlat(String id);
-  Future<dynamic> getMenu(String id);
+  Future<Menu?> getMenu(String id);
 }

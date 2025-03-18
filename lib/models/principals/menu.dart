@@ -26,18 +26,23 @@ class Menu {
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
-  factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-        id: json["id"] ?? 0,
-        count: json["nbre_plats"] ?? 0,
-        nom: json["nom"] ?? "",
-        photo: json["photo"] ?? "",
-        plats: json['plats'] != null
-            ? List<Plat>.from(json["plats"].map((x) => x))
-            : [],
-        createdAt: json["created_at"] != null
-            ? DateTime.parse(json["created_at"])
-            : DateTime.now(),
-      );
+  factory Menu.fromJson(Map<String, dynamic> json) {
+    List<Plat> platsList = const [];
+    if (json['plats'] != null) {
+      var platsJson = json['plats'] as List;
+      platsList = platsJson.map((platJson) => Plat.fromJson(platJson)).toList();
+    }
+    return Menu(
+      id: json["id"] ?? 0,
+      count: json["nbre_plats"] ?? 0,
+      nom: json["nom"] ?? "",
+      photo: json["photo"] ?? "",
+      plats: platsList,
+      createdAt: json["created_at"] != null
+          ? DateTime.parse(json["created_at"])
+          : DateTime.now(),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,

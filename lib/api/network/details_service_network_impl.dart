@@ -10,9 +10,20 @@ class DetailsServiceNetworkImpl implements DetailsServiceNetwork {
   var baseUrl = dotenv.env['BASE_URL'] ?? "";
 
   @override
-  Future<dynamic?> getMenu(String id) {
-    // TODO: implement getMenu
-    throw UnimplementedError();
+  Future<Menu?> getMenu(String id) async {
+    var url = Uri.parse("${baseUrl}mobile-menu/$id");
+    var res = await http.get(
+      url,
+    );
+
+    if (res.statusCode == 200) {
+      // Décodez la réponse JSON
+      Map<String, dynamic> response = json.decode(res.body);
+      Menu menu = Menu.fromJson(response);
+      return menu;
+    }
+
+    return null;
   }
 
   @override

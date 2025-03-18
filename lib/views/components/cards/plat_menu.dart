@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/images_path.dart';
 
 class PlatMenu extends StatefulWidget {
   final GestureTapCallback tap;
-  final String nom;
-  final String details;
-  final double cote;
+  final Plat plat;
   const PlatMenu(
       {super.key,
-      this.cote = 1,
-      required this.details,
-      required this.nom,
+      required this.plat,
       required this.tap});
 
   @override
@@ -44,7 +41,7 @@ class _PlatMenuState extends State<PlatMenu> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    widget.nom,
+                    widget.plat.nom,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 22.5,
@@ -52,12 +49,12 @@ class _PlatMenuState extends State<PlatMenu> {
                   ),
                   Row(
                     children: [
-                      const ImageIcon(
-                        AssetImage(IconsPath.start),
+                      const Icon(
+                        Icons.favorite,
                         color: MyColors.primary,
                       ),
                       Text(
-                        "${widget.cote}",
+                        "${widget.plat.like}",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -69,7 +66,7 @@ class _PlatMenuState extends State<PlatMenu> {
                         width: 5,
                       ),
                       Text(
-                        widget.details,
+                        widget.plat.details,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
