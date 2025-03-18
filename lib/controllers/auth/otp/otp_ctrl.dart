@@ -40,7 +40,7 @@ class OtpCtrl extends GetxController {
           val?.msg = "Félicitations ! Bienvenue chez Jenos-Food";
         });
         MyAlert.show(text: state.value.msg, bg: Colors.green);
-         Get.toNamed('/home');
+         Get.offAllNamed('/home');
       } else {
         state.update((val) {
           val?.loading = false;

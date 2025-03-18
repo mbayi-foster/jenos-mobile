@@ -25,7 +25,7 @@ class _MyFloatingButtonState extends State<MyFloatingButton> {
         ),
       ),
       onPressed: () {
-        Get.toNamed('/home');
+        Get.offAllNamed('/home');
       },
     );
   }

@@ -25,7 +25,7 @@ class LoginCtrl extends GetxController {
         val?.loading = false;
         val?.error = false;
       });
-      Get.toNamed("/home");
+      Get.offAllNamed("/home");
     } else {
       state.update((val) {
         val?.loading = false;
