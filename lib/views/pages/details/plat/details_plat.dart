@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/details/plat/details_plat_ctrl.dart';
+import 'package:jenos_app/views/pages/details/plat/details_plat_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
@@ -34,13 +34,6 @@ class _DetailsPlatState extends State<DetailsPlat> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: const MyBottomNavigationBar(
-          index: -1,
-        ),
-        floatingActionButton: const MyFloatingButton(
-          index: -1,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Obx(() {
           if (state.value.visible) {
             return Stack(

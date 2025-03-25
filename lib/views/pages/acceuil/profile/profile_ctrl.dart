@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
-import 'package:jenos_app/controllers/acceuil/profile/profile_page_state.dart';
+import 'package:jenos_app/views/pages/acceuil/profile/profile_page_state.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/components/my_alert.dart';
 

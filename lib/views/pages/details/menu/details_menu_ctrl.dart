@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/api/network/details_service_network_impl.dart';
-import 'package:jenos_app/controllers/details/menu/deatils_menu_state_page.dart';
+import 'package:jenos_app/views/pages/details/menu/deatils_menu_state_page.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 
 class DetailsMenuCtrl extends GetxController {

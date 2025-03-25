@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/routes/middlewares/middleware_auth.dart';
-import 'package:jenos_app/views/pages/acceuil/home_page.dart';
-import 'package:jenos_app/views/pages/acceuil/menu_page.dart';
+import 'package:jenos_app/views/pages/acceuil/home/home_page.dart';
+import 'package:jenos_app/views/pages/acceuil/menu/menu_page.dart';
 import 'package:jenos_app/views/pages/acceuil/more_page.dart';
 import 'package:jenos_app/views/pages/acceuil/offre_page.dart';
-import 'package:jenos_app/views/pages/acceuil/profile_page.dart';
+import 'package:jenos_app/views/pages/acceuil/profile/profile_page.dart';
 import 'package:jenos_app/views/pages/auth/forget_password.dart';
 import 'package:jenos_app/views/pages/auth/new_password.dart';
-import 'package:jenos_app/views/pages/auth/register_page.dart';
-import 'package:jenos_app/views/pages/auth/verify_otp.dart';
-import 'package:jenos_app/views/pages/commandes/ma_commade.dart';
-import 'package:jenos_app/views/pages/commandes/panier_achat.dart';
-import 'package:jenos_app/views/pages/details/details_menu_page.dart';
-import 'package:jenos_app/views/pages/details/details_plat.dart';
+import 'package:jenos_app/views/pages/auth/register/register_page.dart';
+import 'package:jenos_app/views/pages/auth/otp/verify_otp.dart';
+import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commade.dart';
+import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat.dart';
+import 'package:jenos_app/views/pages/details/menu/details_menu_page.dart';
+import 'package:jenos_app/views/pages/details/plat/details_plat.dart';
 import 'package:jenos_app/views/pages/intro/access_page.dart';
 import 'package:jenos_app/views/pages/intro/info_page.dart';
 import 'package:jenos_app/views/pages/intro/intro_page.dart';
 
-import '../views/pages/auth/login_page.dart';
+import '../views/pages/auth/login/login_page.dart';
 
 class AppRoutes {
   static const String home = '/';

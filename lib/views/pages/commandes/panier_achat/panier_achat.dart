@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/commandes/panier_achat/panier_achat_ctrl.dart';
+import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat_ctrl.dart';
 import 'package:jenos_app/views/components/cards/plat_panier.dart';
 import 'package:jenos_app/views/components/chargement.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';

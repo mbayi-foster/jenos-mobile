@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
-import 'package:jenos_app/controllers/auth/otp/otp_state.dart';
+import 'package:jenos_app/views/pages/auth/otp/otp_state.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/components/my_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';

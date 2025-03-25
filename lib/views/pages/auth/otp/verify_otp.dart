@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/auth/otp/otp_ctrl.dart';
+import 'package:jenos_app/views/pages/auth/otp/otp_ctrl.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';

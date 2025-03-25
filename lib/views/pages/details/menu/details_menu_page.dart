@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/details/menu/details_menu_ctrl.dart';
+import 'package:jenos_app/views/pages/details/menu/details_menu_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';

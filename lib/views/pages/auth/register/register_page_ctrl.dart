@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
-import 'package:jenos_app/controllers/auth/register/register_page_state.dart';
+import 'package:jenos_app/views/pages/auth/register/register_page_state.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/components/my_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';

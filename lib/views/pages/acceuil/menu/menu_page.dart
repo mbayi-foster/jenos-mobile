@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/acceuil/menu/menu_ctrl.dart';
+import 'package:jenos_app/views/pages/acceuil/menu/menu_ctrl.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/images_path.dart';

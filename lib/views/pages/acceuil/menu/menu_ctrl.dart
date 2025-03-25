@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/api/network/acceuil_service_network_impl.dart';
-import 'package:jenos_app/controllers/acceuil/menu/menu_state_page.dart';
+import 'package:jenos_app/views/pages/acceuil/menu/menu_state_page.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 
 class MenuCtrl extends GetxController {

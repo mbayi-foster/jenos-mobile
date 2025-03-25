@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/controllers/acceuil/profile/profile_ctrl.dart';
+import 'package:jenos_app/views/pages/acceuil/profile/profile_ctrl.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
