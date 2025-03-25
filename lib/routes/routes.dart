@@ -16,6 +16,7 @@ import 'package:jenos_app/views/pages/details/plat/details_plat.dart';
 import 'package:jenos_app/views/pages/intro/access_page.dart';
 import 'package:jenos_app/views/pages/intro/info_page.dart';
 import 'package:jenos_app/views/pages/intro/intro_page.dart';
+import 'package:jenos_app/views/pages/notifications/notifications_pages/notifications_page.dart';
 
 import '../views/pages/auth/login/login_page.dart';
 
@@ -42,26 +43,22 @@ class AppRoutes {
 
 //routes protegés
     //Route acceuil
-    GetPage(
-        name: '/menus',
-        page: () => const MenuPage(),
-        middlewares: [MiddlewareAuth(),  ]),
-    GetPage(
-        name: '/offres',
-        page: () => const OffrePage(),
-        middlewares: [MiddlewareAuth(),  ]),
-    GetPage(
-        name: '/more',
-        page: () => const MorePage(),
-        middlewares: [MiddlewareAuth(),  ]),
+    GetPage(name: '/menus', page: () => const MenuPage(), middlewares: [
+      MiddlewareAuth(),
+    ]),
+    GetPage(name: '/offres', page: () => const OffrePage(), middlewares: [
+      MiddlewareAuth(),
+    ]),
+    GetPage(name: '/more', page: () => const MorePage(), middlewares: [
+      MiddlewareAuth(),
+    ]),
     GetPage(
         name: '/home',
         page: () => const HomePage(),
         middlewares: [MiddlewareAuth()]),
-    GetPage(
-        name: '/profile',
-        page: () => const ProfilePage(),
-        middlewares: [MiddlewareAuth(),  ]),
+    GetPage(name: '/profile', page: () => const ProfilePage(), middlewares: [
+      MiddlewareAuth(),
+    ]),
     //fin routes acceuil
     GetPage(
         name: '/commande',
@@ -78,10 +75,16 @@ class AppRoutes {
         page: () => const DetailsMenuPage(),
         middlewares: [MiddlewareAuth()]),
 
-      //routes commandes
-        GetPage(
+    //routes commandes
+    GetPage(
         name: '/panier',
         page: () => const PanierAchat(),
-        middlewares: [MiddlewareAuth()])
+        middlewares: [MiddlewareAuth()]),
+
+    //route info
+    GetPage(
+        name: '/notifications',
+        page: () => const NotificationsPage(),
+        middlewares: [MiddlewareAuth()]),
   ];
 }

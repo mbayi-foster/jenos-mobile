@@ -23,7 +23,7 @@ class _InfoItemState extends State<InfoItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {},
+        onTap: widget.tap,
         child: Stack(
           children: [
             SizedBox(

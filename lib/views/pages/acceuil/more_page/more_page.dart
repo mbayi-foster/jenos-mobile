@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
@@ -18,19 +20,24 @@ class _MorePageState extends State<MorePage> {
     {
       'icon': IconsPath.dollards,
       'text': 'Détails du paiement',
+      'lien': "/notifications"
     },
     {
       'icon': IconsPath.dollards,
       'text': 'Mes commandes',
+      'lien': "/notifications"
     },
-    {'icon': IconsPath.dollards, 'text': 'Notifications', 'notifications': 20},
     {
       'icon': IconsPath.dollards,
-      'text': 'Inbox',
+      'text': 'Notifications',
+      'notifications': 20,
+      'lien': "/notifications"
     },
+    {'icon': IconsPath.dollards, 'text': 'Inbox', 'lien': "/notifications"},
     {
       'icon': IconsPath.dollards,
       'text': 'A propos de nous',
+      'lien': "/notifications"
     },
   ];
 
@@ -71,7 +78,10 @@ class _MorePageState extends State<MorePage> {
         for (var i = 0; i < _content.length; i++)
           Column(children: [
             InfoItem(
-              tap: () {},
+              tap: () {
+                print("cliqué");
+                Get.toNamed(_content[i]['lien']);
+              },
               icon: _content[i]['icon']!,
               text: _content[i]['text']!,
               notifications: _content[i]['notifications'] ?? 0,
