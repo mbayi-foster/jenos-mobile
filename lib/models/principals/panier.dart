@@ -35,7 +35,7 @@ class Panier {
         id: json["id"] ?? 0,
         clienId: json["clien_id"] ?? 0,
         platId: json["plat_id"],
-        plat: json["plat"],
+        plat: json["plat"] ? Plat.fromJson(json["plat"]) : null,
         qte: json["qte"].toDouble() ?? 0,
         status: json["status"] ?? false,
         prix: json["prix"].toDouble() ?? 0,
