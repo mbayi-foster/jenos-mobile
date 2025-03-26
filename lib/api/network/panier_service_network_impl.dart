@@ -10,22 +10,33 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
   @override
   Future<bool> ajouter(Map<String, dynamic> data) async {
     var url = Uri.parse("${baseUrl}paniers");
-    print("data : $data");
+
     var response = await http.post(url, body: data);
-    print("traitement en cours");
+
     if (response.statusCode == 201) {
-      print("succes");
       //  Map<String, dynamic> res = json.decode(response.body);
       return true;
     }
-    print("echec");
+
     return false;
   }
 
   @override
-  Future<List<Panier>>? getAll(int userId) {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<Panier>?>? getAll(int userId) async {
+    var url = Uri.parse("${baseUrl}paniers/$userId");
+    List<Panier> paniers = [];
+    var response = await http.get(
+      url,
+    );
+    print("traitement en cours");
+    if (response.statusCode == 200) {
+      print("succes");
+      List<dynamic> jsonData = json.decode(response.body);
+      paniers = jsonData.map((json) => Panier.fromJson(json)).toList();
+      return paniers;
+    }
+    print("echec");
+    return null;
   }
 
   @override

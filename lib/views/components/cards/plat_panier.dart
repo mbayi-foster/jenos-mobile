@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jenos_app/models/principals/panier.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -6,7 +7,12 @@ import 'package:jenos_app/views/components/texts/text_title.dart';
 class PlatPanier extends StatefulWidget {
   bool isChecked;
   GestureTapCallback tap;
-  PlatPanier({super.key, this.isChecked = false, required this.tap});
+  Panier panier;
+  PlatPanier(
+      {super.key,
+      required this.panier,
+      this.isChecked = false,
+      required this.tap});
 
   @override
   State<PlatPanier> createState() => _PlatPanierState();
@@ -55,8 +61,8 @@ class _PlatPanierState extends State<PlatPanier> {
                   SizedBox(
                     width: 10,
                   ),
-                  Image.asset(
-                    ImagePaths.pizza,
+                  Image.network(
+                    widget.panier.plat!.photo,
                     width: 75,
                     height: 75,
                   ),
@@ -66,15 +72,15 @@ class _PlatPanierState extends State<PlatPanier> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children:[
+                    children: [
                       TextTitle(
-                        title: "Pizza",
+                        title: widget.panier.plat!.nom,
                         fontSize: 15,
                       ),
-                      SizedBox(height:3),
-                      Text("Qte : 5"),
-                      SizedBox(height:3),
-                      Text("9000 FC"),
+                      SizedBox(height: 3),
+                      Text("Qte : ${widget.panier.qte}"),
+                      SizedBox(height: 3),
+                      Text("${widget.panier.prix} FC"),
                     ],
                   ),
                 ],
