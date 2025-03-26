@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/user.dart';
-import 'package:jenos_app/models/requets/user_reauest.dart';
 import 'package:jenos_app/services/network/auth_service_network.dart';
 import 'package:http/http.dart' as http;
 

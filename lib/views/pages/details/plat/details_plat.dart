@@ -27,6 +27,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
       // Mettez à jour l'état ici
       final String id = Get.parameters['id'] ?? '0';
       ctrl.getPlat(id);
+      ctrl.getUser();
     });
     var state = ctrl.state;
     /* final String id = Get.parameters['id'] ?? '0';
@@ -72,7 +73,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Positioned(
                   right:
                       15, // Positionné à l'extrême gauche, ajusté pour dépasser
-                  top: height * 0.21+7.5, // Ajuster la position verticale
+                  top: height * 0.21 + 7.5, // Ajuster la position verticale
                   child: Center(
                     child: Material(
                       elevation: 8, // Élévation pour donner de la profondeur
@@ -295,7 +296,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
           left: 60,
           right: 30,
           top: 7.5,
-          bottom:7.5,
+          bottom: 7.5,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(60),
@@ -322,7 +323,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                   Text(
                     "FC $prix",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: const Color.fromARGB(255, 255, 248, 248),
                         fontSize: 22.5,
                         fontWeight: FontWeight.bold),
                   ),
@@ -335,7 +336,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
                       fontSize: 10.5,
                       title: "Ajouter au panier",
                       bg: MyColors.primary,
-                      onPressed: () {},
+                      onPressed: (){
+                       ctrl.addAtPanier();
+                      },
                       icon: Icons.shopping_basket,
                     ),
                   )
@@ -361,8 +364,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
               child: ClipOval(
                 child: Container(
                   color: Colors.white,
-                  padding:
-                      EdgeInsets.all(0.5), // Espace autour de l'icône
+                  padding: EdgeInsets.all(0.5), // Espace autour de l'icône
                   child: PanierButton(
                     colorIcon: MyColors.primary,
                   ),

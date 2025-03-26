@@ -17,7 +17,7 @@ class Panier {
   Plat? plat;
   int qte;
   bool status;
-  int prix;
+  double prix;
   DateTime createdAt;
 
   Panier({
