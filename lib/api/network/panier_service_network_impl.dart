@@ -32,6 +32,9 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
     if (response.statusCode == 200) {
       print("succes");
       List<dynamic> jsonData = json.decode(response.body);
+      for (var data in jsonData) {
+        print(data);
+      }
       paniers = jsonData.map((json) => Panier.fromJson(json)).toList();
       return paniers;
     }

@@ -33,7 +33,7 @@ class Panier {
 
   factory Panier.fromJson(Map<String, dynamic> json) => Panier(
         id: json["id"] ?? 0,
-        clienId: json["clien_id"] ?? 0,
+        clienId: json["client_id"] ?? 0,
         platId: json["plat_id"],
         plat: json["plat"] ? Plat.fromJson(json["plat"]) : null,
         qte: json["qte"].toDouble() ?? 0,
@@ -46,7 +46,7 @@ class Panier {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "clien_id": clienId,
+        "client_id": clienId,
         "plat_id": platId,
         "plat": plat,
         "qte": qte,
