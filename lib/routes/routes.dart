@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/routes/middlewares/middleware_auth.dart';
+import 'package:jenos_app/views/pages/acceuil/commandes/commandes_page.dart';
 import 'package:jenos_app/views/pages/acceuil/home/home_page.dart';
 import 'package:jenos_app/views/pages/acceuil/menu/menu_page.dart';
 import 'package:jenos_app/views/pages/acceuil/more_page/more_page.dart';
@@ -49,6 +50,9 @@ class AppRoutes {
     GetPage(name: '/offres', page: () => const OffrePage(), middlewares: [
       MiddlewareAuth(),
     ]),
+    GetPage(name: '/commandes', page: () => const CommandesPage(), middlewares: [
+      MiddlewareAuth(),
+    ]),
     GetPage(name: '/more', page: () => const MorePage(), middlewares: [
       MiddlewareAuth(),
     ]),
@@ -60,6 +64,7 @@ class AppRoutes {
       MiddlewareAuth(),
     ]),
     //fin routes acceuil
+
     GetPage(
         name: '/commande',
         page: () => const MaCommade(),

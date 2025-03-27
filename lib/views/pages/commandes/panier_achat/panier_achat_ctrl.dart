@@ -82,8 +82,7 @@ class PanierAchatCtrl extends GetxController {
   }
 
 /* créer une commande */
-void commande(){
-  
-}
-
+  void commande() {
+    List<int> paniers = List.from(state.value.checkList);
+  }
 }

@@ -28,7 +28,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_bag_sharp),
-          label: 'Offres',
+          label: 'Commandes',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
@@ -41,13 +41,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       ],
       currentIndex: index == -1 ? 0 : index,
       onTap: (int index) {
-        print("l'index cliqué est : $index");
         switch (index) {
           case 0:
             Get.toNamed('/menus');
             break;
           case 1:
-            Get.toNamed('/offres');
+            Get.toNamed('/commandes');
             break;
           case 2:
             Get.toNamed('/profile');

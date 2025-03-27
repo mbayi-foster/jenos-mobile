@@ -106,6 +106,7 @@ class _PanierAchatState extends State<PanierAchat> {
                                     fontWeight: FontWeight.bold),
                               ),
                               PrimaryButton(
+                                status: (state.value.checkList.isEmpty) ? false : true,
                                 onPressed: () {},
                                 title: "Commander",
                                 long: false,
