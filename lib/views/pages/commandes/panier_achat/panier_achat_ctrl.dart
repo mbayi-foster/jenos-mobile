@@ -55,6 +55,7 @@ class PanierAchatCtrl extends GetxController {
     });
   }
 
+/* checker un élèment du panier */
   void check(Panier panier) {
     List<int> ids = List.from(state.value.checkList);
     double prix = state.value.prix;
@@ -73,9 +74,16 @@ class PanierAchatCtrl extends GetxController {
     });
   }
 
+/* checker tous les élèments du panier */
   void allCheck() {
     for (Panier panier in state.value.paniers) {
       check(panier);
     }
   }
+
+/* créer une commande */
+void commande(){
+  
+}
+
 }
