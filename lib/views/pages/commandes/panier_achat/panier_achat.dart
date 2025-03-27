@@ -25,108 +25,109 @@ class _PanierAchatState extends State<PanierAchat> {
       ctrl.getAll();
     });
     var state = ctrl.state;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return Obx(() {
+      return Scaffold(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Panier d'achat"),
-        actions: [
-          TextButton(
-              onPressed: () {
-                ctrl.allCheck();
-              },
-              child: Text(
-                (state.value.paniers.length == state.value.checkList.length)
-                    ? "Tous deselectionner (${state.value.checkList.length})"
-                    : "Tout selectionner (${state.value.checkList.length})",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              ))
-        ],
-      ),
-      body: Obx(() {
-        if (state.value.visible) {
-          return Stack(children: [
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    for (Panier panier in state.value.paniers)
-                      Column(
-                        children: [
-                          PlatPanier(
-                            isChecked:
-                                (state.value.checkList.contains(panier.id))
-                                    ? true
-                                    : false,
-                            panier: panier,
-                            tap: () {
-                              ctrl.check(panier);
-                            },
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
-                  ],
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: TextTitle(title: "Panier d'achat"),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  ctrl.allCheck();
+                },
+                child: Text(
+                  (state.value.paniers.length == state.value.checkList.length)
+                      ? "Tous deselectionner (${state.value.checkList.length})"
+                      : "Tout selectionner (${state.value.checkList.length})",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ))
+          ],
+        ),
+        body: (state.value.visible) ?
+             Stack(children: [
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      for (Panier panier in state.value.paniers)
+                        Column(
+                          children: [
+                            PlatPanier(
+                              isChecked:
+                                  (state.value.checkList.contains(panier.id))
+                                      ? true
+                                      : false,
+                              panier: panier,
+                              tap: () {
+                                ctrl.check(panier);
+                              },
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white, // Couleur de fond
-                    /*  border: Border(
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Couleur de fond
+                      /*  border: Border(
                      op: BorderSide(
                         color: Colors.black, // Couleur de la bordure
                         width: 0.5, // Épaisseur de la bordure
                       ),
                     ), */
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            // ignore: deprecated_member_use
-                            Colors.black45, // Couleur de l'ombre
-                        spreadRadius: 2, // Rayon de propagation
-                        blurRadius: 5, // Flou de l'ombre
-                        offset: Offset(0, 3), // Décalage de l'ombre
-                      ),
-                    ],
-                  ),
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("${state.value.prix }FC", style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),),
-                        PrimaryButton(
-                          onPressed: () {},
-                          title: "Commander",
-                          long: false,
-                          fontSize: 16,
-                        )
+                      boxShadow: [
+                        BoxShadow(
+                          color:
+                              // ignore: deprecated_member_use
+                              Colors.black45, // Couleur de l'ombre
+                          spreadRadius: 2, // Rayon de propagation
+                          blurRadius: 5, // Flou de l'ombre
+                          offset: Offset(0, 3), // Décalage de l'ombre
+                        ),
                       ],
                     ),
-                  ),
-                ))
-          ]);
-        }
-        return Chargement(
-          loading: state.value.loading,
-          hasData: state.value.hasData,
-        );
-      }),
-    );
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${state.value.prix}FC",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          PrimaryButton(
+                            onPressed: () {},
+                            title: "Commander",
+                            long: false,
+                            fontSize: 16,
+                          )
+                        ],
+                      ),
+                    ),
+                  ))
+            ])
+          : Chargement(
+            loading: state.value.loading,
+            hasData: state.value.hasData,
+          )
+      );
+    });
   }
 }
