@@ -32,13 +32,13 @@ class Panier {
   }) : createdAt = createdAt ?? DateTime.now();
 
   factory Panier.fromJson(Map<String, dynamic> json) => Panier(
-        id: json["id"] ?? 0,
-        clienId: json["client_id"] ?? 0,
-        platId: json["plat_id"],
-        plat: json["plat"] ? Plat.fromJson(json["plat"]) : null,
-        qte: json["qte"].toDouble() ?? 0,
-        status: json["status"] ?? false,
-        prix: json["prix"].toDouble() ?? 0,
+        id: json["id"] != null ? json['id'] : 0,
+        clienId: json["client_id"] != null ? json["client_id"] : 0,
+        platId: json["plat_id"] != null ? json['plat_id'] : 0,
+        plat: json["plat"] != null ? Plat.fromJson(json["plat"]) : null,
+        qte: json["qte"] != null ? json["qte"].toDouble() : 0,
+        status: json['status'] == 1,
+        prix: json["prix"]  != null ? json['prix'].toDouble() : 0,
         createdAt: json["created_at"] != null
             ? DateTime.parse(json["created_at"])
             : DateTime.now(),

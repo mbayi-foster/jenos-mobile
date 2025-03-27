@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/panier_service_network_impl.dart';
+import 'package:jenos_app/models/principals/panier.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat_state.dart';
 
@@ -19,7 +20,6 @@ class PanierAchatCtrl extends GetxController {
       val?.visible = false;
     });
 
-    print("id ${state.value.user!.toJson()}");
     PanierServiceNetworkImpl api = PanierServiceNetworkImpl();
 
     var data = await api.getAll(state.value.user!.id);
@@ -31,6 +31,9 @@ class PanierAchatCtrl extends GetxController {
         val?.paniers = data;
         val?.visible = true;
       });
+      for (Panier panier in data) {
+        print("un panier est : ${panier.toJson()}");
+      }
     } else {
       state.update((val) {
         val?.loading = false;

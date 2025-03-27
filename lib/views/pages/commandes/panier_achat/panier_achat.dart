@@ -34,7 +34,7 @@ class _PanierAchatState extends State<PanierAchat> {
         // actions: [const PanierButton()],
       ),
       body: Obx(() {
-        if (!state.value.visible) {
+        if (state.value.visible) {
           return Stack(children: [
             SingleChildScrollView(
               child: Padding(
