@@ -106,10 +106,10 @@ class _PanierAchatState extends State<PanierAchat> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${state.value.prix}FC",
+                            "${state.value.prix} FC",
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: 17.5,
                                 fontWeight: FontWeight.bold),
                           ),
                           PrimaryButton(
