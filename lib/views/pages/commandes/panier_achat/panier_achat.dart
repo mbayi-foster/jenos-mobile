@@ -18,9 +18,9 @@ class _PanierAchatState extends State<PanierAchat> {
   PanierAchatCtrl ctrl = Get.put(PanierAchatCtrl());
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // Mettez à jour l'état ici
-     // ctrl.getUser();
+      // ctrl.getUser();
       // Future.delayed(Duration(seconds: ));
       ctrl.getAll();
     });
@@ -45,9 +45,13 @@ class _PanierAchatState extends State<PanierAchat> {
                       Column(
                         children: [
                           PlatPanier(
+                            isChecked:
+                                (state.value.checkList.contains(panier.id))
+                                    ? true
+                                    : false,
                             panier: panier,
                             tap: () {
-                              print("clique du check");
+                              ctrl.check(panier.id);
                             },
                           ),
                           SizedBox(
@@ -89,9 +93,14 @@ class _PanierAchatState extends State<PanierAchat> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              ctrl.allCheck();
+                            },
                             child: Text(
-                              "Tout selectionner (5)",
+                              (state.value.paniers.length ==
+                                      state.value.checkList.length)
+                                  ? "Tous deselectionner (${state.value.checkList.length})"
+                                  : "Tout selectionner (${state.value.checkList.length})",
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.black,

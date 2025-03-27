@@ -9,9 +9,11 @@ class PanierAchatState {
   bool visible;
   List<Panier> paniers;
   User? user;
+  List<int> checkList;
   PanierAchatState(
       {this.plats = const [],
       this.paniers = const [],
+      this.checkList = const [],
       this.loading = false,
       this.hasData = false,
       this.user,
@@ -23,11 +25,13 @@ class PanierAchatState {
           bool? loading,
           bool? hasData,
           User? user,
+          List<int>? checkList,
           bool? visible}) =>
       PanierAchatState(
         paniers: paniers ?? this.paniers,
         plats: plats ?? this.plats,
         user: user ?? this.user,
+        checkList: checkList ?? this.checkList,
         loading: loading ?? this.loading,
         hasData: hasData ?? this.hasData,
         visible: visible ?? this.visible,

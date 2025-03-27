@@ -54,4 +54,24 @@ class PanierAchatCtrl extends GetxController {
       val?.user = user;
     });
   }
+
+  void check(int id) {
+    List<int> ids =  List.from(state.value.checkList);
+    if (ids.contains(id)) {
+      // Si l'ID existe, le retirer
+      ids.remove(id);
+    } else {
+      // Sinon, l'ajouter
+      ids.add(id);
+    }
+    state.update((val) {
+      val?.checkList = ids;
+    });
+  }
+
+  void allCheck() {
+    for (Panier panier in state.value.paniers) {
+      check(panier.id);
+    }
+  }
 }
