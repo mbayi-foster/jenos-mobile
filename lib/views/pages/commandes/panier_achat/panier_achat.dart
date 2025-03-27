@@ -30,8 +30,21 @@ class _PanierAchatState extends State<PanierAchat> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: TextTitle(title: "Panier d'achat"),
-        // ignore: prefer_const_literals_to_create_immutables
-        // actions: [const PanierButton()],
+        actions: [
+          TextButton(
+              onPressed: () {
+                ctrl.allCheck();
+              },
+              child: Text(
+                (state.value.paniers.length == state.value.checkList.length)
+                    ? "Tous deselectionner (${state.value.checkList.length})"
+                    : "Tout selectionner (${state.value.checkList.length})",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+              ))
+        ],
       ),
       body: Obx(() {
         if (state.value.visible) {
@@ -51,7 +64,7 @@ class _PanierAchatState extends State<PanierAchat> {
                                     : false,
                             panier: panier,
                             tap: () {
-                              ctrl.check(panier.id);
+                              ctrl.check(panier);
                             },
                           ),
                           SizedBox(
@@ -92,25 +105,16 @@ class _PanierAchatState extends State<PanierAchat> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(
-                            onPressed: () {
-                              ctrl.allCheck();
-                            },
-                            child: Text(
-                              (state.value.paniers.length ==
-                                      state.value.checkList.length)
-                                  ? "Tous deselectionner (${state.value.checkList.length})"
-                                  : "Tout selectionner (${state.value.checkList.length})",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                              ),
-                            )),
+                        Text("${state.value.prix }FC", style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold
+                        ),),
                         PrimaryButton(
                           onPressed: () {},
                           title: "Commander",
                           long: false,
-                          fontSize: 14,
+                          fontSize: 16,
                         )
                       ],
                     ),

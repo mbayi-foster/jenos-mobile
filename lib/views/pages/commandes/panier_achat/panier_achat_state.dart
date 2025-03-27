@@ -9,6 +9,7 @@ class PanierAchatState {
   bool visible;
   List<Panier> paniers;
   User? user;
+  double prix;
   List<int> checkList;
   PanierAchatState(
       {this.plats = const [],
@@ -17,6 +18,7 @@ class PanierAchatState {
       this.loading = false,
       this.hasData = false,
       this.user,
+      this.prix = 0.0,
       this.visible = false});
 
   PanierAchatState copyWith(
@@ -25,9 +27,11 @@ class PanierAchatState {
           bool? loading,
           bool? hasData,
           User? user,
+          double? prix,
           List<int>? checkList,
           bool? visible}) =>
       PanierAchatState(
+        prix: prix ?? this.prix,
         paniers: paniers ?? this.paniers,
         plats: plats ?? this.plats,
         user: user ?? this.user,
