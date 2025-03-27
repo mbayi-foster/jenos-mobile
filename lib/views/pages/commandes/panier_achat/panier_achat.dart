@@ -34,6 +34,7 @@ class _PanierAchatState extends State<PanierAchat> {
                     ctrl.allCheck();
                   },
                   child: TextTitle(
+                    fontSize: 16,
                       title: (state.value.paniers.length ==
                               state.value.checkList.length)
                           ? "Tous deselectionner (${state.value.checkList.length})"
