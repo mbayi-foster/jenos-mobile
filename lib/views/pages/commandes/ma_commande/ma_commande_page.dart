@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:jenos_app/models/principals/panier.dart';
+import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page_ctrl.dart';
 
 class MaCommandePage extends StatefulWidget {
   const MaCommandePage({super.key});
@@ -11,18 +16,21 @@ class MaCommandePage extends StatefulWidget {
 }
 
 class _MaCommandePageState extends State<MaCommandePage> {
+  MaCommandePageCtrl ctrl = Get.put(MaCommandePageCtrl());
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
+    var state = ctrl.state;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Ma Commande"),
+        title: TextTitle(title: LocalisationService.of(context)!.translate("commande.title")),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _plats(),
+            _plats(paniers: state.value.paniers),
             SizedBox(
               height: 30,
             ),
@@ -34,7 +42,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: PrimaryButton(
                 onPressed: () {},
-                title: "Checker",
+                title: LocalisationService.of(context)!.translate("commande.py"),
                 padding: 23,
               ),
             )
@@ -44,13 +52,13 @@ class _MaCommandePageState extends State<MaCommandePage> {
     );
   }
 
-  _plats() {
+  _plats({required List<Panier> paniers}) {
     return Container(
       decoration: BoxDecoration(color: Colors.grey[200]),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: Column(children: [
-          for (var i = 0; i < 4; i++)
+          for (Panier panier in paniers)
             SizedBox(
               width: double.infinity,
               child: Column(
@@ -58,22 +66,23 @@ class _MaCommandePageState extends State<MaCommandePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Beef Buerger x2", style: TextStyle(fontSize: 17.5)),
+                      Text("${panier.plat!.nom}  x${panier.qte}",
+                          style: const TextStyle(fontSize: 17.5)),
                       Text(
-                        '\$16',
-                        style: TextStyle(
+                        '${panier.prix} FC',
+                        style: const TextStyle(
                             fontSize: 17.5, fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.00,
                   ),
                   Container(
                     height: 0.75,
                     color: Colors.black45,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.00,
                   ),
                 ],
@@ -85,6 +94,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
   }
 
   _prix() {
+    var state = ctrl.state;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -93,7 +103,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Instruction de livraisons',
+                LocalisationService.of(context)!.translate("commande.inst"),
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               TextButton(
@@ -118,11 +128,11 @@ class _MaCommandePageState extends State<MaCommandePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Prix total',
+                LocalisationService.of(context)!.translate("commande.pt"),
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$68",
+                "${state.value.prix} FC",
                 style: TextStyle(
                     fontSize: 17.5,
                     fontWeight: FontWeight.w400,
@@ -141,7 +151,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$2",
+                "${state.value.deliveryPrice} FC",
                 style: TextStyle(
                     fontSize: 17.5,
                     fontWeight: FontWeight.w400,
@@ -167,7 +177,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$2",
+                "${state.value.prixTotal} FC",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

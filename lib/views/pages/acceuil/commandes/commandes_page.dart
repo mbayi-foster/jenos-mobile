@@ -21,7 +21,6 @@ class _CommandesPageState extends State<CommandesPage> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Mettez à jour l'état ici
-      ctrl.fetchData();
     });
     var state = ctrl.state;
     return Obx(() {

@@ -1,8 +1,14 @@
 {
-    "title": "Bonjour",
-    "message": "Bienvenue dans notre application",
-    "btnLog":"Se connecter",
-    "btnReg":"S'inscrire",
-    "reg":"Créer un compte",
-    "btnSave":"Sauvegarder"
+    "title": "Salut",
+    "message": "Bienvenue sur notre application",
+    "btnLog": "Se connecter",
+    "btnReg": "S'inscrire",
+    "reg": "Créer un compte",
+    "btnSave": "Sauvegarder",
+    "Commande": {
+        "title":"Ma commande",
+        "py": "Payer",
+        "inst": "Instruction de livraisons",
+        "pt": "Prix total"
+    }
 }
