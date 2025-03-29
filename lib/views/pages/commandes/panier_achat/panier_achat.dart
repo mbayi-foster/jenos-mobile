@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jenos_app/models/principals/panier.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page.dart';
 import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat_ctrl.dart';
 import 'package:jenos_app/views/components/cards/plat_panier.dart';
 import 'package:jenos_app/views/components/chargement.dart';
@@ -43,27 +44,32 @@ class _PanierAchatState extends State<PanierAchat> {
             ],
           ),
           body: RefreshIndicator(
+            onRefresh: () async {
+              ctrl.getAll();
+            },
+            color: MyColors.primary,
+            backgroundColor: Colors.transparent,
             child: (state.value.visible)
                 ? Stack(children: [
                     SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
                             for (Panier panier in state.value.paniers)
                               Column(
                                 children: [
                                   PlatPanier(
-                                    isChecked: (state.value.checkList
-                                            .contains(panier.id))
-                                        ? true
-                                        : false,
+                                    isChecked:
+                                        (state.value.checkList.contains(panier))
+                                            ? true
+                                            : false,
                                     panier: panier,
                                     tap: () {
                                       ctrl.check(panier);
                                     },
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],
@@ -75,7 +81,7 @@ class _PanierAchatState extends State<PanierAchat> {
                     Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white, // Couleur de fond
                             /*  border: Border(
                      op: BorderSide(
@@ -103,7 +109,7 @@ class _PanierAchatState extends State<PanierAchat> {
                               children: [
                                 Text(
                                   "${state.value.prix} FC",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 17.5,
                                       fontWeight: FontWeight.bold),
@@ -112,7 +118,10 @@ class _PanierAchatState extends State<PanierAchat> {
                                   status: (state.value.checkList.isEmpty)
                                       ? false
                                       : true,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.to(() => const MaCommandePage(),
+                                        arguments: ctrl.commander());
+                                  },
                                   title: "Commander",
                                   long: false,
                                   fontSize: 16,
@@ -126,11 +135,6 @@ class _PanierAchatState extends State<PanierAchat> {
                     loading: state.value.loading,
                     hasData: state.value.hasData,
                   ),
-            onRefresh: () async {
-              ctrl.getAll();
-            },
-            color: MyColors.primary,
-            backgroundColor: Colors.transparent,
           ));
     });
   }

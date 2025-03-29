@@ -44,10 +44,10 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
     // TODO: implement retirer
     throw UnimplementedError();
   }
-  
+
   @override
-  Future<bool> commander(List<int> paniers, int userId) {
-    // TODO: implement commander
-    throw UnimplementedError();
+  Future<bool> commander(List<int> paniers, int userId) async{
+    
+    return true;
   }
 }

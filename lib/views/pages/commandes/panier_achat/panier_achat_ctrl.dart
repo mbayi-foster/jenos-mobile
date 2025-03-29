@@ -57,15 +57,15 @@ class PanierAchatCtrl extends GetxController {
 
 /* checker un élèment du panier */
   void check(Panier panier) {
-    List<int> ids = List.from(state.value.checkList);
+    List<Panier> ids = List.from(state.value.checkList);
     double prix = state.value.prix;
-    if (ids.contains(panier.id)) {
+    if (ids.contains(panier)) {
       // Si l'ID existe, le retirer
-      ids.remove(panier.id);
+      ids.remove(panier);
       prix -= panier.prix;
     } else {
       // Sinon, l'ajouter
-      ids.add(panier.id);
+      ids.add(panier);
       prix += panier.prix;
     }
     state.update((val) {
@@ -82,7 +82,8 @@ class PanierAchatCtrl extends GetxController {
   }
 
 /* créer une commande */
-  void commande() {
-    List<int> paniers = List.from(state.value.checkList);
+  List<Panier> commander() {
+    List<Panier> paniers = state.value.checkList;
+    return paniers;
   }
 }

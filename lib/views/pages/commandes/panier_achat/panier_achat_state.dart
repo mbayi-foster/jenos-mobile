@@ -10,7 +10,7 @@ class PanierAchatState {
   List<Panier> paniers;
   User? user;
   double prix;
-  List<int> checkList;
+  List<Panier> checkList;
   PanierAchatState(
       {this.plats = const [],
       this.paniers = const [],
@@ -28,7 +28,7 @@ class PanierAchatState {
           bool? hasData,
           User? user,
           double? prix,
-          List<int>? checkList,
+          List<Panier>? checkList,
           bool? visible}) =>
       PanierAchatState(
         prix: prix ?? this.prix,

@@ -3,14 +3,14 @@ import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
-class MaCommade extends StatefulWidget {
-  const MaCommade({super.key});
+class MaCommandePage extends StatefulWidget {
+  const MaCommandePage({super.key});
 
   @override
-  State<MaCommade> createState() => _MaCommadeState();
+  State<MaCommandePage> createState() => _MaCommandePageState();
 }
 
-class _MaCommadeState extends State<MaCommade> {
+class _MaCommandePageState extends State<MaCommandePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
