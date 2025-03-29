@@ -3,4 +3,11 @@ import 'package:jenos_app/views/pages/acceuil/commandes/commandes_page_state.dar
 
 class CommandesPageCtrl extends GetxController {
   var state = CommandesPageState().obs;
+
+  /* recuperation des commandes */
+  void fetchData(){
+    state.update((val){
+      val?.visible=true;
+    });
+  }
 }

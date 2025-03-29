@@ -323,7 +323,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                   Text(
                     "FC $prix",
                     style: TextStyle(
-                        color: const Color.fromARGB(255, 255, 248, 248),
+                        color: Colors.black,
                         fontSize: 22.5,
                         fontWeight: FontWeight.bold),
                   ),
