@@ -163,7 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           prenom: _prenom!,
                           email: _email!,
                           phone: _phone!);
-                      await ctrl.sendData(user, _password!);
+                      await ctrl.sendData(user, _password!, context);
                     }
                   },
                   title: LocalisationService.of(context)!

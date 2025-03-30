@@ -28,8 +28,8 @@ class _PlatMenuState extends State<PlatMenu> {
             SizedBox(
               width: double.infinity, // Prendre toute la largeur
               height: 200,
-              child: Image.asset(
-                ImagePaths.pizza,
+              child: Image.network(
+               widget.plat.photo,
                 fit: BoxFit.cover,
               ),
             ),
