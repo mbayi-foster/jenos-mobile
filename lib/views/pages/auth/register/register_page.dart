@@ -151,28 +151,28 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                if (!state.value.loading)
-                  PrimaryButton(
-                    onPressed: () async {
-                      if (_keyForm.currentState!.validate()) {
-                        _keyForm.currentState!.save();
-                        //  _showCustomToast(context, "valide");
-                        User user = User(
-                            id: 0,
-                            nom: _nom!,
-                            prenom: _prenom!,
-                            email: _email!,
-                            phone: _phone!);
-                        await ctrl.sendData(user, _password!);
-                      }
-                    },
-                    title: LocalisationService.of(context)!
-                        .translate("inscrire.btn"),
-                  ),
-                if (state.value.loading)
+                // if (!state.value.loading)
+                PrimaryButton(
+                  onPressed: () async {
+                    if (_keyForm.currentState!.validate()) {
+                      _keyForm.currentState!.save();
+                      //  _showCustomToast(context, "valide");
+                      User user = User(
+                          id: 0,
+                          nom: _nom!,
+                          prenom: _prenom!,
+                          email: _email!,
+                          phone: _phone!);
+                      await ctrl.sendData(user, _password!);
+                    }
+                  },
+                  title: LocalisationService.of(context)!
+                      .translate("inscrire.btn"),
+                ),
+                /*  if (state.value.loading)
                   const CircularProgressIndicator(
                     color: MyColors.primary,
-                  ),
+                  ), */
                 SizedBox(
                   height: height * 0.05,
                 ),

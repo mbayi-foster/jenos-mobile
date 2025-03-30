@@ -88,8 +88,8 @@ class _MenuItemState extends State<MenuItem> {
                 color: Colors.transparent,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(200)),
-                  child: Image.asset(
-                    widget.image,
+                  child: Image.network(
+                    widget.menu.photo,
                     height: double.infinity,
                     width: double.infinity,
                   ),
