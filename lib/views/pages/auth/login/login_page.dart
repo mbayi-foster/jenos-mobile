@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     var state = ctrl.state;
     return Scaffold(body: Obx(() {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+        padding:const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
         child: SingleChildScrollView(
           child: Form(
             key: _keyForm,
@@ -72,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                   showPassword: state.value.showPassword,
                   isPassword: true,
                   validator: _validatePassword,
-                  hint:  LocalisationService.of(context)!.translate("login.password"),
+                  hint: LocalisationService.of(context)!
+                      .translate("login.password"),
                   onSaved: (value) {
                     _password = value;
                   },
@@ -81,41 +82,40 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                if (!state.value.loading)
-                  PrimaryButton(
-                      onPressed: () {
-                        if (_keyForm.currentState!.validate()) {
-                          _keyForm.currentState!.save();
-                          ctrl.login(_email!, _password!);
-                        }
-                      },
-                      title:
-                          LocalisationService.of(context)!.translate("login.btn")),
-                if (state.value.error && !state.value.loading)
-                  const SizedBox(
-                    height: 20,
-                  ),
+                PrimaryButton(
+                    onPressed: () {
+                      if (_keyForm.currentState!.validate()) {
+                        _keyForm.currentState!.save();
+                        ctrl.login(_email!, _password!, context);
+                      }
+                    },
+                    title: LocalisationService.of(context)!
+                        .translate("login.btn")),
+                const SizedBox(
+                  height: 20,
+                ),
                 if (state.value.error && !state.value.loading)
                   TextButton(
                       onPressed: () {
                         Get.toNamed("/forget-password");
                       },
                       child: Text(
-                        LocalisationService.of(context)!.translate("login.forget"),
+                        LocalisationService.of(context)!
+                            .translate("login.forget"),
                         style: TextStyle(
                             fontSize: width * 0.04,
                             fontWeight: FontWeight.w400,
                             color: Colors.black54),
                       )),
-                if (state.value.loading)
+                /*   if (state.value.loading)
                   const CircularProgressIndicator(
                     color: MyColors.primary,
-                  ),
+                  ), */
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                 LocalisationService.of(context)!.translate("login.or"),
+                  LocalisationService.of(context)!.translate("login.or"),
                   style: TextStyle(
                       fontSize: width * 0.04,
                       fontWeight: FontWeight.w400,
@@ -147,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                       Get.toNamed("/register");
                     },
                     child: Text(
-                      LocalisationService.of(context)!.translate("login.compte"),
+                      LocalisationService.of(context)!
+                          .translate("login.compte"),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 15,
