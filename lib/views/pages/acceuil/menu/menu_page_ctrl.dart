@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:jenos_app/api/network/acceuil_service_network_impl.dart';
-import 'package:jenos_app/views/pages/acceuil/menu/menu_state_page.dart';
+import 'package:jenos_app/views/pages/acceuil/menu/menu_page_state.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 
-class MenuCtrl extends GetxController {
-  var state = MenuStatePage().obs;
+class MenuPageCtrl extends GetxController {
+  var state = MenuPageState().obs;
 
   void fetchData() async {
     state.update((val) {

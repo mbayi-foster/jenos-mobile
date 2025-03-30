@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/images_path.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/buttons/secondary_button.dart';
 
@@ -39,7 +39,7 @@ class _AccessPageState extends State<AccessPage> {
                   children: [
                     Text(
                       textAlign: TextAlign.center,
-                      "Découvrez les meilleurs plats de plus de 5000 restaurants et une livraison rapide à votre porte",
+                      LocalisationService.of(context)!.translate("info.title"),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -47,19 +47,19 @@ class _AccessPageState extends State<AccessPage> {
                     ),
                     const SizedBox(height: 55),
                     PrimaryButton(
-                        onPressed: () {
-                          Get.toNamed("/login");
-                        },
-                        title: LocalisationService.of(context)!
-                            .translate("btnLog"),
-                        ),
+                      onPressed: () {
+                        Get.toNamed("/login");
+                      },
+                      title: LocalisationService.of(context)!
+                          .translate("info.btnLog"),
+                    ),
                     const SizedBox(height: 25),
                     SecondaryButton(
                         onPressed: () {
                           Get.toNamed("/register");
                         },
-                        title:
-                            LocalisationService.of(context)!.translate("reg"))
+                        title: LocalisationService.of(context)!
+                            .translate("info.btnLog"))
                   ],
                 ),
               ),

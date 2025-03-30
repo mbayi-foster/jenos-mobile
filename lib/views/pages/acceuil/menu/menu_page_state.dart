@@ -1,12 +1,12 @@
 import 'package:jenos_app/models/principals/menu.dart';
 
-class MenuStatePage {
+class MenuPageState {
   bool loading;
   bool hasData;
   bool visible;
   List<Menu> menus;
 
-  MenuStatePage({
+  MenuPageState({
     this.loading = false,
     this.hasData = false,
     this.visible = false,

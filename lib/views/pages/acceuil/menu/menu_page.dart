@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/views/pages/acceuil/menu/menu_ctrl.dart';
+import 'package:jenos_app/views/pages/acceuil/menu/menu_page_ctrl.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/images_path.dart';
@@ -20,7 +20,7 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  MenuCtrl ctrl = Get.put(MenuCtrl());
+  MenuPageCtrl ctrl = Get.put(MenuPageCtrl());
 
   _goMenu(id) {
     Get.toNamed('/menu/$id');
