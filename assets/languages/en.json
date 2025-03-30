@@ -1,14 +1,147 @@
 {
-    "title": "Hello",
-    "message": "Welcome to our application",
-    "btnLog": "Login",
-    "btnReg": "Register",
-    "reg": "Creat an acount",
-    "btnSave": "Save",
-    "Commande": {
-        "title":"My Order",
-        "py": "Checkout",
-        "inst": "Instruction de livraisons",
-        "pt":"Total price"
+    "info": {
+        "btn": "Suivant",
+        "title1": "Trouvez votre nourriture préferée",
+        "mot1": "Trouvez le plat",
+        "title2": "Livraison rapide",
+        "mot2": "Livraison dans moins de 40min",
+        "title3": "Traceur en direct",
+        "mot3": "Tracez votre livraison en direct"
+    },
+    "intro": {
+        "title": "Plus de 1000 plat",
+        "btnLog": "Se connecter",
+        "btnReg": "Créer un compte"
+    },
+    "login": {
+        "title": "Se connecter",
+        "mot": "Ajoutez vos coordonnées pour vous connecter",
+        "email": "Adresse email",
+        "password": "Mot de passe",
+        "btn": "Se cpnnecter",
+        "forget": "Mot de passe oublié",
+        "or": "ou Connectez vous avec",
+        "compte": "Vous n'avez pas de compte ? Inscrivez vous"
+    },
+    "inscrire": {
+        "mot": "Ajoutez vos coordonnées pour vous inscrire",
+        "name": "Nom",
+        "prename": "Prénom",
+        "email": "Adresse email",
+        "phone": "Téléphone",
+        "adresse": "Adresse",
+        "password": "Mot de passe",
+        "confirm": "Confirmez le mot de passe",
+        "btn": "S'inscrire",
+        "log": "Vous avez déjà un compte ? Se connecter"
+    },
+    "forget": {
+        "title": "Réinitialiser le mot de passe",
+        "mot": "Veillez saisir votre adresse email pour recevoir un code permettant de créer un nouveau mot de passe par email",
+        "email": "Adresse email",
+        "btn": "Envoyer"
+    },
+    "opt": {
+        "title": "Vous avez réçu un code",
+        "mot": "Veillez verifier votre boite mail et entre le code, code envoyez au : ",
+        "btn": "Suivant",
+        "not": "Vous n'avez pas reçu de code cliquez ici"
+    },
+    "password": {
+        "title": "Nouveau mot de passe",
+        "mot": "Veillez créer un nouveau mot de passe",
+        "password": "Mot de passe",
+        "confirm": "Confirmez le mot de passe",
+        "btn": "Suivant"
+    },
+    "home": {
+        "hi": "Salut",
+        "lieu": "Livraison à",
+        "mot": "Emplacement actuel",
+        "search": "Rechercher un plat...",
+        "pop": "Plats populaires",
+        "most": "Très commandé",
+        "recents": "Plats récents",
+        "all": "Voir tous",
+        "like": "J'aime",
+        "menu": "Menu",
+        "commande": "Commandes",
+        "profile": "Profile",
+        "more": "Plus"
+    },
+    "menu": {
+        "title": "Menu",
+        "search": "Rechercher un menu...",
+        "plat": "Plats"
+    },
+    "plat": {
+        "descrip": "Déscription",
+        "qte": "Quantité",
+        "btn": "Ajouter au panier",
+        "tot": "Prix total"
+    },
+    "new": {
+        "title": "Nouveautés",
+        "mot": "Découvrez nos nouvelles offres spécialement faits pour vous"
+    },
+    "profile": {
+        "title": "Profile",
+        "hi": "Salut",
+        "logout": "Se déconnecter",
+        "btn": "Sauvegarder"
+    },
+    "more": {
+        "title": "Plus",
+        "commandes": "Mes commandes",
+        "notif": "Notifications",
+        "inbox": "Messages",
+        "about": "A propos de nous"
+    },
+    "notif": {
+        "now": "Maintenant",
+        "ago": "Déjà"
+    },
+    "about": {
+        "title": "A propos de nous"
+    },
+    "inbox": {
+        "title": "Messages",
+        "now": "Maintenant",
+        "ago": "Déjà"
+    },
+    "commande": {
+        "title": "Ma commande",
+        "note": "Instructions de livraison",
+        "sub": "Prix total",
+        "cost": "Prix de livraison",
+        "tot": "Total"
+    },
+    "checkout": {
+        "title": "Payer",
+        "adresse": "Adresse de livraison",
+        "change": "Changer",
+        "method": "Méthode de paiement",
+        "sub": "Prix total",
+        "cost": "Prix de livraison",
+        "tot": "Total"
+    },
+    "traceur": {
+        "title": "Traceur",
+        "search": "Rechercher une adresse...",
+        "btn": "Sauvegarder"
+    },
+    "thanks": {
+        "title": "Merci !",
+        "for": "Pour votre commande",
+        "mot": "Votre commande est en cours",
+        "btn": "Suivre ma commande",
+        "back": "Retour à l'acceuil"
+    },
+    "panier": {
+        "title": "Mon panier",
+        "btn": "Commander",
+        "tot": "Total",
+        "all": "Tout sélectionner",
+        "unall": "Tout deselectionner"
     }
 }
