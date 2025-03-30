@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 
 class InputSearch extends StatefulWidget {
   final double size;
+  final String title;
   final GestureTapCallback tap;
-  const InputSearch(
-      {super.key,
-      required this.tap,
-     this.size = 15,});
+  const InputSearch({
+    super.key,
+    required this.tap,
+    this.size = 15,
+    this.title = "home.hi"
+  });
 
   @override
   State<InputSearch> createState() => _InputSearchState();
@@ -25,18 +29,21 @@ class _InputSearchState extends State<InputSearch> {
           fontWeight: FontWeight.w400),
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.search),
-        hintText: "Recherche...",
+        hintText: LocalisationService.of(context)!.translate(widget.title),
         filled: true,
         fillColor: Colors.grey[200],
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide:
+                const BorderSide(width: 0.0, color: MyColors.inputColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide:
+                const BorderSide(width: 0.0, color: MyColors.inputColor)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide:
+                const BorderSide(width: 0.0, color: MyColors.inputColor)),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -29,12 +30,15 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextTitle(title: "Réinitialiser le mot de passe"),
+                TextTitle(
+                  title: LocalisationService.of(context)!
+                      .translate("forget.title"),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  "Veillez saisir votre adresse email pour recevoir un code afin de créer un nouveau mot de passe",
+                  LocalisationService.of(context)!.translate("forget.mot"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: width * 0.04,
@@ -45,7 +49,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   height: 20,
                 ),
                 MyInput(
-                  hint: "Email",
+                  hint: LocalisationService.of(context)!
+                      .translate("forget.email"),
                   keyboardType: TextInputType.emailAddress,
                   onSaved: (value) {},
                 ),
@@ -56,7 +61,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     onPressed: () {
                       Get.toNamed("/otp");
                     },
-                    title: "Envoyer"),
+                    title: LocalisationService.of(context)!
+                      .translate("forget.btn"),),
               ],
             ),
           ),

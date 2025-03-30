@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/pages/acceuil/profile/profile_ctrl.dart';
 import 'package:jenos_app/models/principals/user.dart';
-import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
@@ -23,7 +23,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   // bool _edit = true;
 
-   ProfileCtrl ctrl = Get.put(ProfileCtrl());
+  ProfileCtrl ctrl = Get.put(ProfileCtrl());
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +32,28 @@ class _ProfilePageState extends State<ProfilePage> {
     });
     double width = MediaQuery.of(context).size.width;
     var state = ctrl.state;
-   
-     TextEditingController nomCtrl = TextEditingController(text: state.value.user?.nom);
-     TextEditingController emailCtrl = TextEditingController(text: state.value.user?.email);
-     TextEditingController phoneCtrl = TextEditingController(text: state.value.user?.phone);
-     TextEditingController adresseCtrl = TextEditingController(text: state.value.user?.adresse);
-     List<TextEditingController> controllers = [
-      nomCtrl, emailCtrl, phoneCtrl, adresseCtrl
+
+    TextEditingController nomCtrl =
+        TextEditingController(text: state.value.user?.nom);
+    TextEditingController emailCtrl =
+        TextEditingController(text: state.value.user?.email);
+    TextEditingController phoneCtrl =
+        TextEditingController(text: state.value.user?.phone);
+    TextEditingController adresseCtrl =
+        TextEditingController(text: state.value.user?.adresse);
+    List<TextEditingController> controllers = [
+      nomCtrl,
+      emailCtrl,
+      phoneCtrl,
+      adresseCtrl
     ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Profile"),
+        title: TextTitle(
+            title: LocalisationService.of(context)!.translate("profile.title")),
         automaticallyImplyLeading: false,
         // ignore: prefer_const_literals_to_create_immutables
         actions: [const PanierButton()],
@@ -57,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 _photo(width, user: state.value.user),
                 const SizedBox(height: 30),
-                _data(width, edit: state.value.edit, user:state.value.user)
+                _data(width, edit: state.value.edit, user: state.value.user)
               ],
             ),
           ),
@@ -95,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    "Editer le profile",
+                    LocalisationService.of(context)!.translate("profile.edit"),
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -104,8 +112,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             )),
-        TextTitle(title: "Salut ${user?.prenom} !"),
-        TextTitle(title: "${user?.email}"),
+        TextTitle(
+            title:
+                "${LocalisationService.of(context)!.translate("profile.hi")} ${user!.prenom} !"),
+        TextTitle(title: user!.email),
         TextButton(
             onPressed: () {
               MyDialogue dialogue = MyDialogue();
@@ -116,7 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
               // ctrl.signOut();
             },
             child: Text(
-              "Se déconnecter",
+              LocalisationService.of(context)!.translate("profile.logout"),
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -137,8 +147,8 @@ class _ProfilePageState extends State<ProfilePage> {
             validator: (value) {
               return null;
             },
-            hint: "Nom",
-            label: "Nom",
+            hint: LocalisationService.of(context)!.translate("inscrire.name"),
+            label: LocalisationService.of(context)!.translate("inscrire.name"),
             ctrl: TextEditingController(text: user?.nom),
             keyboardType: TextInputType.text,
           ),
@@ -150,8 +160,10 @@ class _ProfilePageState extends State<ProfilePage> {
             validator: (value) {
               return null;
             },
-            hint: "Prénom",
-            label: "Prénom",
+            hint:
+                LocalisationService.of(context)!.translate("inscrire.prename"),
+            label:
+                LocalisationService.of(context)!.translate("inscrire.prename"),
             ctrl: TextEditingController(text: user?.prenom),
             keyboardType: TextInputType.emailAddress,
           ),
@@ -163,8 +175,8 @@ class _ProfilePageState extends State<ProfilePage> {
             validator: (value) {
               return null;
             },
-            hint: "Phone",
-            label: "Phone",
+            hint: LocalisationService.of(context)!.translate("inscrire.phone"),
+            label: LocalisationService.of(context)!.translate("inscrire.phone"),
             ctrl: TextEditingController(text: user?.phone),
             keyboardType: TextInputType.number,
           ),
@@ -176,8 +188,10 @@ class _ProfilePageState extends State<ProfilePage> {
             validator: (value) {
               return null;
             },
-            hint: "Adresse",
-            label: "Adresse",
+            hint:
+                LocalisationService.of(context)!.translate("inscrire.adresse"),
+            label:
+                LocalisationService.of(context)!.translate("inscrire.adresse"),
             ctrl: TextEditingController(text: user?.adresse),
             keyboardType: TextInputType.text,
           ),
@@ -187,7 +201,8 @@ class _ProfilePageState extends State<ProfilePage> {
           if (!edit)
             PrimaryButton(
                 onPressed: () {},
-                title: LocalisationService.of(context)!.translate("btnSave")),
+                title:
+                    LocalisationService.of(context)!.translate("profile.btn")),
           const SizedBox(
             height: 15,
           ),

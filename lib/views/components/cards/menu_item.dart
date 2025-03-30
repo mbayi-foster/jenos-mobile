@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
-import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 
 class MenuItem extends StatefulWidget {
   final String image;
   final Menu menu;
   final GestureTapCallback tap;
-  const MenuItem(
-      {super.key,
-      required this.menu,
-      required this.tap,
-      required this.image,});
+  const MenuItem({
+    super.key,
+    required this.menu,
+    required this.tap,
+    required this.image,
+  });
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -33,7 +33,7 @@ class _MenuItemState extends State<MenuItem> {
             height: 100,
             child: Center(child: Text('Card')),
           ),
-      
+
           // Widget positionné au-dessus de la Card
           Positioned(
               left: 25,
@@ -67,7 +67,7 @@ class _MenuItemState extends State<MenuItem> {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "${widget.menu.count} plats",
+                            "${widget.menu.count} ${LocalisationService.of(context)!.translate("menu.plat")}",
                             style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -101,7 +101,7 @@ class _MenuItemState extends State<MenuItem> {
             child: Center(
               child: Material(
                 elevation: 4, // Élévation pour donner de la profondeur
-                shape: CircleBorder(), // Forme circulaire
+                shape: const CircleBorder(), // Forme circulaire
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30), // Arrondir les coins
                   onTap: widget.tap,
@@ -109,7 +109,7 @@ class _MenuItemState extends State<MenuItem> {
                     child: Container(
                       color: Colors.white,
                       padding: EdgeInsets.all(8), // Espace autour de l'icône
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_forward_ios, // Icône à afficher
                         size: 30,
                         color: MyColors.primary,

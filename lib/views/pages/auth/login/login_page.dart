@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/buttons/my_icon_button.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -37,13 +37,13 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextTitle(
-                    title:
-                        LocalisationService.of(context)!.translate("btnLog")),
+                    title: LocalisationService.of(context)!
+                        .translate("login.title")),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  "Ajoutez vos coordonnées pour vous connecter",
+                  LocalisationService.of(context)!.translate("login.mot"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -55,7 +55,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 MyInput(
                   validator: _validateEmail,
-                  hint: "Email",
+                  hint:
+                      LocalisationService.of(context)!.translate("login.email"),
                   onSaved: (value) {
                     _email = value;
                   },
@@ -65,13 +66,13 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 MyInput(
-                  showPasswordOnTap: (){
+                  showPasswordOnTap: () {
                     ctrl.showPassword();
                   },
                   showPassword: state.value.showPassword,
                   isPassword: true,
                   validator: _validatePassword,
-                  hint: "Mot de passe",
+                  hint:  LocalisationService.of(context)!.translate("login.password"),
                   onSaved: (value) {
                     _password = value;
                   },
@@ -89,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                       title:
-                          LocalisationService.of(context)!.translate("btnLog")),
+                          LocalisationService.of(context)!.translate("login.btn")),
                 if (state.value.error && !state.value.loading)
                   const SizedBox(
                     height: 20,
@@ -100,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                         Get.toNamed("/forget-password");
                       },
                       child: Text(
-                        "Mot de passe oublié",
+                        LocalisationService.of(context)!.translate("login.forget"),
                         style: TextStyle(
                             fontSize: width * 0.04,
                             fontWeight: FontWeight.w400,
@@ -114,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 Text(
-                  "Ou connecter vous avec",
+                 LocalisationService.of(context)!.translate("login.or"),
                   style: TextStyle(
                       fontSize: width * 0.04,
                       fontWeight: FontWeight.w400,
@@ -146,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                       Get.toNamed("/register");
                     },
                     child: Text(
-                      "Vous n'avez pas des comptes, inscrivez vous!",
+                      LocalisationService.of(context)!.translate("login.compte"),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 15,

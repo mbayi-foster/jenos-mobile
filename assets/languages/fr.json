@@ -88,7 +88,8 @@
         "title": "Profile",
         "hi": "Salut",
         "logout": "Se déconnecter",
-        "btn": "Sauvegarder"
+        "btn": "Sauvegarder",
+        "edit": "Editer le profile"
     },
     "more": {
         "title": "Plus",
@@ -114,7 +115,9 @@
         "note": "Instructions de livraison",
         "sub": "Prix total",
         "cost": "Prix de livraison",
-        "tot": "Total"
+        "tot": "Total",
+        "add": "Ajouter",
+        "btn":"Commander"
     },
     "checkout": {
         "title": "Payer",

@@ -39,7 +39,7 @@ class _AccessPageState extends State<AccessPage> {
                   children: [
                     Text(
                       textAlign: TextAlign.center,
-                      LocalisationService.of(context)!.translate("info.title"),
+                      LocalisationService.of(context)!.translate("intro.title"),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -51,7 +51,7 @@ class _AccessPageState extends State<AccessPage> {
                         Get.toNamed("/login");
                       },
                       title: LocalisationService.of(context)!
-                          .translate("info.btnLog"),
+                          .translate("intro.btnLog"),
                     ),
                     const SizedBox(height: 25),
                     SecondaryButton(
@@ -59,7 +59,7 @@ class _AccessPageState extends State<AccessPage> {
                           Get.toNamed("/register");
                         },
                         title: LocalisationService.of(context)!
-                            .translate("info.btnLog"))
+                            .translate("intro.btnReg"))
                   ],
                 ),
               ),

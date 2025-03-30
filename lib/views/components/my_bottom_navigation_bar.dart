@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   final int index;
@@ -21,22 +22,22 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
       iconSize: 16.0,
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.menu_outlined),
-          label: 'Menu',
+          icon: const Icon(Icons.menu_outlined),
+          label: LocalisationService.of(context)!.translate("home.menu"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag_sharp),
-          label: 'Commandes',
+          icon: const Icon(Icons.shopping_bag_sharp),
+          label: LocalisationService.of(context)!.translate("home.commande"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-          label: 'Profile',
+          icon: const Icon(Icons.account_circle),
+          label: LocalisationService.of(context)!.translate("home.profile"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.more_vert),
-          label: 'More',
+          icon: const Icon(Icons.more_vert),
+          label: LocalisationService.of(context)!.translate("home.more"),
         ),
       ],
       currentIndex: index == -1 ? 0 : index,

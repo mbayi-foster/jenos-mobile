@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/pages/auth/register/register_page_ctrl.dart';
 import 'package:jenos_app/models/principals/user.dart';
-import 'package:jenos_app/services/settings/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -43,13 +43,13 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextTitle(
-                    title:
-                        LocalisationService.of(context)!.translate("btnReg")),
+                    title: LocalisationService.of(context)!
+                        .translate("inscrire.btn")),
                 const SizedBox(
                   height: 25,
                 ),
-                const Text(
-                  "Ajoutez vos coordonnées pour vous inscrire",
+                Text(
+                  LocalisationService.of(context)!.translate("inscrire.mot"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -60,7 +60,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 30,
                 ),
                 MyInput(
-                  hint: "Prénom",
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.prename"),
                   validator: _validatePrenom,
                   onSaved: (value) {
                     _prenom = value;
@@ -71,7 +72,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 20,
                 ),
                 MyInput(
-                  hint: "Nom",
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.name"),
                   validator: _validateNom,
                   onSaved: (value) {
                     _nom = value;
@@ -82,7 +84,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 20,
                 ),
                 MyInput(
-                  hint: "Email",
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.email"),
                   validator: _validateEmail,
                   onSaved: (value) {
                     _email = value;
@@ -93,7 +96,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 20,
                 ),
                 MyInput(
-                  hint: "Téléphone",
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.phone"),
                   validator: _validatePhone,
                   onSaved: (value) {
                     _phone = value;
@@ -119,7 +123,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   showPasswordOnTap: () {
                     ctrl.showPassword();
                   },
-                  hint: "Mot de passe",
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.password"),
                   validator: _validatePassword,
                   onSaved: (value) {
                     _password = value;
@@ -136,7 +141,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ctrl.showPassword();
                   },
                   validator: _validateConfirmPassword,
-                  hint: "Confirmer mot de passe",
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.confirm"),
                   onSaved: (value) {
                     _confirmPassword = value;
                   },
@@ -147,20 +153,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 if (!state.value.loading)
                   PrimaryButton(
-                      onPressed: () async {
-                        if (_keyForm.currentState!.validate()) {
-                          _keyForm.currentState!.save();
+                    onPressed: () async {
+                      if (_keyForm.currentState!.validate()) {
+                        _keyForm.currentState!.save();
                         //  _showCustomToast(context, "valide");
-                          User user = User(
-                              id: 0,
-                              nom: _nom ?? "Kalala",
-                              prenom: _prenom ?? "",
-                              email: _email ?? "mbayifoster@gmail.com",
-                              phone: _phone ?? "00000000");
-                          await ctrl.sendData(user, _password ?? "");
-                        }
-                      },
-                      title: "S'inscrire"),
+                        User user = User(
+                            id: 0,
+                            nom: _nom!,
+                            prenom: _prenom!,
+                            email: _email!,
+                            phone: _phone!);
+                        await ctrl.sendData(user, _password!);
+                      }
+                    },
+                    title: LocalisationService.of(context)!
+                        .translate("inscrire.btn"),
+                  ),
                 if (state.value.loading)
                   const CircularProgressIndicator(
                     color: MyColors.primary,
@@ -173,9 +181,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       Get.toNamed("/login");
                     },
                     child: Text(
-                      "Vous avez déjà un comptes ? Se connecter",
+                      LocalisationService.of(context)!
+                          .translate("inscrire.log"),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Colors.black54),

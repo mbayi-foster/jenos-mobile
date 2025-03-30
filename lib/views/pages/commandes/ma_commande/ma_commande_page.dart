@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:jenos_app/models/principals/panier.dart';
-import 'package:jenos_app/services/settings/localisation_service.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -25,7 +25,9 @@ class _MaCommandePageState extends State<MaCommandePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: TextTitle(title: LocalisationService.of(context)!.translate("commande.title")),
+        title: TextTitle(
+            title:
+                LocalisationService.of(context)!.translate("commande.title")),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -42,7 +44,8 @@ class _MaCommandePageState extends State<MaCommandePage> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: PrimaryButton(
                 onPressed: () {},
-                title: LocalisationService.of(context)!.translate("commande.py"),
+                title:
+                    LocalisationService.of(context)!.translate("commande.btn"),
                 padding: 23,
               ),
             )
@@ -103,13 +106,13 @@ class _MaCommandePageState extends State<MaCommandePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                LocalisationService.of(context)!.translate("commande.inst"),
+                LocalisationService.of(context)!.translate("commande.note"),
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  "+ Ajouter",
+                  "+ ${LocalisationService.of(context)!.translate("commande.add")}",
                   style: TextStyle(
                       fontSize: 17.5,
                       fontWeight: FontWeight.w400,
@@ -128,7 +131,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                LocalisationService.of(context)!.translate("commande.pt"),
+                LocalisationService.of(context)!.translate("commande.sub"),
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               Text(
@@ -147,7 +150,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Frais de livraison',
+                LocalisationService.of(context)!.translate("commande.cost"),
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               Text(
@@ -173,7 +176,7 @@ class _MaCommandePageState extends State<MaCommandePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total',
+                LocalisationService.of(context)!.translate("commande.tot"),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(

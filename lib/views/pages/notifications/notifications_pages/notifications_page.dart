@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
@@ -17,8 +18,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Notifications"),
-        actions: [const PanierButton()],
+        title: TextTitle(
+            title: LocalisationService.of(context)!.translate("more.notif")),
+        actions: const [PanierButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -26,9 +28,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
           child: Column(
             children: [
               Container(
-                width: double.infinity, // S'assure que le conteneur prend toute la largeur
+                width: double
+                    .infinity, // S'assure que le conteneur prend toute la largeur
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start, // Aligne le texte correctement
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start, // Aligne le texte correctement
                   children: [
                     ClipOval(
                       child: Container(
@@ -48,7 +52,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                               fontSize: 15, fontWeight: FontWeight.w800),
                         ),
                         Text(
-                          "Now",
+                          LocalisationService.of(context)!
+                              .translate("notif.now"),
                           style: TextStyle(color: Colors.grey, fontSize: 13),
                         ),
                       ],

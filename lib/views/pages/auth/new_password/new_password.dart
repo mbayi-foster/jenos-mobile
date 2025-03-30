@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -29,12 +30,14 @@ class _NewPasswordState extends State<NewPassword> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextTitle(title: "Nouveau mot de passe"),
+                TextTitle(
+                    title: LocalisationService.of(context)!
+                        .translate("password.title")),
                 SizedBox(
                   height: 25,
                 ),
                 Text(
-                  "Veillez créer un nouveau mot de passe sur d'au moins 6 caractère",
+                  LocalisationService.of(context)!.translate("password.mot"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -45,7 +48,8 @@ class _NewPasswordState extends State<NewPassword> {
                   height: height * 0.035,
                 ),
                 MyInput(
-                  hint: "Mot de passe",
+                  hint: LocalisationService.of(context)!
+                      .translate("password.password"),
                   onSaved: (value) {},
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -53,7 +57,8 @@ class _NewPasswordState extends State<NewPassword> {
                   height: 20,
                 ),
                 MyInput(
-                  hint: "Confirmez mot de passe",
+                  hint: LocalisationService.of(context)!
+                      .translate("password.confirm"),
                   onSaved: (value) {},
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -64,7 +69,8 @@ class _NewPasswordState extends State<NewPassword> {
                     onPressed: () {
                       Get.toNamed("/otp");
                     },
-                    title: "Envoyer"),
+                    title: LocalisationService.of(context)!
+                        .translate("password.btn")),
               ],
             ),
           ),
