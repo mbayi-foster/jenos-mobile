@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/views/pages/acceuil/menu/menu_ctrl.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/views/pages/acceuil/menu/menu_page_ctrl.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/images_path.dart';
@@ -20,7 +21,7 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  MenuCtrl ctrl = Get.put(MenuCtrl());
+  MenuPageCtrl ctrl = Get.put(MenuPageCtrl());
 
   _goMenu(id) {
     Get.toNamed('/menu/$id');
@@ -38,7 +39,7 @@ class _MenuPageState extends State<MenuPage> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: TextTitle(title: "Menus"),
+            title: TextTitle(title:LocalisationService.of(context)!.translate("menu.title")),
             automaticallyImplyLeading: false,
             // ignore: prefer_const_literals_to_create_immutables
             actions: [const PanierButton()],
@@ -88,7 +89,7 @@ class _MenuPageState extends State<MenuPage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 25.00),
+                            padding: const EdgeInsets.symmetric(horizontal: 25.00),
                             child: _menu(menus: state.value.menus),
                           ),
                           SizedBox(

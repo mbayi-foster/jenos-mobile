@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/models/principals/panier.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page.dart';
 import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat_ctrl.dart';
@@ -29,7 +30,9 @@ class _PanierAchatState extends State<PanierAchat> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: TextTitle(title: "Panier d'achat"),
+            title: TextTitle(
+                title:
+                    LocalisationService.of(context)!.translate("panier.title")),
             actions: [
               TextButton(
                   onPressed: () {
@@ -39,8 +42,8 @@ class _PanierAchatState extends State<PanierAchat> {
                       fontSize: 16,
                       title: (state.value.paniers.length ==
                               state.value.checkList.length)
-                          ? "Tous deselectionner (${state.value.checkList.length})"
-                          : "Tout selectionner (${state.value.checkList.length})"))
+                          ? "${LocalisationService.of(context)!.translate("panier.all")} (${state.value.checkList.length})"
+                          : "${LocalisationService.of(context)!.translate("panier.unall")} (${state.value.checkList.length})"))
             ],
           ),
           body: RefreshIndicator(
@@ -108,7 +111,7 @@ class _PanierAchatState extends State<PanierAchat> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "${state.value.prix} FC",
+                                  "${LocalisationService.of(context)!.translate("panier.tot")} : ${state.value.prix} FC",
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 17.5,
@@ -122,7 +125,8 @@ class _PanierAchatState extends State<PanierAchat> {
                                     Get.to(() => const MaCommandePage(),
                                         arguments: ctrl.commander());
                                   },
-                                  title: "Commander",
+                                  title: LocalisationService.of(context)!
+                                      .translate("btn"),
                                   long: false,
                                   fontSize: 16,
                                 )

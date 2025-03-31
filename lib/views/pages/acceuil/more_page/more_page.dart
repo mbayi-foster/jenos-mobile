@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:jenos_app/utils/icons_path.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/cards/info_item.dart';
@@ -19,24 +19,24 @@ class _MorePageState extends State<MorePage> {
   final List<Map<String, dynamic>> _content = [
     {
       'icon': IconsPath.dollards,
-      'text': 'Détails du paiement',
+      'text': "more.commandes",
       'lien': "/notifications"
     },
     {
       'icon': IconsPath.dollards,
-      'text': 'Mes commandes',
+      'text': "more.inbox",
       'lien': "/notifications"
     },
     {
       'icon': IconsPath.dollards,
-      'text': 'Notifications',
+      'text': "more.notif",
       'notifications': 20,
       'lien': "/notifications"
     },
     {'icon': IconsPath.dollards, 'text': 'Inbox', 'lien': "/notifications"},
     {
       'icon': IconsPath.dollards,
-      'text': 'A propos de nous',
+      'text': "more.about",
       'lien': "/notifications"
     },
   ];
@@ -47,7 +47,7 @@ class _MorePageState extends State<MorePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: TextTitle(title: "Plus d'info"),
+        title: TextTitle(title: LocalisationService.of(context)!.translate("more.title")),
         automaticallyImplyLeading: false,
         // ignore: prefer_const_literals_to_create_immutables
         actions: [const PanierButton()],
@@ -83,7 +83,7 @@ class _MorePageState extends State<MorePage> {
                 Get.toNamed(_content[i]['lien']);
               },
               icon: _content[i]['icon']!,
-              text: _content[i]['text']!,
+              text: LocalisationService.of(context)!.translate(_content[i]['text']),
               notifications: _content[i]['notifications'] ?? 0,
             ),
             SizedBox(

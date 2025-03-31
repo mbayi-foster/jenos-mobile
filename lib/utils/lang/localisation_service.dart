@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,22 +11,28 @@ class LocalisationService {
     return Localizations.of<LocalisationService>(context, LocalisationService);
   }
 
-  Map<String, String>? _localizedString;
+  Map<String, dynamic>? _localizedString;
 
   Future<bool> load() async {
     String jsonStr = await rootBundle
         .loadString("assets/languages/${locale.languageCode}.json");
-    Map<String, dynamic> jsonMap = jsonDecode(jsonStr);
-
-    _localizedString = jsonMap.map(
-      (key, value) => MapEntry(key, value.toString()),
-    );
-
+    _localizedString = jsonDecode(jsonStr);
     return true;
   }
 
   String translate(String key) {
-    return _localizedString![key] ?? "";
+    List<String> keys = key.split('.');
+    dynamic value = _localizedString;
+
+    for (String k in keys) {
+      if (value is Map<String, dynamic>) {
+        value = value[k];
+      } else {
+        return "";
+      }
+    }
+
+    return value?.toString() ?? "";
   }
 
   static const LocalizationsDelegate<LocalisationService> delegate =

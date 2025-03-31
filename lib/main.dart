@@ -4,7 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/routes/routes.dart';
-import 'package:jenos_app/services/settings/localisation_service.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GlobalLoaderOverlay(
+      child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Jenos-Food",
       initialRoute: '/',
@@ -37,8 +39,8 @@ class _MyAppState extends State<MyApp> {
         LocalisationService.delegate
       ],
       supportedLocales: const [
-        Locale('en', ''), // Anglais
-        Locale('fr', ''), // Français
+        Locale('en', 'US'), // Anglais
+        Locale('fr', 'FR'), // Français
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
@@ -48,6 +50,7 @@ class _MyAppState extends State<MyApp> {
         }
         return supportedLocales.first;
       },
-    );
-  }
+    )
+ 
+    ) ;}
 }

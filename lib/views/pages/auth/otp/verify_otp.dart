@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/pages/auth/otp/otp_ctrl.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
@@ -31,12 +32,14 @@ class _VerifyOtpState extends State<VerifyOtp> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextTitle(title: "Vérification OTP"),
+                TextTitle(
+                    title: LocalisationService.of(context)!
+                        .translate("opt.title")),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  "Un code vous a été envoyé veillez le saisir ici pour continuer",
+                  LocalisationService.of(context)!.translate("opt.mot"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -57,24 +60,24 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   height: 20,
                 ),
                 if (!state.value.loading)
-                PrimaryButton(
-                    onPressed: () {
-                      _keyForm.currentState!.save();
-                      int code = int.parse(_code!);
-                      ctrl.checkOtp(code);
-                    },
-                    title: "Suivant"),
+                  PrimaryButton(
+                      onPressed: () {
+                        _keyForm.currentState!.save();
+                        int code = int.parse(_code!);
+                        ctrl.checkOtp(code);
+                      },
+                      title:  LocalisationService.of(context)!.translate("opt.btn")),
                 if (state.value.loading)
                   const CircularProgressIndicator(
                     color: MyColors.primary,
-                  ), 
+                  ),
                 const SizedBox(
                   height: 10,
                 ),
                 TextButton(
                     onPressed: () {},
                     child: Text(
-                      "Renvoyez le code",
+                      LocalisationService.of(context)!.translate("opt.not"),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,

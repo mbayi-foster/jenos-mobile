@@ -1,18 +1,22 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
 import 'package:jenos_app/views/pages/auth/register/register_page_state.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/components/my_alert.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPageCtrl extends GetxController {
   var state = RegisterPageState().obs;
 
-  Future<void> sendData(User user, String password) async {
-   // print("utilisateur ${user.toJson()} et mot de passe $password");
+  Future<void> sendData(
+      User user, String password, BuildContext context) async {
+    // print("utilisateur ${user.toJson()} et mot de passe $password");
+    context.loaderOverlay.show();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     state.update((val) {
       val?.loading = true;
@@ -22,10 +26,10 @@ class RegisterPageCtrl extends GetxController {
     var data = await api.newUser(user.nom, user.email);
 
     if (data != null) {
-    //  print("data : $data");
+      //  print("data : $data");
 
       if (data.containsKey("code")) {
-      //  print("la clef existe et c'est ${data["code"]}");
+        //  print("la clef existe et c'est ${data["code"]}");
         int code = data['code'];
         await prefs.setString('user', jsonEncode(user.toJson()));
         await prefs.setString('password', password);
@@ -48,7 +52,7 @@ class RegisterPageCtrl extends GetxController {
           val?.code = 0;
           val?.msg = msg;
         });
-           MyAlert.show(text: state.value.msg);
+        MyAlert.show(text: state.value.msg);
       }
     } else {
       state.update((val) {
@@ -59,7 +63,11 @@ class RegisterPageCtrl extends GetxController {
         val?.msg =
             "Une erreur s'est produite vérifier votre connexion internet et réessayez";
       });
-      MyAlert.show(text: state.value.msg,  time:4);
+      MyAlert.show(text: state.value.msg, time: 4);
+    }
+
+    if (context.mounted) {
+      context.loaderOverlay.hide();
     }
   }
 

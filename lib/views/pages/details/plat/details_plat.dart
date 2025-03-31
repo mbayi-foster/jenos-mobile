@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/pages/details/plat/details_plat_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/icons_path.dart';
-import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/my_icon_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/chargement.dart';
-import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class DetailsPlat extends StatefulWidget {
@@ -85,7 +84,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                             color: Colors.white,
                             padding: const EdgeInsets.all(
                                 5), // Espace autour de l'icône
-                            child: Icon(
+                            child: const Icon(
                               Icons.favorite,
                               color: MyColors.primary,
                               size: 40,
@@ -161,19 +160,19 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Text("4 étoiles", style: TextStyle(color: Colors.red))
               ]),
               Text(
-                "FC ${plat.prix}",
+                "${plat.prix} FC",
                 style: TextStyle(fontSize: 27.5, fontWeight: FontWeight.bold),
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
-            "Description",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            LocalisationService.of(context)!.translate("plat.descrip"),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
-          SizedBox(
+          const SizedBox(
             height: 1.5,
           ),
           Container(
@@ -181,7 +180,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
             child: SingleChildScrollView(
               child: Text(
                 plat.details,
-                style: TextStyle(fontWeight: FontWeight.w400),
+                style: const TextStyle(fontWeight: FontWeight.w400),
               ),
             ),
           ),
@@ -196,9 +195,10 @@ class _DetailsPlatState extends State<DetailsPlat> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Quantité",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.5),
+              Text(
+                LocalisationService.of(context)!.translate("plat.qte"),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 17.5),
               ),
               Row(
                 children: [
@@ -314,14 +314,14 @@ class _DetailsPlatState extends State<DetailsPlat> {
                     height: 3.5,
                   ),
                   Text(
-                    "Prix total",
+                    LocalisationService.of(context)!.translate("plat.tot"),
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: Colors.black54),
                   ),
                   Text(
-                    "FC $prix",
+                    "$prix FC",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.5,
@@ -334,10 +334,11 @@ class _DetailsPlatState extends State<DetailsPlat> {
                     width: 150,
                     child: MyIconButton(
                       fontSize: 10.5,
-                      title: "Ajouter au panier",
+                      title: LocalisationService.of(context)!
+                          .translate("plat.btn"),
                       bg: MyColors.primary,
-                      onPressed: (){
-                       ctrl.addAtPanier();
+                      onPressed: () {
+                        ctrl.addAtPanier();
                       },
                       icon: Icons.shopping_basket,
                     ),
