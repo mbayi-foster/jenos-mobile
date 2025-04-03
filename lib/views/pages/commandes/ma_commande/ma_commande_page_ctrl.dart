@@ -19,4 +19,18 @@ class MaCommandePageCtrl extends GetxController {
 
     state.value.prixTotal = state.value.prix + state.value.deliveryPrice;
   }
+
+/* ajouter la note */
+  void getNote(String note) {
+    state.update((val) {
+      val?.note = note;
+    });
+  }
+
+  /* retirer la note */
+  void retireNote() {
+    state.update((val) {
+      val?.note = "";
+    });
+  }
 }

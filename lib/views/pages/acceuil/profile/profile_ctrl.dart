@@ -36,7 +36,7 @@ class ProfileCtrl extends GetxController {
     if (signOut) {
       MyAlert.show(
           text: "Vous êtes maintenant déconnecté.", bg: Colors.black54);
-      // Get.toNamed('/login');
+      Get.offAllNamed('/login');
     }
   }
 }

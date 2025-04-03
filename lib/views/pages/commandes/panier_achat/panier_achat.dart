@@ -126,7 +126,7 @@ class _PanierAchatState extends State<PanierAchat> {
                                         arguments: ctrl.commander());
                                   },
                                   title: LocalisationService.of(context)!
-                                      .translate("btn"),
+                                      .translate("panier.btn"),
                                   long: false,
                                   fontSize: 16,
                                 )

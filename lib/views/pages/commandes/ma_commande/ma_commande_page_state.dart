@@ -3,7 +3,7 @@ import 'package:jenos_app/models/principals/panier.dart';
 class MaCommandePageState {
   bool erreur;
   List<Panier> paniers;
-  String? note;
+  String note;
   double prix;
   double deliveryPrice;
   double prixTotal;
@@ -11,7 +11,7 @@ class MaCommandePageState {
   MaCommandePageState(
       {this.erreur = false,
       this.paniers = const [],
-      this.note,
+      this.note = "",
       this.prix = 0.0,
       this.deliveryPrice = 0.0,
       this.prixTotal = 0.0});

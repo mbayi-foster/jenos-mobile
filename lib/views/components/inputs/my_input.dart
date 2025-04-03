@@ -3,6 +3,8 @@ import 'package:jenos_app/utils/colors.dart';
 
 class MyInput extends StatefulWidget {
   final String hint;
+  final int ligne;
+  final bool radius;
   final TextInputType keyboardType;
   final double size;
   final bool isPassword;
@@ -13,10 +15,12 @@ class MyInput extends StatefulWidget {
 
   const MyInput(
       {super.key,
+      this.radius = true,
       this.showPassword = false,
       this.isPassword = false,
       this.showPasswordOnTap,
       this.size = 15,
+      this.ligne = 1,
       this.validator,
       required this.hint,
       required this.onSaved,
@@ -30,6 +34,7 @@ class _MyInputState extends State<MyInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: widget.ligne,
       onSaved: widget.onSaved,
       validator: widget.validator,
       obscureText: (widget.isPassword) ? widget.showPassword : false,
@@ -44,24 +49,31 @@ class _MyInputState extends State<MyInput> {
                 onPressed: widget.showPasswordOnTap,
                 icon: Icon(
                   widget.showPassword ? Icons.visibility : Icons.visibility_off,
-                  color:
-                      (!widget.showPassword) ? MyColors.primary : Colors.black45,
+                  color: (!widget.showPassword)
+                      ? MyColors.primary
+                      : Colors.black45,
                 ),
               )
             : null,
         hintText: widget.hint,
         filled: true,
-        fillColor: Colors.grey[200],
+        fillColor: Colors.grey[300],
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(75),
+            borderRadius: (widget.radius)
+                ? BorderRadius.circular(75)
+                : BorderRadius.circular(10),
             borderSide:
                 const BorderSide(width: 0.0, color: MyColors.inputColor)),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(75),
+            borderRadius: (widget.radius)
+                ? BorderRadius.circular(75)
+                : BorderRadius.circular(10),
             borderSide:
                 const BorderSide(width: 0.0, color: MyColors.inputColor)),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(75),
+            borderRadius: (widget.radius)
+                ? BorderRadius.circular(75)
+                : BorderRadius.circular(10),
             borderSide:
                 const BorderSide(width: 0.0, color: MyColors.inputColor)),
       ),

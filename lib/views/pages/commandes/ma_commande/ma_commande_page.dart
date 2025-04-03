@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:jenos_app/models/principals/panier.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page_ctrl.dart';
+import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page_state.dart';
 
 class MaCommandePage extends StatefulWidget {
   const MaCommandePage({super.key});
@@ -21,38 +25,40 @@ class _MaCommandePageState extends State<MaCommandePage> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {});
     var state = ctrl.state;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return Obx(() {
+      return Scaffold(
         backgroundColor: Colors.white,
-        title: TextTitle(
-            title:
-                LocalisationService.of(context)!.translate("commande.title")),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _plats(paniers: state.value.paniers),
-            SizedBox(
-              height: 30,
-            ),
-            _prix(),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: PrimaryButton(
-                onPressed: () {},
-                title:
-                    LocalisationService.of(context)!.translate("commande.btn"),
-                padding: 23,
-              ),
-            )
-          ],
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: TextTitle(
+              title:
+                  LocalisationService.of(context)!.translate("commande.title")),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _plats(paniers: state.value.paniers),
+              SizedBox(
+                height: 30,
+              ),
+              _prix(state: state),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: PrimaryButton(
+                  onPressed: () {},
+                  title: LocalisationService.of(context)!
+                      .translate("commande.btn"),
+                  padding: 23,
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   _plats({required List<Panier> paniers}) {
@@ -96,8 +102,9 @@ class _MaCommandePageState extends State<MaCommandePage> {
     );
   }
 
-  _prix() {
-    var state = ctrl.state;
+  _prix({required Rx<MaCommandePageState> state}) {
+    final formKey = GlobalKey<FormState>();
+    String? note;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -110,9 +117,64 @@ class _MaCommandePageState extends State<MaCommandePage> {
                 style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (state.value.note.isEmpty) {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextTitle(title: "Ajoutez une note"),
+                              SizedBox(height: 15),
+                              Form(
+                                key: formKey,
+                                child: MyInput(
+                                  ligne: 5,
+                                  radius: false,
+                                  hint: 'Note',
+                                  onSaved: (String? value) {
+                                    note = value;
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Veillez  ajouter une note";
+                                    } else if (value.length > 300) {
+                                      return "La note ne doit pas depasser 300 caractères";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              PrimaryButton(
+                                  long: false,
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      formKey.currentState!.save();
+                                      ctrl.getNote(note!);
+
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                  title: LocalisationService.of(context)!
+                                      .translate("commande.add")),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    ctrl.retireNote();
+                  }
+                },
                 child: Text(
-                  "+ ${LocalisationService.of(context)!.translate("commande.add")}",
+                  (state.value.note.isEmpty)
+                      ? "+ ${LocalisationService.of(context)!.translate("commande.add")}"
+                      : "Retirer",
                   style: TextStyle(
                       fontSize: 17.5,
                       fontWeight: FontWeight.w400,
@@ -121,7 +183,17 @@ class _MaCommandePageState extends State<MaCommandePage> {
               ),
             ],
           ),
-          SizedBox(height: 20.00),
+          if (state.value.note.isNotEmpty) 
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+            const SizedBox(height: 10.00),
+            Text(
+              state.value.note,
+              textAlign: TextAlign.start,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+            ),]),
+          const SizedBox(height: 20.00),
           Container(
             height: 0.75,
             color: Colors.black45,
