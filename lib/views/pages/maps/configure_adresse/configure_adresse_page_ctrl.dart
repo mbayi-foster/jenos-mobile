@@ -8,6 +8,12 @@ import 'package:geolocator/geolocator.dart';
 class ConfigureAdressePageCtrl extends GetxController {
   var state = ConfigureAdressePageState().obs;
 
+  @override
+  onInit() {
+    state.value.place = Place(lat: -4.322693, long: 15.271774, nom: "default");
+    super.onInit();
+  }
+
 /* changer de localisation */
   void changeLocalisation({required double lat, required double long}) {
     state.update((val) {
@@ -17,7 +23,7 @@ class ConfigureAdressePageCtrl extends GetxController {
   }
 
   /* recuperer sa position */
-  Future<void> getCurrentLocation() async {
+  Future<Place> getCurrentLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -27,14 +33,9 @@ class ConfigureAdressePageCtrl extends GetxController {
         permission == LocationPermission.always) {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
-      state.update((val) {
-        val?.place!.lat = position.latitude;
-        val?.place!.long = position.longitude;
-      });
-      print("Latitude: ${position.latitude}, Longitude: ${position.longitude}");
-    } else {
-      print("Persiommision refusé");
+      return Place(lat: position.latitude, long: position.longitude);
     }
+    return Place(lat: -4.322693, long: 15.271774, nom: "default");
   }
 
   /* recuperer le nom du lieu */

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/colors.dart';
-import 'package:jenos_app/views/components/inputs/my_auto_complete_location.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
@@ -21,9 +21,10 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Mettez à jour l'état ici
-      ctrl.getCurrentLocation();
+      Place place = await ctrl.getCurrentLocation();
+      mapController.move(LatLng(place.lat!, place.long!), 13.0);
     });
     var state = ctrl.state;
     return Obx(() {
@@ -50,27 +51,17 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                         ),
                         const SizedBox(height: 10),
                         FloatingActionButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            Place place = await ctrl.getCurrentLocation();
+                            mapController.move(
+                                LatLng(place.lat!, place.long!), 13.0);
+                          },
                           child: Icon(Icons.my_location),
                         ),
                       ],
                     ),
                   ),
                 )),
-            /* Positioned(
-                child: ClipRRect(
-                    child: Container(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      MyAutoCompleteLocation(label: "label", onTap: (location) {})
-                    ],
-                  ),
-                ),
-              ),
-            ))) */
           ],
         ),
       );
