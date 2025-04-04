@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 class TextTitle extends StatefulWidget {
   String title;
   double fontSize;
-  TextTitle({super.key, required this.title, this.fontSize=17.5});
+  TextOverflow? overflow;
+  int maxLines;
+  TextTitle(
+      {super.key,
+      this.maxLines = 1,
+      this.overflow,
+      required this.title,
+      this.fontSize = 17.5});
 
   @override
   State<TextTitle> createState() => _TextTitleState();
@@ -14,9 +21,13 @@ class _TextTitleState extends State<TextTitle> {
   @override
   Widget build(BuildContext context) {
     return Text(
+      overflow: widget.overflow,
+      maxLines: widget.maxLines,
       widget.title,
       style: TextStyle(
-          fontSize:widget.fontSize, fontWeight: FontWeight.w500, color: Colors.black),
+          fontSize: widget.fontSize,
+          fontWeight: FontWeight.w500,
+          color: Colors.black),
     );
   }
 }

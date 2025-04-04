@@ -12,6 +12,7 @@ import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/my_dialogue.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -65,7 +66,11 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 _photo(width, user: state.value.user),
                 const SizedBox(height: 30),
-                _data(width, edit: state.value.edit, user: state.value.user)
+                _data(
+                  width,
+                  edit: state.value.edit,
+                  user: state.value.user,
+                )
               ],
             ),
           ),
@@ -87,31 +92,6 @@ class _ProfilePageState extends State<ProfilePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(IconsPath.profile),
-        TextButton(
-            onPressed: () {
-              ctrl.edit();
-            },
-            child: SizedBox(
-              width: 150,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.edit,
-                    color: MyColors.primary,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    LocalisationService.of(context)!.translate("profile.edit"),
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: MyColors.primary),
-                  ),
-                ],
-              ),
-            )),
         TextTitle(
             title:
                 "${LocalisationService.of(context)!.translate("profile.hi")} ${user!.prenom} !"),
@@ -136,75 +116,157 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _data(width, {required bool edit, required User? user}) {
-    double height = 20;
+  _data(
+    width, {
+    required bool edit,
+    required User? user,
+  }) {
+    double height = 15;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
       child: Column(
         children: [
-          InputLabel(
-            edit: edit,
-            validator: (value) {
-              return null;
-            },
-            hint: LocalisationService.of(context)!.translate("inscrire.name"),
-            label: LocalisationService.of(context)!.translate("inscrire.name"),
-            ctrl: TextEditingController(text: user?.nom),
-            keyboardType: TextInputType.text,
-          ),
-          SizedBox(
-            height: height,
-          ),
-          InputLabel(
-            edit: edit,
-            validator: (value) {
-              return null;
-            },
-            hint:
-                LocalisationService.of(context)!.translate("inscrire.prename"),
-            label:
-                LocalisationService.of(context)!.translate("inscrire.prename"),
-            ctrl: TextEditingController(text: user?.prenom),
-            keyboardType: TextInputType.emailAddress,
-          ),
-          SizedBox(
-            height: height,
-          ),
-          InputLabel(
-            edit: edit,
-            validator: (value) {
-              return null;
-            },
-            hint: LocalisationService.of(context)!.translate("inscrire.phone"),
-            label: LocalisationService.of(context)!.translate("inscrire.phone"),
-            ctrl: TextEditingController(text: user?.phone),
-            keyboardType: TextInputType.number,
-          ),
-          SizedBox(
-            height: height,
-          ),
-          InputLabel(
-            edit: edit,
-            validator: (value) {
-              return null;
-            },
-            hint:
-                LocalisationService.of(context)!.translate("inscrire.adresse"),
-            label:
-                LocalisationService.of(context)!.translate("inscrire.adresse"),
-            ctrl: TextEditingController(text: user?.adresse),
-            keyboardType: TextInputType.text,
-          ),
-          SizedBox(
-            height: height,
-          ),
-          if (!edit)
-            PrimaryButton(
-                onPressed: () {},
-                title:
-                    LocalisationService.of(context)!.translate("profile.btn")),
-          const SizedBox(
-            height: 15,
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            TextTitle(
+                title: LocalisationService.of(context)!
+                    .translate("inscrire.adresse")),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: TextTitle(
+                    title: (user!.adresse.isNotEmpty)
+                        ? user.adresse
+                        : "Aucune adresse enregistrée, cliquez sur changer pour enregistrer une adresse.",
+                    maxLines: 4, // Limitez le nombre de lignes si nécessaire
+                    overflow: TextOverflow.ellipsis,
+                    fontSize:
+                        15, // Ajoutez des ellipses si le texte est trop long
+                  ),
+                ),
+                const SizedBox(
+                    width: 15), // Ajoutez un espace entre le texte et le bouton
+                TextButton(
+                  onPressed: () {
+                    Get.toNamed("/change-adresse");
+                  },
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Changer",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.primary),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ]),
+          Form(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: height,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextTitle(title: "Mon profile"),
+                    TextButton(
+                        onPressed: () {
+                          ctrl.edit();
+                        },
+                        child: SizedBox(
+                          width: 150,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.edit,
+                                color: MyColors.primary,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                LocalisationService.of(context)!
+                                    .translate("profile.edit"),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: MyColors.primary),
+                              ),
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                InputLabel(
+                  edit: edit,
+                  validator: (value) {
+                    return null;
+                  },
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.name"),
+                  label: LocalisationService.of(context)!
+                      .translate("inscrire.name"),
+                  ctrl: TextEditingController(text: user?.nom),
+                  keyboardType: TextInputType.text,
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                InputLabel(
+                  edit: edit,
+                  validator: (value) {
+                    return null;
+                  },
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.prename"),
+                  label: LocalisationService.of(context)!
+                      .translate("inscrire.prename"),
+                  ctrl: TextEditingController(text: user?.prenom),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                InputLabel(
+                  edit: edit,
+                  validator: (value) {
+                    return null;
+                  },
+                  hint: LocalisationService.of(context)!
+                      .translate("inscrire.phone"),
+                  label: LocalisationService.of(context)!
+                      .translate("inscrire.phone"),
+                  ctrl: TextEditingController(text: user?.phone),
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                if (!edit)
+                  PrimaryButton(
+                      onPressed: () {},
+                      title: LocalisationService.of(context)!
+                          .translate("profile.btn")),
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
+            ),
           ),
         ],
       ),

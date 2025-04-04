@@ -1,9 +1,9 @@
 import 'dart:async';
-
+import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/utils/images_path.dart';
-import 'package:jenos_app/views/pages/intro/info_page.dart';
+import 'package:jenos_app/models/principals/user.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -17,8 +17,17 @@ class _IntroPageState extends State<IntroPage> {
   void initState() {
     super.initState();
     // Démarrer le timer pour changer de page après 10 secondes
-    Timer(const Duration(seconds: 5), () {
-      Get.toNamed("/info-page");
+    Timer(const Duration(seconds: 5), () async{
+      AuthServiceLocalImpl api = AuthServiceLocalImpl();
+
+      User? user = await api.getUser();
+
+      if(user == null){
+       
+      }else{
+         Get.offAllNamed('/home');
+      }
+      
     });
   }
 

@@ -17,6 +17,7 @@ import 'package:jenos_app/views/pages/details/plat/details_plat.dart';
 import 'package:jenos_app/views/pages/intro/access_page.dart';
 import 'package:jenos_app/views/pages/intro/info_page.dart';
 import 'package:jenos_app/views/pages/intro/intro_page.dart';
+import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page.dart';
 import 'package:jenos_app/views/pages/notifications/notifications_pages/notifications_page.dart';
 
 import '../views/pages/auth/login/login_page.dart';
@@ -50,9 +51,12 @@ class AppRoutes {
     GetPage(name: '/offres', page: () => const OffrePage(), middlewares: [
       MiddlewareAuth(),
     ]),
-    GetPage(name: '/commandes', page: () => const CommandesPage(), middlewares: [
-      MiddlewareAuth(),
-    ]),
+    GetPage(
+        name: '/commandes',
+        page: () => const CommandesPage(),
+        middlewares: [
+          MiddlewareAuth(),
+        ]),
     GetPage(name: '/more', page: () => const MorePage(), middlewares: [
       MiddlewareAuth(),
     ]),
@@ -90,6 +94,13 @@ class AppRoutes {
     GetPage(
         name: '/notifications',
         page: () => const NotificationsPage(),
+        middlewares: [MiddlewareAuth()]),
+   
+
+    /* routes des adresses */
+     GetPage(
+        name: '/change-adresse',
+        page: () => const ConfigureAdressePage(),
         middlewares: [MiddlewareAuth()]),
   ];
 }
