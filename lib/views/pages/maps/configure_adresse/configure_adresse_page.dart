@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/views/components/inputs/my_auto_complete_location.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,10 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Mettez à jour l'état ici
+      ctrl.getCurrentLocation();
+    });
     var state = ctrl.state;
     return Obx(() {
       return Scaffold(
@@ -29,7 +34,44 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
           title: TextTitle(title: "Choisir une adresse"),
         ),
         body: Stack(
-          children: [Text(state.value.adresse), _carte(state: state)],
+          children: [
+            _carte(state: state),
+            Positioned(
+                bottom: 20,
+                left: 20,
+                child: ClipRRect(
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    child: Column(
+                      children: [
+                        FloatingActionButton(
+                          onPressed: () {},
+                          child: const Icon(Icons.center_focus_strong),
+                        ),
+                        const SizedBox(height: 10),
+                        FloatingActionButton(
+                          onPressed: () {},
+                          child: Icon(Icons.my_location),
+                        ),
+                      ],
+                    ),
+                  ),
+                )),
+            /* Positioned(
+                child: ClipRRect(
+                    child: Container(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Expanded(
+                  child: Column(
+                    children: [
+                      MyAutoCompleteLocation(label: "label", onTap: (location) {})
+                    ],
+                  ),
+                ),
+              ),
+            ))) */
+          ],
         ),
       );
     });
@@ -52,7 +94,8 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
       );
 
   _carte({required Rx<ConfigureAdressePageState> state}) {
-    late var localisation = buildPin(LatLng(state.value.lat, state.value.long),
+    late var localisation = buildPin(
+        LatLng(state.value.place!.lat ?? 0.0, state.value.place!.long ?? 0.0),
         Icon(Icons.location_pin, size: 60, color: MyColors.primary));
     return Flexible(
       child: FlutterMap(
@@ -60,9 +103,10 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
         options: MapOptions(
           onTap: (tapPosition, p) async {
             ctrl.changeLocalisation(lat: p.latitude, long: p.longitude);
-           // print("Lieu : ${tapPosition.}");
+            // print("Lieu : ${tapPosition.}");
           },
-          initialCenter: LatLng(state.value.lat, state.value.long),
+          initialCenter: LatLng(
+              state.value.place!.lat ?? 0.0, state.value.place!.long ?? 0.0),
           initialZoom: 17,
           maxZoom: 25,
           minZoom: 3,

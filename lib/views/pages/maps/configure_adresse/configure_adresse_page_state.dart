@@ -1,11 +1,9 @@
+import 'package:jenos_app/models/principals/place.dart';
+
 class ConfigureAdressePageState {
-  String adresse;
-  double lat;
-  double long;
+  Place? place;
 
   ConfigureAdressePageState({
-    this.adresse = "",
-    this.lat = -4.322693,
-    this.long = 15.271774,
+    this.place
   });
 }
