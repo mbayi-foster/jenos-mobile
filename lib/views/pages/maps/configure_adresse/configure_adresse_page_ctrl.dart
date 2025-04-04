@@ -17,13 +17,15 @@ class ConfigureAdressePageCtrl extends GetxController {
 /* changer de localisation */
   void changeLocalisation({required double lat, required double long}) {
     state.update((val) {
-      val?.place!.lat = lat;
-      val?.place!.long = long;
+      val?.place = Place(lat: lat, long: long);
     });
   }
 
   /* recuperer sa position */
-  Future<Place> getCurrentLocation() async {
+  getCurrentLocation() async {
+    state.update((val) {
+      val?.loading = true;
+    });
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -33,9 +35,15 @@ class ConfigureAdressePageCtrl extends GetxController {
         permission == LocationPermission.always) {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
-      return Place(lat: position.latitude, long: position.longitude);
+      state.update((val) {
+        val?.loading = false;
+        val?.place = Place(lat: position.latitude, long: position.longitude);
+      });
     }
-    return Place(lat: -4.322693, long: 15.271774, nom: "default");
+     state.update((val) {
+      val?.loading = false;
+    });
+    // return Place(lat: -4.322693, long: 15.271774, nom: "default");
   }
 
   /* recuperer le nom du lieu */
@@ -46,14 +54,4 @@ class ConfigureAdressePageCtrl extends GetxController {
       val?.place = place;
     });
   }
-  /*  Future<String> _getNomLieu(double lat, double lng) async {
-   // var response = await http.get(getRouteUrl2(lat, lng));
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      print("Nom : " + data['display_name']);
-      return data['display_name'];
-    }
-
-    return 'Not found';
-  } */
 }

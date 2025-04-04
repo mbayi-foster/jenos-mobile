@@ -40,14 +40,6 @@ class _ProfilePageState extends State<ProfilePage> {
         TextEditingController(text: state.value.user?.email);
     TextEditingController phoneCtrl =
         TextEditingController(text: state.value.user?.phone);
-    TextEditingController adresseCtrl =
-        TextEditingController(text: state.value.user?.adresse);
-    List<TextEditingController> controllers = [
-      nomCtrl,
-      emailCtrl,
-      phoneCtrl,
-      adresseCtrl
-    ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -139,8 +131,8 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Expanded(
                   child: TextTitle(
-                    title: (user!.adresse.isNotEmpty)
-                        ? user.adresse
+                    title: (user!.adresse!.nom!.isNotEmpty)
+                        ? user.adresse!.nom!
                         : "Aucune adresse enregistrée, cliquez sur changer pour enregistrer une adresse.",
                     maxLines: 4, // Limitez le nombre de lignes si nécessaire
                     overflow: TextOverflow.ellipsis,

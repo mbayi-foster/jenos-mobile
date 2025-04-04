@@ -6,12 +6,9 @@ class InputSearch extends StatefulWidget {
   final double size;
   final String title;
   final GestureTapCallback tap;
-  const InputSearch({
-    super.key,
-    required this.tap,
-    this.size = 15,
-    this.title = "home.hi"
-  });
+  final bool readOnly;
+  const InputSearch(
+      {super.key, required this.tap, this.size = 15, this.title = "home.hi", this.readOnly = true});
 
   @override
   State<InputSearch> createState() => _InputSearchState();
@@ -21,7 +18,7 @@ class _InputSearchState extends State<InputSearch> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      readOnly: true,
+      readOnly: widget.readOnly,
       onTap: widget.tap,
       style: TextStyle(
           color: Colors.black54,

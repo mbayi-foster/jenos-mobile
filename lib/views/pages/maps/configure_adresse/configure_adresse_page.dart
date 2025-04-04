@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/views/components/inputs/input_location_search.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
+import 'package:jenos_app/views/pages/maps/search/search_adress_page.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -18,13 +20,11 @@ class ConfigureAdressePage extends StatefulWidget {
 class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
   ConfigureAdressePageCtrl ctrl = Get.put(ConfigureAdressePageCtrl());
   final mapController = MapController();
-
+  late var localisation;
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Mettez à jour l'état ici
-      Place place = await ctrl.getCurrentLocation();
-      mapController.move(LatLng(place.lat!, place.long!), 13.0);
     });
     var state = ctrl.state;
     return Obx(() {
@@ -37,6 +37,19 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
         body: Stack(
           children: [
             _carte(state: state),
+            Positioned(
+                top: 20,
+                left: 20,
+                right: 20,
+                child: InputLocationSearch(
+                  tap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SearchAdressPage()),
+                    );
+                  },
+                )),
             Positioned(
                 bottom: 20,
                 left: 20,
@@ -52,9 +65,13 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                         const SizedBox(height: 10),
                         FloatingActionButton(
                           onPressed: () async {
-                            Place place = await ctrl.getCurrentLocation();
-                            mapController.move(
-                                LatLng(place.lat!, place.long!), 13.0);
+                            ctrl.getCurrentLocation();
+                            if (!state.value.loading) {
+                              mapController.move(
+                                  LatLng(state.value.place!.lat!,
+                                      state.value.place!.long!),
+                                  17);
+                            }
                           },
                           child: Icon(Icons.my_location),
                         ),
@@ -85,9 +102,9 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
       );
 
   _carte({required Rx<ConfigureAdressePageState> state}) {
-    late var localisation = buildPin(
+    localisation = buildPin(
         LatLng(state.value.place!.lat ?? 0.0, state.value.place!.long ?? 0.0),
-        Icon(Icons.location_pin, size: 60, color: MyColors.primary));
+        const Icon(Icons.location_pin, size: 60, color: MyColors.primary));
     return Flexible(
       child: FlutterMap(
         mapController: mapController,
@@ -96,8 +113,8 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
             ctrl.changeLocalisation(lat: p.latitude, long: p.longitude);
             // print("Lieu : ${tapPosition.}");
           },
-          initialCenter: LatLng(
-              state.value.place!.lat ?? 0.0, state.value.place!.long ?? 0.0),
+          initialCenter:
+              LatLng(state.value.place!.lat!, state.value.place!.long!),
           initialZoom: 17,
           maxZoom: 25,
           minZoom: 3,
