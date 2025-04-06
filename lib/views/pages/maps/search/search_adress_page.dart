@@ -44,7 +44,7 @@ class _SearchAdressPageState extends State<SearchAdressPage> {
                 height: 10,
               ),
               if (!state.value.loading && state.value.hasData == "okay")
-                _places(state),
+                Expanded(child: _places(state)),
               if (state.value.loading || state.value.hasData == "en_cours")
                 Center(
                   child: Column(

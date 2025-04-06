@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/inputs/input_location_search.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 import 'package:jenos_app/views/pages/maps/search/search_adress_page.dart';
@@ -38,7 +39,7 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
         body: Stack(
           children: [
             _carte(state: state),
-            /* Champ ed recherches */
+            /* Champ de recherches */
             if (!state.value.isVisible)
               Positioned(
                   top: 20,
@@ -47,11 +48,11 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                   child: InputLocationSearch(
                     tap: () {
                       //_searchPlace(height, state: state);
-                       Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SearchAdressPage()),
-                    );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchAdressPage()),
+                      );
                     },
                   )),
             /* Bouton flottant */
@@ -86,6 +87,39 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                     ),
                   ),
                 )),
+            /* voir le lieu */
+            Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 100,
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 2,
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.location_on_sharp,
+                            color: MyColors.primary,
+                          ),
+                          TextTitle(
+                              title: (state.value.place == null)
+                                  ? "Aucune adresse choisi"
+                                  : state.value.place!.nom!),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          PrimaryButton(
+                              long: false, onPressed: () {}, title: "Changer")
+                        ],
+                      ),
+                    ),
+                  ),
+                ))
           ],
         ),
       );
@@ -192,5 +226,4 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
     });
   }
  */
-
 }
