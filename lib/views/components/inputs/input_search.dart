@@ -8,7 +8,11 @@ class InputSearch extends StatefulWidget {
   final GestureTapCallback tap;
   final bool readOnly;
   const InputSearch(
-      {super.key, required this.tap, this.size = 15, this.title = "home.hi", this.readOnly = true});
+      {super.key,
+      required this.tap,
+      this.size = 15,
+      this.title = "home.search",
+      this.readOnly = true});
 
   @override
   State<InputSearch> createState() => _InputSearchState();
