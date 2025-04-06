@@ -23,6 +23,7 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
   late var localisation;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Mettez à jour l'état ici
     });
@@ -37,19 +38,23 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
         body: Stack(
           children: [
             _carte(state: state),
-            Positioned(
-                top: 20,
-                left: 20,
-                right: 20,
-                child: InputLocationSearch(
-                  tap: () {
-                    Navigator.push(
+            /* Champ ed recherches */
+            if (!state.value.isVisible)
+              Positioned(
+                  top: 20,
+                  left: 20,
+                  right: 20,
+                  child: InputLocationSearch(
+                    tap: () {
+                      //_searchPlace(height, state: state);
+                       Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => SearchAdressPage()),
                     );
-                  },
-                )),
+                    },
+                  )),
+            /* Bouton flottant */
             Positioned(
                 bottom: 20,
                 left: 20,
@@ -65,13 +70,15 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                         const SizedBox(height: 10),
                         FloatingActionButton(
                           onPressed: () async {
-                            ctrl.getCurrentLocation();
-                            if (!state.value.loading) {
+                            bool position = await ctrl.getCurrentLocation();
+                            if (position) {
                               mapController.move(
                                   LatLng(state.value.place!.lat!,
                                       state.value.place!.long!),
                                   17);
                             }
+
+                            if (!state.value.loading) {}
                           },
                           child: Icon(Icons.my_location),
                         ),
@@ -133,4 +140,57 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
       ),
     );
   }
+
+  /*modal pour chercher les places par nom */
+/*   _searchPlace(double height, {required Rx<ConfigureAdressePageState> state}) {
+    state.update((val) {
+      val?.isVisible = true;
+    });
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        builder: (context) {
+          return SizedBox(
+            width: double.infinity,
+            height: height * 0.85,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  InputLocationSearch(
+                    onChange: (value) {
+                      if (value.length >= 3) {
+                        ctrl.searchPlaces(value);
+                      }
+                    },
+                    readOnly: false,
+                    autoFocus: true,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        if(state.value.loading)
+                        CircularProgressIndicator(color: MyColors.primary,),
+                        if(!state.value.loading && state.value.hasData)
+                        for (Place place in state.value.places)
+                          Text("${place.nom}")
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        }).whenComplete(() {
+      state.update((val) {
+        val?.isVisible = false;
+      });
+    });
+  }
+ */
+
 }

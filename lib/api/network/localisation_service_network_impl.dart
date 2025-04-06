@@ -13,7 +13,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.body);
+      var data = jsonDecode(response.body);
       return Place(
           nom: data["display_name"],
           lat: double.parse(data["lat"]),
@@ -31,7 +31,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
   }
 
   @override
-  Future<List<Place>> getPlaces(String nom) async {
+  Future<List<Place>> searchPlaces(String nom) async {
     var url = Uri.parse(
         "https://nominatim.openstreetmap.org/search?q=$nom&format=json&addressdetails=1&limit=5");
     var response = await http.get(url);
@@ -39,7 +39,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
 
     if (response.statusCode == 200) {
       debugPrint("Suucces " + response.body);
-      List<Map<String, dynamic>> data = jsonDecode(response.body);
+      var data = jsonDecode(response.body);
 
       data
           .map(

@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:jenos_app/utils/colors.dart';
 
 class InputLocationSearch extends StatefulWidget {
-  const InputLocationSearch({super.key, this.onChange, this.tap, this.readOnly = true});
+  const InputLocationSearch(
+      {super.key,
+      this.autoFocus = false,
+      this.onChange,
+      this.tap,
+      this.readOnly = true});
   final GestureTapCallback? tap;
   final ValueChanged? onChange;
   final bool readOnly;
+  final bool autoFocus;
   @override
   State<InputLocationSearch> createState() => _InputLocationSearchState();
 }
@@ -14,6 +20,7 @@ class _InputLocationSearchState extends State<InputLocationSearch> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: widget.autoFocus,
       readOnly: widget.readOnly,
       onTap: widget.tap,
       onChanged: widget.onChange,

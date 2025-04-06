@@ -22,10 +22,7 @@ class ConfigureAdressePageCtrl extends GetxController {
   }
 
   /* recuperer sa position */
-  getCurrentLocation() async {
-    state.update((val) {
-      val?.loading = true;
-    });
+  Future<bool> getCurrentLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -33,16 +30,16 @@ class ConfigureAdressePageCtrl extends GetxController {
 
     if (permission == LocationPermission.whileInUse ||
         permission == LocationPermission.always) {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+      Position position = await Geolocator.getCurrentPosition();
       state.update((val) {
-        val?.loading = false;
         val?.place = Place(lat: position.latitude, long: position.longitude);
       });
+      return true;
     }
-     state.update((val) {
+    state.update((val) {
       val?.loading = false;
     });
+    return false;
     // return Place(lat: -4.322693, long: 15.271774, nom: "default");
   }
 
@@ -54,4 +51,6 @@ class ConfigureAdressePageCtrl extends GetxController {
       val?.place = place;
     });
   }
+
+  
 }
