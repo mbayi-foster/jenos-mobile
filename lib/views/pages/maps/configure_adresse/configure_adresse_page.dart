@@ -57,8 +57,8 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                   )),
             /* Bouton flottant */
             Positioned(
-                bottom: 20,
-                left: 20,
+                bottom: 140,
+                right: 20,
                 child: ClipRRect(
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -88,38 +88,38 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                   ),
                 )),
             /* voir le lieu */
-            Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 100,
-                  child: Card(
-                    color: Colors.white,
-                    elevation: 2,
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.location_on_sharp,
-                            color: MyColors.primary,
-                          ),
-                          TextTitle(
-                              title: (state.value.place == null)
-                                  ? "Aucune adresse choisi"
-                                  : state.value.place!.nom!),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          PrimaryButton(
-                              long: false, onPressed: () {}, title: "Changer")
-                        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: double.infinity,
+                height: 130,
+                child: Card(
+                  color: Colors.white,
+                  elevation: 2,
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.location_on_sharp,
+                        color: MyColors.primary,
                       ),
-                    ),
+                      TextTitle(
+                          title: (state.value.place!.nom == null)
+                              ? "Adresse"
+                              : state.value.place!.nom!),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      PrimaryButton(
+                          long: false,
+                          onPressed: () {
+                            ctrl.charger(state.value.place);
+                          },
+                          title: "Changer")
+                    ],
                   ),
-                ))
+                ),
+              ),
+            )
           ],
         ),
       );
@@ -132,9 +132,9 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
         height: 60,
         child: GestureDetector(
           onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Tapped existing marker'),
-              duration: Duration(seconds: 1),
+              duration: Duration(milliseconds: 1),
               showCloseIcon: true,
             ),
           ),

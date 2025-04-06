@@ -28,14 +28,11 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
     var response = await http.get(
       url,
     );
-    print("traitement en cours");
     if (response.statusCode == 200) {
-      print("succes");
       List<dynamic> jsonData = json.decode(response.body);
       paniers = jsonData.map((json) => Panier.fromJson(json)).toList();
       return paniers;
     }
-    print("echec");
     return null;
   }
 
