@@ -109,10 +109,11 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                       const SizedBox(
                         height: 5,
                       ),
+                      if(state.value.place!.nom != null)
                       PrimaryButton(
                           long: false,
                           onPressed: () {
-                            ctrl.charger(state.value.place);
+                            ctrl.charger(state.value.place, context);
                           },
                           title: "Changer")
                     ],

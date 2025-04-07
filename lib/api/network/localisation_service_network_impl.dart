@@ -69,7 +69,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
       "id": userID.toString()
     });
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       Map<String, dynamic> res = json.decode(response.body);
       return User.fromJson(res);
     }

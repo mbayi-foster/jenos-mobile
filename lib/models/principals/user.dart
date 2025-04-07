@@ -31,19 +31,22 @@ class User {
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"] ?? 0,
-        nom: json["nom"],
-        prenom: json["prenom"] ?? "",
-        email: json["email"],
-        phone: json["phone"] ?? "",
-        photo: json["photo"] ?? "",
-        adresse: Place(lat: json['lat'] ?? 0.0, long: json['lon'], nom: json['adresse'] ?? ""),
-        createdAt: json["created_at"] != null
-            ? DateTime.parse(json["created_at"])
-            : DateTime.now(),
-      );
-
+  factory User.fromJson(Map<String, dynamic> json) {
+    Place? place =
+        (json['adresse'] != null) ? Place.fromJson(json['adresse']) : null;
+    return User(
+      id: json["id"] ?? 0,
+      nom: json["nom"],
+      prenom: json["prenom"] ?? "",
+      email: json["email"],
+      phone: json["phone"] ?? "",
+      photo: json["photo"] ?? "",
+      adresse: json['adresse'] != null ? place : null,
+      createdAt: json["created_at"] != null
+          ? DateTime.parse(json["created_at"])
+          : DateTime.now(),
+    );
+  }
   Map<String, dynamic> toJson() => {
         "id": id,
         "nom": nom,
