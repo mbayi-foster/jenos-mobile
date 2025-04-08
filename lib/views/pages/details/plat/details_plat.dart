@@ -66,7 +66,7 @@ class _DetailsPlatState extends State<DetailsPlat> {
                 Positioned(
                     right: 0,
                     left: 0,
-                    bottom: 45,
+                    bottom: 25,
                     //top: height * 0.65,
                     child: _price(height, state.value.prix)),
                 Positioned(

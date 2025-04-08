@@ -5,6 +5,8 @@ import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/components/inputs/input_location_search.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page.dart';
+import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_ctrl.dart';
 import 'package:jenos_app/views/pages/maps/search/search_adress_page_ctrl.dart';
 import 'package:jenos_app/views/pages/maps/search/search_adress_page_state.dart';
 
@@ -75,7 +77,11 @@ class _SearchAdressPageState extends State<SearchAdressPage> {
         return Column(
           children: [
             InkWell(
-                onTap: () {},
+                onTap: () {
+                  debugPrint("adresse choisi : ${places[index].toJson()}");
+                  Get.off(() => const ConfigureAdressePage(),
+                      arguments: {'location': places[index]});
+                },
                 child: SizedBox(
                   width: double.infinity,
                   height: 100,

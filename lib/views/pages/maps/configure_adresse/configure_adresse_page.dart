@@ -24,11 +24,23 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
   late var localisation;
   @override
   Widget build(BuildContext context) {
+    var state = ctrl.state;
     double height = MediaQuery.of(context).size.height;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // Mettez à jour l'état ici
+      final args = Get.arguments;
+      if (args == null || !args.containsKey('location')) {
+        state.update((val) {
+          val?.place = Place(lat: -4.322693, long: 15.271774);
+        });
+        print("pas d'argument");
+      } else {
+        state.update((val) {
+          val?.place = args['location'];
+        });
+        print("arguments : ${state.value.place!.toJson()}");
+      }
     });
-    var state = ctrl.state;
+
     return Obx(() {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -109,13 +121,13 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      if(state.value.place!.nom != null)
-                      PrimaryButton(
-                          long: false,
-                          onPressed: () {
-                            ctrl.charger(state.value.place, context);
-                          },
-                          title: "Changer")
+                      if (state.value.place!.nom != null)
+                        PrimaryButton(
+                            long: false,
+                            onPressed: () {
+                              ctrl.charger(state.value.place, context);
+                            },
+                            title: "Changer")
                     ],
                   ),
                 ),

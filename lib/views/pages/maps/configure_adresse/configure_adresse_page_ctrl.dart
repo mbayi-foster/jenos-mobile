@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:jenos_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
@@ -8,6 +8,7 @@ import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 
+import 'package:jenos_app/views/components/my_alert.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +18,16 @@ class ConfigureAdressePageCtrl extends GetxController {
 
   @override
   onInit() {
-    state.value.place = Place(lat: -4.322693, long: 15.271774);
+    final args = Get.arguments;
+    if (args == null || !args.containsKey('location')) {
+      state.value.place = Place(lat: -4.322693, long: 15.271774);
+      print("pas d'argument");
+    } else {
+      state.update((val) {
+        val?.place = args['location'];
+      });
+      print("arguments : ${state.value.place!.toJson()}");
+    }
 
     super.onInit();
   }
@@ -64,25 +74,30 @@ class ConfigureAdressePageCtrl extends GetxController {
 
   void charger(Place? place, BuildContext ctx) async {
     ctx.loaderOverlay.show();
-    if(state.value.last == 1){
+    if (state.value.last == 1) {
       /* traitement pour la page precedente profile */
       AuthServiceLocalImpl apiUser = AuthServiceLocalImpl();
-    User? userLocal = await apiUser.getUser();
-    LocalisationServiceNetworkImpl api = LocalisationServiceNetworkImpl();
-    User? user = await api.changeAdresse(
-        Place(lat: place!.lat, long: place.long, nom: place.nom),
-        userLocal!.id);
+      User? userLocal = await apiUser.getUser();
+      LocalisationServiceNetworkImpl api = LocalisationServiceNetworkImpl();
+      User? user = await api.changeAdresse(
+          Place(lat: place!.lat, long: place.long, nom: place.nom),
+          userLocal!.id);
 
-    if (user != null) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('user', jsonEncode(user.toJson()));
-      print("utilisateur : ${user.toJson()}");
-      ctx.loaderOverlay.hide();
-      Get.offNamed('/profile');
-    }
-    }else{
+      if (user != null) {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('user', jsonEncode(user.toJson()));
+        if (ctx.mounted) {
+          ctx.loaderOverlay.hide();
+        }
+        MyAlert.show(
+            text: "Adresse configurée avec succès", bg: MyColors.primary);
+        Get.offNamed('/profile');
+      }
+    } else {
       /* page precedente commande */
     }
-    ctx.loaderOverlay.hide();
+    if (ctx.mounted) {
+      ctx.loaderOverlay.hide();
+    }
   }
 }
