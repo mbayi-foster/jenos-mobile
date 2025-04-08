@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
+import 'package:jenos_app/api/network/auth_service_network_impl.dart';
 import 'package:jenos_app/api/network/localisation_service_network_impl.dart';
 import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/colors.dart';
@@ -64,8 +65,37 @@ class ProfileCtrl extends GetxController {
         ctx.loaderOverlay.hide();
         Navigator.of(ctx).pop();
       }
-      MyAlert.show(
-          text: "Adresse configurée avec succès", bg: MyColors.primary);
+      MyAlert.show(text: "Adresse configurée avec succès", bg: Colors.green);
+    }
+
+    if (ctx.mounted) {
+      ctx.loaderOverlay.hide();
+    }
+  }
+
+  /* mis à jour de l'utilisateur */
+  void updateUser(
+      String nom, String prenom, String phone, BuildContext ctx) async {
+    ctx.loaderOverlay.show();
+    AuthServiceNetworkImpl api = AuthServiceNetworkImpl();
+
+    User? userLocal = state.value.user!;
+
+    userLocal.nom = nom;
+    userLocal.prenom = prenom;
+    userLocal.phone = phone;
+    User? user = await api.updateUser(userLocal);
+
+    if (user != null) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user', jsonEncode(user.toJson()));
+
+      if (ctx.mounted) {
+        ctx.loaderOverlay.hide();
+        Get.reload();
+        //   Navigator.of(ctx).pop();
+      }
+      MyAlert.show(text: "Mis à jour réussié !", bg: Colors.green);
     }
 
     if (ctx.mounted) {

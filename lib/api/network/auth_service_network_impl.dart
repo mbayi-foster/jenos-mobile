@@ -66,8 +66,16 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   }
 
   @override
-  Future<User?> updateUser(int id, User user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<User?> updateUser(User user) async {
+    var url = Uri.parse("${baseUrl}clients/${user.id.toString()}");
+    var response = await http.put(url,
+        body: {"nom": user.nom, "prenom": user.prenom, "phone": user.phone});
+
+    if (response.statusCode == 201) {
+      Map<String, dynamic> res = json.decode(response.body);
+
+      return User.fromJson(res);
+    }
+    return null;
   }
 }

@@ -10,11 +10,13 @@ class InputLabel extends StatefulWidget {
   final bool isPassword;
   final bool edit;
   final String? Function(String?)? validator;
+  final Function(String?)? onSaved;
   const InputLabel(
       {super.key,
+      required this.onSaved,
       this.isPassword = false,
       this.edit = true,
-     this.size = 15,
+      this.size = 15,
       this.validator,
       required this.hint,
       required this.label,
@@ -29,6 +31,7 @@ class _InputLabelState extends State<InputLabel> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onSaved: widget.onSaved,
       readOnly: widget.edit,
       controller: widget.ctrl,
       validator: widget.validator,
@@ -40,7 +43,7 @@ class _InputLabelState extends State<InputLabel> {
           fontWeight: FontWeight.w400),
       decoration: InputDecoration(
         label: Padding(
-          padding: const EdgeInsets.only(top: 20.0,left: 10),
+          padding: const EdgeInsets.only(top: 20.0, left: 10),
           child: Text(
             widget.label,
             style: TextStyle(
@@ -54,13 +57,16 @@ class _InputLabelState extends State<InputLabel> {
         fillColor: Colors.grey[200],
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide:
+                const BorderSide(width: 0.0, color: MyColors.inputColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide:
+                const BorderSide(width: 0.0, color: MyColors.inputColor)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(75),
-            borderSide: const BorderSide(width: 0.0, color: MyColors.inputColor)),
+            borderSide:
+                const BorderSide(width: 0.0, color: MyColors.inputColor)),
       ),
     );
   }

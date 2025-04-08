@@ -26,7 +26,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   // bool _edit = true;
-
+  final _keyForm = GlobalKey<FormState>();
+  String? _nom;
+  String? _prenom;
+  String? _phone;
   ProfileCtrl ctrl = Get.put(ProfileCtrl());
 
   @override
@@ -166,6 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ]),
           Form(
+            key: _keyForm,
             child: Column(
               children: [
                 SizedBox(
@@ -208,45 +212,63 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 InputLabel(
+                  onSaved: (value) {
+                    _nom = value;
+                  },
                   edit: edit,
                   validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Veillez entrer un nom";
+                    }
                     return null;
                   },
                   hint: LocalisationService.of(context)!
                       .translate("inscrire.name"),
                   label: LocalisationService.of(context)!
                       .translate("inscrire.name"),
-                  ctrl: TextEditingController(text: user?.nom),
+                  ctrl: TextEditingController(text: user.nom),
                   keyboardType: TextInputType.text,
                 ),
                 SizedBox(
                   height: height,
                 ),
                 InputLabel(
+                  onSaved: (p0) {
+                    _prenom = p0;
+                  },
                   edit: edit,
                   validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Veillez entrer un prénom";
+                    }
                     return null;
                   },
                   hint: LocalisationService.of(context)!
                       .translate("inscrire.prename"),
                   label: LocalisationService.of(context)!
                       .translate("inscrire.prename"),
-                  ctrl: TextEditingController(text: user?.prenom),
+                  ctrl: TextEditingController(text: user.prenom),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(
                   height: height,
                 ),
                 InputLabel(
+                  onSaved: (p0) {
+                    _phone = p0;
+                  },
                   edit: edit,
                   validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Veillez entrer un numéro de téléphone";
+                    }
                     return null;
                   },
                   hint: LocalisationService.of(context)!
                       .translate("inscrire.phone"),
                   label: LocalisationService.of(context)!
                       .translate("inscrire.phone"),
-                  ctrl: TextEditingController(text: user?.phone),
+                  ctrl: TextEditingController(text: user.phone),
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(
@@ -254,7 +276,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 if (!edit)
                   PrimaryButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_keyForm.currentState!.validate()) {
+                          _keyForm.currentState!.save();
+                          ctrl.updateUser(_nom!, _prenom!, _phone!, context);
+                        }
+                      },
                       title: LocalisationService.of(context)!
                           .translate("profile.btn")),
                 const SizedBox(
@@ -357,7 +384,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             ctrl.changerAdresse(
                                 Place(nom: adresse, lat: 0.0, long: 0.0),
                                 context);
-                            
                           }
                         },
                         title: "Changer")

@@ -90,7 +90,7 @@ class ConfigureAdressePageCtrl extends GetxController {
           ctx.loaderOverlay.hide();
         }
         MyAlert.show(
-            text: "Adresse configurée avec succès", bg: MyColors.primary);
+            text: "Adresse configurée avec succès", bg: Colors.green);
         Get.offNamed('/profile');
       }
     } else {
