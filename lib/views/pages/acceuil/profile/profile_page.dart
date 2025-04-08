@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/views/components/buttons/secondary_button.dart';
+import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/pages/acceuil/profile/profile_ctrl.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/utils/colors.dart';
@@ -10,7 +13,7 @@ import 'package:jenos_app/views/components/inputs/input_label.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
-import 'package:jenos_app/views/components/my_dialogue.dart';
+import 'package:jenos_app/views/components/popups/my_dialogue.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 
@@ -144,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 15), // Ajoutez un espace entre le texte et le bouton
                 TextButton(
                   onPressed: () {
-                    Get.toNamed("/change-adresse");
+                    _dialogCarte();
                   },
                   child: const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,5 +266,106 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+/* popup pour le choix de l'adresse */
+  _dialogCarte() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+            child: SizedBox(
+              height: 170,
+              width: 400,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                child: Card(
+                  color: Colors.white,
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          TextTitle(title: "Trouver votre adresse"),
+                          const SizedBox(height: 15),
+                          PrimaryButton(
+                              long: false,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Get.toNamed("/change-adresse");
+                              },
+                              title: "Choisir sur la carte"),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SecondaryButton(
+                              long: false,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                _dialogueCarteBottom();
+                              },
+                              title: "Entrer au clavier")
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  _dialogueCarteBottom() {
+    String? adresse;
+    final keyCarte = GlobalKey<FormState>();
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              child: Form(
+                key: keyCarte,
+                child: Column(
+                  children: [
+                    TextTitle(title: "Entrez votre adresse complète"),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    MyInput(
+                        hint: "Adresse",
+                        onSaved: (value) {
+                          adresse = value;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Veillez entrer une adresse";
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    PrimaryButton(
+                        onPressed: () {
+                          if (keyCarte.currentState!.validate()) {
+                            keyCarte.currentState!.save();
+                            ctrl.changerAdresse(
+                                Place(nom: adresse, lat: 0.0, long: 0.0),
+                                context);
+                            
+                          }
+                        },
+                        title: "Changer")
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

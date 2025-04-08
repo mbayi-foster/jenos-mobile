@@ -6,9 +6,11 @@ class SecondaryButton extends StatefulWidget {
   Color color;
   double fontSize;
   double padding;
+  bool long;
   final VoidCallback onPressed;
   SecondaryButton({
     super.key,
+    this.long = true,
     required this.onPressed,
     this.fontSize = 15,
     this.padding = 12,
@@ -26,12 +28,11 @@ class _SecondaryButtonState extends State<SecondaryButton> {
     return ElevatedButton(
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: widget.padding),
           backgroundColor: Colors.white,
           foregroundColor: widget.color,
-          minimumSize: const Size(double.infinity, 45),
-          /* padding:
-              EdgeInsets.symmetric(vertical: 12, horizontal: widget.padding), */
+          padding: EdgeInsets.symmetric(
+              vertical: widget.padding, horizontal: (!widget.long) ? 45 : 2),
+          minimumSize: Size((widget.long) ? double.infinity : 45, 45),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),
