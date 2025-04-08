@@ -23,7 +23,7 @@ class _IntroPageState extends State<IntroPage> {
       User? user = await api.getUser();
 
       if(user == null){
-       
+       Get.offAllNamed('/info-page');
       }else{
          Get.offAllNamed('/home');
       }
