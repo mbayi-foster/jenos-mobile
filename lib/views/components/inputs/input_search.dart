@@ -5,11 +5,15 @@ import 'package:jenos_app/utils/lang/localisation_service.dart';
 class InputSearch extends StatefulWidget {
   final double size;
   final String title;
-  final GestureTapCallback tap;
+  final GestureTapCallback? tap;
   final bool readOnly;
+  final bool autoFocus;
+  final ValueChanged? onChange;
   const InputSearch(
       {super.key,
-      required this.tap,
+      this.autoFocus = false,
+      this.onChange,
+      this.tap,
       this.size = 15,
       this.title = "home.search",
       this.readOnly = true});
@@ -22,6 +26,8 @@ class _InputSearchState extends State<InputSearch> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: widget.autoFocus,
+      onChanged: widget.onChange,
       readOnly: widget.readOnly,
       onTap: widget.tap,
       style: TextStyle(

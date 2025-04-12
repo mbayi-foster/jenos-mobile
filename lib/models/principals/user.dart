@@ -19,6 +19,7 @@ class User {
   String phone;
   String photo;
   DateTime createdAt;
+  String token;
 
   User({
     required this.id,
@@ -28,6 +29,7 @@ class User {
     required this.phone,
     this.adresse,
     this.photo = "",
+    this.token="",
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
@@ -39,9 +41,10 @@ class User {
       nom: json["nom"],
       prenom: json["prenom"] ?? "",
       email: json["email"],
-      phone: json["phone"] ?? "",
+      phone: json["phone"].toString() ?? "",
       photo: json["photo"] ?? "",
       adresse: json['adresse'] != null ? place : null,
+      token:json['token'] ?? "",
       createdAt: json["created_at"] != null
           ? DateTime.parse(json["created_at"])
           : DateTime.now(),
@@ -55,6 +58,7 @@ class User {
         "phone": phone,
         "photo": photo,
         "adresse": adresse?.toJson(),
+        "token":token,
         "created_at":
             "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
       };
