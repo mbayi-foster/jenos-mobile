@@ -19,6 +19,7 @@ import 'package:jenos_app/views/pages/intro/info_page.dart';
 import 'package:jenos_app/views/pages/intro/intro_page.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page.dart';
 import 'package:jenos_app/views/pages/notifications/notifications_pages/notifications_page.dart';
+import 'package:jenos_app/views/pages/plats/search/search_page.dart';
 
 import '../views/pages/auth/login/login_page.dart';
 
@@ -67,6 +68,11 @@ class AppRoutes {
     GetPage(name: '/profile', page: () => const ProfilePage(), middlewares: [
       MiddlewareAuth(),
     ]),
+    GetPage(name: '/search', 
+    page: () => const SearchPage(), 
+    middlewares: [
+      MiddlewareAuth(),
+    ]),
     //fin routes acceuil
 
     GetPage(
@@ -95,10 +101,9 @@ class AppRoutes {
         name: '/notifications',
         page: () => const NotificationsPage(),
         middlewares: [MiddlewareAuth()]),
-   
 
     /* routes des adresses */
-     GetPage(
+    GetPage(
         name: '/change-adresse',
         page: () => const ConfigureAdressePage(),
         middlewares: [MiddlewareAuth()]),

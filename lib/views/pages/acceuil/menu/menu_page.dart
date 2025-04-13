@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/langues.dart';
 import 'package:jenos_app/views/pages/acceuil/menu/menu_page_ctrl.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
@@ -39,7 +40,7 @@ class _MenuPageState extends State<MenuPage> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: TextTitle(title:LocalisationService.of(context)!.translate("menu.title")),
+            title: TextTitle(title:"menu.title".myTr),
             automaticallyImplyLeading: false,
             // ignore: prefer_const_literals_to_create_immutables
             actions: [const PanierButton()],

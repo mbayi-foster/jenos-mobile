@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/langues.dart';
 
 class InputSearch extends StatefulWidget {
   final double size;
@@ -29,14 +31,16 @@ class _InputSearchState extends State<InputSearch> {
       autofocus: widget.autoFocus,
       onChanged: widget.onChange,
       readOnly: widget.readOnly,
-      onTap: widget.tap,
+      onTap: () {
+        Get.toNamed("/search");
+      },
       style: TextStyle(
           color: Colors.black54,
           fontSize: widget.size,
           fontWeight: FontWeight.w400),
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.search),
-        hintText: LocalisationService.of(context)!.translate(widget.title),
+        hintText: widget.title.myTr,
         filled: true,
         fillColor: Colors.grey[200],
         enabledBorder: OutlineInputBorder(

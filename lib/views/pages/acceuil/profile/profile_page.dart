@@ -350,10 +350,10 @@ class _ProfilePageState extends State<ProfilePage> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: SizedBox(
+              width: double.infinity,
               child: Form(
                 key: keyCarte,
                 child: Column(

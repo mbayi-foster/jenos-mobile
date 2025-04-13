@@ -27,7 +27,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GlobalLoaderOverlay(
-      child: GetMaterialApp(
+        child: GetMaterialApp(
+      navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
       title: "Jenos-Food",
       initialRoute: '/',
@@ -50,7 +51,11 @@ class _MyAppState extends State<MyApp> {
         }
         return supportedLocales.first;
       },
-    )
- 
-    ) ;}
+    ));
+  }
+}
+
+class NavigationService {
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 }
