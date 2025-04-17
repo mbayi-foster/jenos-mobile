@@ -7,4 +7,5 @@ class ImagePaths {
   static const String info2 = "assets/images/03.png";
   static const String info3 = "assets/images/07.png";
   static const String bg = "assets/images/12.png";
+  static const String error = "assets/images/error.png";
 }

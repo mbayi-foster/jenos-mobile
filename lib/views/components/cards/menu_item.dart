@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
 
 class MenuItem extends StatefulWidget {
@@ -92,6 +93,17 @@ class _MenuItemState extends State<MenuItem> {
                     widget.menu.photo,
                     height: double.infinity,
                     width: double.infinity,
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        ImagePaths
+                            .error, // Remplace par le chemin de ton image de remplacement
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit
+                            .cover, // Ajustement de l'image de remplacement
+                      );
+                    },
                   ),
                 )),
           ),

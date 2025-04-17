@@ -46,6 +46,15 @@ class _PlatsPopState extends State<PlatsPop> {
                   child: Image.network(
                     widget.plat.photo,
                     fit: widget.fit,
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        ImagePaths
+                            .error, // Remplace par le chemin de ton image de remplacement
+                        fit: BoxFit
+                            .cover, // Ajustement de l'image de remplacement
+                      );
+                    },
                   )),
             ),
             TextTitle(title: widget.plat.nom),

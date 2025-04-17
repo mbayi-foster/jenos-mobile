@@ -29,6 +29,15 @@ class _PlatsState extends State<Plats> {
             child: Image.network(
               widget.plat.photo,
               fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        ImagePaths
+                            .error, 
+                        fit: BoxFit
+                            .cover, // Ajustement de l'image de remplacement
+                      );
+                    },
             ),
           ),
           Padding(

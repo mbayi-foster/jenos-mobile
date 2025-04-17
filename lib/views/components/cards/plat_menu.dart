@@ -7,10 +7,7 @@ import 'package:jenos_app/utils/images_path.dart';
 class PlatMenu extends StatefulWidget {
   final GestureTapCallback tap;
   final Plat plat;
-  const PlatMenu(
-      {super.key,
-      required this.plat,
-      required this.tap});
+  const PlatMenu({super.key, required this.plat, required this.tap});
 
   @override
   State<PlatMenu> createState() => _PlatMenuState();
@@ -29,8 +26,16 @@ class _PlatMenuState extends State<PlatMenu> {
               width: double.infinity, // Prendre toute la largeur
               height: 200,
               child: Image.network(
-               widget.plat.photo,
+                widget.plat.photo,
                 fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object error,
+                    StackTrace? stackTrace) {
+                  return Image.asset(
+                    ImagePaths
+                        .error, // Remplace par le chemin de ton image de remplacement
+                    fit: BoxFit.cover, // Ajustement de l'image de remplacement
+                  );
+                },
               ),
             ),
             Positioned(

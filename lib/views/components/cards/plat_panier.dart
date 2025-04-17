@@ -65,6 +65,17 @@ class _PlatPanierState extends State<PlatPanier> {
                     widget.panier.plat!.photo,
                     width: 75,
                     height: 75,
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        ImagePaths
+                            .error, // Remplace par le chemin de ton image de remplacement
+                        width: 75,
+                        height: 75,
+                        fit: BoxFit
+                            .cover, // Ajustement de l'image de remplacement
+                      );
+                    },
                   ),
                   const SizedBox(
                     width: 10,

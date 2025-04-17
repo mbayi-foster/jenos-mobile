@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jenos_app/models/principals/panier.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/langues.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page.dart';
 import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat_ctrl.dart';
@@ -42,8 +43,8 @@ class _PanierAchatState extends State<PanierAchat> {
                       fontSize: 16,
                       title: (state.value.paniers.length ==
                               state.value.checkList.length)
-                          ? "${LocalisationService.of(context)!.translate("panier.all")} (${state.value.checkList.length})"
-                          : "${LocalisationService.of(context)!.translate("panier.unall")} (${state.value.checkList.length})"))
+                          ? "${"panier.all".myTr} (${state.value.checkList.length})"
+                          : "${"panier.unall".myTr} (${state.value.checkList.length})"))
             ],
           ),
           body: RefreshIndicator(

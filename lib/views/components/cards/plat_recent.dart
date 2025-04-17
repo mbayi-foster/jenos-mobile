@@ -51,6 +51,15 @@ class _PlatRecentState extends State<PlatRecent> {
                         ),
                       );
                     },
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        ImagePaths
+                            .error, // Remplace par le chemin de ton image de remplacement
+                        fit: BoxFit
+                            .cover, // Ajustement de l'image de remplacement
+                      );
+                    },
                     /* errorBuilder: (BuildContext context, Object error,
                         StackTrace? stackTrace) {
                       return Text('Erreur de chargement de l\'image');

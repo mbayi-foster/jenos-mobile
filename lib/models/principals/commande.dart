@@ -1,4 +1,6 @@
+import 'package:jenos_app/models/principals/livreur.dart';
 import 'package:jenos_app/models/principals/panier.dart';
+import 'package:jenos_app/models/principals/place.dart';
 
 class Commande {
   int id;
@@ -6,21 +8,15 @@ class Commande {
   double prix;
   bool status;
   bool confirm;
-  bool livraison;
-  String adresse;
-
-  // longitude et latitude de la commande en cours de livraison
-  double long;
-  double lat;
-
-  // paniers de la commande
+  String livraison;
+  String paiement;
+  Place? adresse;
   List<Panier> panier;
-  bool facture;
-  int livreurId;
+  Livreur livreur;
   DateTime createdAt;
 
   Commande({
-    required this.id,
+    this.id = 0,
     required this.ticket,
     required this.status,
     required this.prix,
