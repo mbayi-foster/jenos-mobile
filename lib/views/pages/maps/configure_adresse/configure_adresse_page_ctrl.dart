@@ -21,14 +21,17 @@ class ConfigureAdressePageCtrl extends GetxController {
     final args = Get.arguments;
     if (args == null || !args.containsKey('location')) {
       state.value.place = Place(lat: -4.322693, long: 15.271774);
-      print("pas d'argument");
     } else {
       state.update((val) {
         val?.place = args['location'];
       });
       print("arguments : ${state.value.place!.toJson()}");
     }
-
+    String previousRoute = Get.previousRoute;
+    print("La route précédente est : $previousRoute");
+    if (previousRoute == '/checkout') {
+      state.value.last = 2;
+    }
     super.onInit();
   }
 
@@ -89,12 +92,14 @@ class ConfigureAdressePageCtrl extends GetxController {
         if (ctx.mounted) {
           ctx.loaderOverlay.hide();
         }
-        MyAlert.show(
-            text: "Adresse configurée avec succès", bg: Colors.green);
+        MyAlert.show(text: "Adresse configurée avec succès", bg: Colors.green);
         Get.offNamed('/profile');
       }
     } else {
       /* page precedente commande */
+      // Dans la page où vous souhaitez revenir
+      Get.back(result: {'adresse': "ceci est l'adresse"});
+      print('route precente checkout');
     }
     if (ctx.mounted) {
       ctx.loaderOverlay.hide();

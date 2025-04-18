@@ -19,6 +19,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
       var data = jsonDecode(response.body);
       return Place(
           nom: data["display_name"],
+          commune: data['address']['municipality'] ?? '',
           lat: double.parse(data["lat"]),
           long: double.parse(data["lon"]));
     }
@@ -48,6 +49,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
           .map(
             (p) => result.add(Place(
                 nom: p["display_name"],
+                commune: p['address']['municipality'] ?? '',
                 lat: double.parse(p["lat"]),
                 long: double.parse(p["lon"]))),
           )
@@ -76,6 +78,4 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
 
     return null;
   }
-
-  
 }
