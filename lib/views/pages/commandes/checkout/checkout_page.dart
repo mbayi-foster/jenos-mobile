@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/padding.dart';
+import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import 'package:jenos_app/views/pages/commandes/checkout/checkout_page_ctrl.dart';
 import 'package:jenos_app/views/pages/commandes/checkout/checkout_page_state.dart';
@@ -16,11 +17,8 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   CheckoutPageCtrl ctrl = Get.put(CheckoutPageCtrl());
   List<Map<String, dynamic>> typePaiement = [
-    {'type': 'Paiement à la livraison', 'value': 'cash'},
-    {'type': 'Banque', 'value': 'bank'},
-    {'type': 'Mobile money', 'value': 'mobil'},
-    {'type': 'Carte', 'value': 'carte'},
-    {'type': 'Paypal', 'value': 'paypal'},
+    {'type': 'Payer à la livraison', 'value': 'cash'},
+    {'type': 'Payer en ligne', 'value': 'line'},
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,7 +64,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed('/change-adresse');
+                            },
                             child: TextTitle(
                               title: "Changer",
                               color: MyColors.primary,
@@ -76,7 +76,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ],
                 ),
                 20.ph,
-                _paiement(state: state)
+                _paiement(state: state),
+                20.ph,
+                _prix(state: state),
+                20.ph,
+                PrimaryButton(onPressed: () {}, title: "Envoyer la commande")
               ],
             ),
           ),
@@ -108,8 +112,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       }),
                   10.ph
                 ],
-              ),
-            Text('Valeur sélectionnée: ${state.value.paiement}'),
+              )
           ],
         )
       ],
@@ -117,7 +120,42 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   _prix({required Rx<CheckoutPageState> state}) {
-    return Column();
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextTitle(title: "Addition"),
+            TextTitle(title: "${state.value.prix} FC")
+          ],
+        ),
+        10.ph,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextTitle(title: "Frais de livraison"),
+            TextTitle(title: "${state.value.deliveryCoast} FC")
+          ],
+        ),
+        10.ph,
+        Container(
+          height: 0.75,
+          color: Colors.black45,
+        ),
+        10.ph,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextTitle(title: "Total"),
+            TextTitle(
+                title: "${state.value.prix + state.value.deliveryCoast} FC")
+          ],
+        )
+      ],
+    );
   }
 
   _radioButton({
