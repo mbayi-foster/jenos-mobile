@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:jenos_app/models/principals/panier.dart';
+import 'package:jenos_app/utils/images_path.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/langues.dart';
+import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
@@ -37,16 +37,56 @@ class _MaCommandePageState extends State<MaCommandePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              _plats(paniers: state.value.paniers),
-              SizedBox(
-                height: 30,
-              ),
-              _prix(state: state),
-              SizedBox(
-                height: 30,
-              ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 35),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(7.5)),
+                      child: Image.asset(
+                        ImagePaths.pizza,
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    20.pw,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextTitle(
+                          title: 'Jenos Food',
+                          fontSize: 20,
+                        ),
+                        5.ph,
+                        Text("Pour vous servire"),
+                        5.ph,
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on,
+                              color: MyColors.primary,
+                              size: 17,
+                            ),
+                            7.5.pw,
+                            Text("Adresse")
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              30.ph,
+              _plats(paniers: state.value.paniers),
+              30.ph,
+              _prix(state: state),
+              30.ph,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: PrimaryButton(
                   onPressed: () {},
                   title: LocalisationService.of(context)!
@@ -183,72 +223,26 @@ class _MaCommandePageState extends State<MaCommandePage> {
               ),
             ],
           ),
-          if (state.value.note.isNotEmpty) 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:[
-            const SizedBox(height: 10.00),
-            Text(
-              state.value.note,
-              textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-            ),]),
+          if (state.value.note.isNotEmpty)
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(height: 10.00),
+              Text(
+                state.value.note,
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+              ),
+            ]),
           const SizedBox(height: 20.00),
           Container(
             height: 0.75,
             color: Colors.black45,
           ),
-          SizedBox(height: 20.00),
+          20.0.ph,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                LocalisationService.of(context)!.translate("commande.sub"),
-                style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "${state.value.prix} FC",
-                style: TextStyle(
-                    fontSize: 17.5,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.primary),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20.00,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                LocalisationService.of(context)!.translate("commande.cost"),
-                style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "${state.value.deliveryPrice} FC",
-                style: TextStyle(
-                    fontSize: 17.5,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.primary),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20.00,
-          ),
-          Container(
-            height: 1,
-            color: Colors.black45,
-          ),
-          SizedBox(
-            height: 20.00,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                LocalisationService.of(context)!.translate("commande.tot"),
+                "commande.tot".myTr,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(

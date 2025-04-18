@@ -5,7 +5,6 @@ class MaCommandePageState {
   List<Panier> paniers;
   String note;
   double prix;
-  double deliveryPrice;
   double prixTotal;
 
   MaCommandePageState(
@@ -13,6 +12,5 @@ class MaCommandePageState {
       this.paniers = const [],
       this.note = "",
       this.prix = 0.0,
-      this.deliveryPrice = 0.0,
       this.prixTotal = 0.0});
 }

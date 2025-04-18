@@ -9,7 +9,6 @@ class MaCommandePageCtrl extends GetxController {
   void onInit() {
     // Récupérer les arguments et les assigner à l'observable
     state.value.paniers = Get.arguments;
-    state.value.deliveryPrice = 5000;
     super.onInit();
 
     for (Panier panier in state.value.paniers) {
@@ -17,7 +16,7 @@ class MaCommandePageCtrl extends GetxController {
       state.value.prix = prix + panier.prix;
     }
 
-    state.value.prixTotal = state.value.prix + state.value.deliveryPrice;
+    state.value.prixTotal = state.value.prix;
   }
 
 /* ajouter la note */

@@ -1,5 +1,19 @@
+import 'package:jenos_app/models/principals/place.dart';
+import 'package:jenos_app/models/principals/user.dart';
+
 class CheckoutPageState {
-  bool loading;
-  bool visible;
-  
+  Place? adresse;
+  String paiement;
+  double prix;
+  List<int> paniers;
+  double deliveryCoast;
+  User? user;
+
+  CheckoutPageState(
+      {this.adresse,
+      this.paiement = 'cash',
+      this.prix = 0.0,
+      this.deliveryCoast = 0.0,
+      this.paniers = const [],
+      this.user});
 }

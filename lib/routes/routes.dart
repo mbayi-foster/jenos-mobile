@@ -10,6 +10,7 @@ import 'package:jenos_app/views/pages/auth/forget_password/forget_password.dart'
 import 'package:jenos_app/views/pages/auth/new_password/new_password.dart';
 import 'package:jenos_app/views/pages/auth/register/register_page.dart';
 import 'package:jenos_app/views/pages/auth/otp/verify_otp.dart';
+import 'package:jenos_app/views/pages/commandes/checkout/checkout_page.dart';
 import 'package:jenos_app/views/pages/commandes/ma_commande/ma_commande_page.dart';
 import 'package:jenos_app/views/pages/commandes/panier_achat/panier_achat.dart';
 import 'package:jenos_app/views/pages/details/menu/details_menu_page.dart';
@@ -63,7 +64,7 @@ class AppRoutes {
     ]),
     GetPage(
         name: '/home',
-        page: () => const HomePage(),
+        page: () => const CheckoutPage(),
         middlewares: [MiddlewareAuth()]),
     GetPage(name: '/profile', page: () => const ProfilePage(), middlewares: [
       MiddlewareAuth(),
@@ -78,6 +79,10 @@ class AppRoutes {
     GetPage(
         name: '/commande',
         page: () => const MaCommandePage(),
+        middlewares: [MiddlewareAuth()]),
+    GetPage(
+        name: '/checkout',
+        page: () => const CheckoutPage(),
         middlewares: [MiddlewareAuth()]),
 
     //routes details

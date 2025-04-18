@@ -6,8 +6,10 @@ class TextTitle extends StatefulWidget {
   double fontSize;
   TextOverflow? overflow;
   int maxLines;
+  Color color;
   TextTitle(
       {super.key,
+      this.color = Colors.black,
       this.maxLines = 1,
       this.overflow,
       required this.title,
@@ -27,7 +29,7 @@ class _TextTitleState extends State<TextTitle> {
       style: TextStyle(
           fontSize: widget.fontSize,
           fontWeight: FontWeight.w500,
-          color: Colors.black),
+          color: widget.color),
     );
   }
 }

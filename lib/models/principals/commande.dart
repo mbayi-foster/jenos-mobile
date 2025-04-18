@@ -6,28 +6,30 @@ class Commande {
   int id;
   String ticket;
   double prix;
+  double deliveryCoast;
   bool status;
   bool confirm;
+  bool facture;
   String livraison;
   String paiement;
   Place? adresse;
-  List<Panier> panier;
+  List<Panier> paniers;
   Livreur livreur;
   DateTime createdAt;
 
   Commande({
     this.id = 0,
+    required this.paiement,
+    required this.livreur,
     required this.ticket,
     required this.status,
     required this.prix,
+    required this.deliveryCoast,
     required this.confirm,
     required this.livraison,
     required this.adresse,
-    this.long = 0.0,
-    this.lat = 0.0,
-    this.panier = const [],
     required this.facture,
-    this.livreurId = 0,
+    this.paniers = const [],
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
@@ -39,20 +41,40 @@ class Commande {
           panierJson.map((panierJson) => Panier.fromJson(panierJson)).toList();
     }
     return Commande(
-      id: json["id"] != null ? json['id'] : 0,
+      id: json["id"] ?? 0,
       ticket: json['ticket'] ?? "",
-      status: json['status'] == 1,
       prix: json["prix"] != null ? double.parse(json['prix']) : 0.0,
+      deliveryCoast: json["delivery_coast"] != null
+          ? double.parse(json['delivery_coast'])
+          : 0.0,
+      status: json['status'] == 1,
       confirm: json['confirm'] == 1,
-      livraison: json['livraison'] == 1,
-      adresse: json['adresse'] ?? "",
-      long: json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
-      lat: json['latitude'] != null ? double.parse(json["latitude"]) : 0.0,
       facture: json["facture"] == 1,
-      panier: panierList,
+      livraison: json['livraison'] ?? "null",
+      paiement: json['paiement'] ?? "",
+      adresse: json['adresse'] != null ? Place.fromJson(json['adresse']) : null,
+      paniers: panierList,
+      livreur: Livreur.fromJson(json['livreur']),
       createdAt: json["created_at"] != null
           ? DateTime.parse(json["created_at"])
           : DateTime.now(),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "ticket": ticket,
+        "prix": prix,
+        "deliveryCoast": deliveryCoast,
+        "status": status,
+        "confirm": confirm,
+        "facture": facture,
+        "livraison": livraison,
+        "paiement": paiement,
+        "adresse": adresse,
+        "paniers": paniers,
+        "livreur": livreur,
+        "created_at":
+            "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
+      };
 }
