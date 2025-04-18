@@ -88,7 +88,9 @@ class _MaCommandePageState extends State<MaCommandePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: PrimaryButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed('/checkout', arguments: ctrl.commander());
+                  },
                   title: LocalisationService.of(context)!
                       .translate("commande.btn"),
                   padding: 23,

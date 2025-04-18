@@ -64,7 +64,7 @@ class AppRoutes {
     ]),
     GetPage(
         name: '/home',
-        page: () => const CheckoutPage(),
+        page: () => const HomePage(),
         middlewares: [MiddlewareAuth()]),
     GetPage(name: '/profile', page: () => const ProfilePage(), middlewares: [
       MiddlewareAuth(),

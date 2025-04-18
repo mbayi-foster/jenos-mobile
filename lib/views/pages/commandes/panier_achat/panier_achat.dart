@@ -41,7 +41,7 @@ class _PanierAchatState extends State<PanierAchat> {
                   },
                   child: TextTitle(
                       fontSize: 16,
-                      title: (state.value.paniers.length ==
+                      title: (state.value.paniers.length !=
                               state.value.checkList.length)
                           ? "${"panier.all".myTr} (${state.value.checkList.length})"
                           : "${"panier.unall".myTr} (${state.value.checkList.length})"))

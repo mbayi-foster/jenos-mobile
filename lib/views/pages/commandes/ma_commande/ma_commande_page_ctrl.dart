@@ -9,7 +9,7 @@ class MaCommandePageCtrl extends GetxController {
   void onInit() {
     // Récupérer les arguments et les assigner à l'observable
     state.value.paniers = Get.arguments;
-    super.onInit();
+    
 
     for (Panier panier in state.value.paniers) {
       double prix = state.value.prix;
@@ -17,6 +17,7 @@ class MaCommandePageCtrl extends GetxController {
     }
 
     state.value.prixTotal = state.value.prix;
+    super.onInit();
   }
 
 /* ajouter la note */
@@ -31,5 +32,14 @@ class MaCommandePageCtrl extends GetxController {
     state.update((val) {
       val?.note = "";
     });
+  }
+
+  Map<String, dynamic> commander() {
+    List<int> ids = state.value.paniers.map((e) => e.id).toList();
+    return {
+      'paniers': ids,
+      'prix': state.value.prixTotal,
+      'note': state.value.note
+    };
   }
 }
