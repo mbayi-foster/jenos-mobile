@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:jenos_app/models/principals/commune.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/services/network/auth_service_network.dart';
 import 'package:http/http.dart' as http;
@@ -77,5 +78,23 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
       return User.fromJson(res);
     }
     return null;
+  }
+
+  Future<List<Commune>> getCommune() async {
+    List<Commune> communes = [];
+    var url = Uri.parse("${baseUrl}communes");
+    var res = await http.get(url);
+    if (res.statusCode == 200) {
+      // Décodez la réponse JSON
+      List<dynamic> jsonData = json.decode(res.body);
+      /* jsonData.forEach((item){
+        print(item);
+      }); */
+      communes = jsonData.map((json) => Commune.fromJson(json)).toList();
+
+      return communes;
+    }
+
+    return communes;
   }
 }

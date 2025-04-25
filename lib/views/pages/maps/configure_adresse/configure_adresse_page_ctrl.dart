@@ -6,6 +6,7 @@ import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/localisation_service_network_impl.dart';
 import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/models/principals/user.dart';
+import 'package:jenos_app/views/pages/commandes/checkout/checkout_page.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 
 import 'package:jenos_app/views/components/my_alert.dart';
@@ -72,6 +73,7 @@ class ConfigureAdressePageCtrl extends GetxController {
     Place? place = await api.getPlace(lat, long);
     state.update((val) {
       val?.place!.nom = place!.nom;
+      val?.place!.commune = place!.commune;
     });
   }
 
@@ -96,10 +98,7 @@ class ConfigureAdressePageCtrl extends GetxController {
         Get.offNamed('/profile');
       }
     } else {
-      /* page precedente commande */
-      // Dans la page où vous souhaitez revenir
-      Get.back(result: {'adresse': "ceci est l'adresse"});
-      print('route precente checkout');
+      Get.back(result: {'place': place});
     }
     if (ctx.mounted) {
       ctx.loaderOverlay.hide();

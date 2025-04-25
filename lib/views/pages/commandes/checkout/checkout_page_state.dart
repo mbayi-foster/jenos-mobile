@@ -9,6 +9,9 @@ class CheckoutPageState {
   List<int> paniers;
   double deliveryCoast;
   User? user;
+  bool loading;
+  bool hasData;
+  bool isVisible;
 
   CheckoutPageState(
       {this.adresse,
@@ -17,5 +20,9 @@ class CheckoutPageState {
       this.prix = 0.0,
       this.deliveryCoast = 0.0,
       this.paniers = const [],
-      this.user});
+      this.user,
+      this.loading = false,
+      this.hasData = false,
+      this.isVisible = false
+      });
 }

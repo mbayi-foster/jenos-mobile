@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
+import 'package:jenos_app/views/components/chargement.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import 'package:jenos_app/views/pages/commandes/checkout/checkout_page_ctrl.dart';
 import 'package:jenos_app/views/pages/commandes/checkout/checkout_page_state.dart';
@@ -33,7 +34,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
+            child: (state.value.isVisible) ? Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +66,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Get.toNamed('/change-adresse');
+                             ctrl.navigateToDestination();
                             },
                             child: TextTitle(
                               title: "Changer",
@@ -82,7 +83,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 20.ph,
                 PrimaryButton(onPressed: () {}, title: "Envoyer la commande")
               ],
-            ),
+            ) : Chargement(loading: state.value.loading, hasData: state.value.hasData,),
           ),
         ),
       );
