@@ -17,56 +17,35 @@ class _AccessPageState extends State<AccessPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Column(
+        body: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            color: Colors.red,
-            // width: double.infinity,
-            child: Image.asset(
-              ImagePaths.bg,
-              width: width,
-            ),
+          Text(
+            textAlign: TextAlign.center,
+            LocalisationService.of(context)!.translate("intro.title"),
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: Colors.black54),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      textAlign: TextAlign.center,
-                      LocalisationService.of(context)!.translate("intro.title"),
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black54),
-                    ),
-                    const SizedBox(height: 55),
-                    PrimaryButton(
-                      onPressed: () {
-                        Get.toNamed("/login");
-                      },
-                      title: LocalisationService.of(context)!
-                          .translate("intro.btnLog"),
-                    ),
-                    const SizedBox(height: 25),
-                    SecondaryButton(
-                        onPressed: () {
-                          Get.toNamed("/register");
-                        },
-                        title: LocalisationService.of(context)!
-                            .translate("intro.btnReg"))
-                  ],
-                ),
-              ),
-            ],
-          )
+          const SizedBox(height: 55),
+          PrimaryButton(
+            onPressed: () {
+              Get.toNamed("/login");
+            },
+            title: LocalisationService.of(context)!.translate("intro.btnLog"),
+          ),
+          const SizedBox(height: 25),
+          SecondaryButton(
+              onPressed: () {
+                Get.toNamed("/register");
+              },
+              title: LocalisationService.of(context)!.translate("intro.btnReg"))
         ],
       ),
-    );
+    ));
   }
 }

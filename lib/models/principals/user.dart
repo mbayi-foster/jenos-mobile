@@ -12,6 +12,7 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
   int id;
+  int uid;
   String nom;
   String prenom;
   String email;
@@ -23,6 +24,7 @@ class User {
 
   User({
     required this.id,
+    required this.uid,
     required this.nom,
     this.prenom = "",
     required this.email,
@@ -38,6 +40,7 @@ class User {
         (json['adresse'] != null) ? Place.fromJson(json['adresse']) : null;
     return User(
       id: json["id"] ?? 0,
+      uid:json['uid'] ?? 0,
       nom: json["nom"],
       prenom: json["prenom"] ?? "",
       email: json["email"],
@@ -52,6 +55,7 @@ class User {
   }
   Map<String, dynamic> toJson() => {
         "id": id,
+        "uid":uid,
         "nom": nom,
         "prenom": prenom,
         "email": email,

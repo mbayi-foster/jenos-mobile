@@ -66,6 +66,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
     var url = Uri.parse("${baseUrl}map");
     var response = await http.post(url, body: {
       "adresse": place.nom,
+      "commune":place.commune
       "location_lat": place.lat.toString(),
       "location_lon": place.long.toString(),
       "id": userID.toString()

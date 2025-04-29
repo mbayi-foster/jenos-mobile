@@ -54,7 +54,7 @@ class ProfileCtrl extends GetxController {
 
     LocalisationServiceNetworkImpl api = LocalisationServiceNetworkImpl();
     User? user = await api.changeAdresse(
-        Place(lat: place!.lat, long: place.long, nom: place.nom),
+        Place(lat: place!.lat, long: place.long, nom: place.nom,commune:place!.commune),
         state.value.user!.id);
 
     if (user != null) {

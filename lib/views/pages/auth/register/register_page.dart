@@ -4,6 +4,7 @@ import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/pages/auth/register/register_page_ctrl.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/utils/colors.dart';
+import 'package:jenos_app/utils/langues.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import '../../../components/buttons/primary_button.dart';
@@ -123,8 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   showPasswordOnTap: () {
                     ctrl.showPassword();
                   },
-                  hint: LocalisationService.of(context)!
-                      .translate("inscrire.password"),
+                  hint: "inscrire.password".myTr,
                   validator: _validatePassword,
                   onSaved: (value) {
                     _password = value;
@@ -141,8 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ctrl.showPassword();
                   },
                   validator: _validateConfirmPassword,
-                  hint: LocalisationService.of(context)!
-                      .translate("inscrire.confirm"),
+                  hint: "inscrire.confirm".myTr,
                   onSaved: (value) {
                     _confirmPassword = value;
                   },
@@ -159,6 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       //  _showCustomToast(context, "valide");
                       User user = User(
                           id: 0,
+                          uid:0,
                           nom: _nom!,
                           prenom: _prenom!,
                           email: _email!,
