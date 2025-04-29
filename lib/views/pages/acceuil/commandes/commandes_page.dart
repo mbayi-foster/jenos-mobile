@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/padding.dart';
+import 'package:jenos_app/views/components/cards/commande_item.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import 'package:jenos_app/views/pages/acceuil/commandes/commandes_page_ctrl.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
@@ -33,10 +35,18 @@ class _CommandesPageState extends State<CommandesPage> {
           // ignore: prefer_const_literals_to_create_immutables
           actions: [const PanierButton()],
         ),
-        body: (state.value.visible)
+        body: (!state.value.visible)
             ? SingleChildScrollView(
-                child: Column(
-                  children: [],
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      CommandeItem(),
+                      10.ph,
+                      CommandeItem(),
+                      10.ph,
+                    ],
+                  ),
                 ),
               )
             : Chargement(

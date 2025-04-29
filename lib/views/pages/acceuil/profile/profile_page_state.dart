@@ -6,9 +6,12 @@ class ProfilePageState {
   User? user;
   bool isLoad;
   bool error;
+  bool hasData;
+  bool isVisible;
   List<Commune> communes;
+  Commune? commune;
   ProfilePageState(
-      {this.edit = true, this.communes = const [], this.user, this.isLoad = false, this.error = false});
+      {this.edit = true, this.hasData = false, this.isVisible = false, this.commune, this.communes = const [], this.user, this.isLoad = false, this.error = false});
 
   ProfilePageState copyWith(
           {bool? edit, User? user, bool? isLoad, bool? error}) =>

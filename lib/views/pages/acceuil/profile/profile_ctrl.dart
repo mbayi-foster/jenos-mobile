@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
 import 'package:jenos_app/api/network/localisation_service_network_impl.dart';
+import 'package:jenos_app/models/principals/commune.dart';
 import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/views/pages/acceuil/profile/profile_page_state.dart';
@@ -17,13 +18,33 @@ class ProfileCtrl extends GetxController {
   var state = ProfilePageState().obs;
 
   void getUser() async {
-    AuthServiceLocalImpl api = AuthServiceLocalImpl();
-  
-    User? user = await api.getUser();
-
     state.update((val) {
-      val?.user = user;
+      val?.isLoad = true;
+      val?.hasData = false;
+      val?.isVisible = false;
     });
+    AuthServiceLocalImpl api = AuthServiceLocalImpl();
+    LocalisationServiceNetworkImpl apiCommunes =
+        LocalisationServiceNetworkImpl();
+    List<Commune> communes = await apiCommunes.getCommune();
+    User? user = await api.getUser();
+    if (user != null && communes.isNotEmpty) {
+      state.update((val) {
+        val?.user = user;
+        val?.communes = communes;
+        val?.isLoad = false;
+        val?.hasData = true;
+        val?.isVisible = true;
+      });
+    } else {
+      state.update((val) {
+        val?.user = user;
+        val?.communes = communes;
+        val?.isLoad = false;
+        val?.hasData = false;
+        val?.isVisible = false;
+      });
+    }
   }
 
   void edit() {
@@ -54,7 +75,11 @@ class ProfileCtrl extends GetxController {
 
     LocalisationServiceNetworkImpl api = LocalisationServiceNetworkImpl();
     User? user = await api.changeAdresse(
-        Place(lat: place!.lat, long: place.long, nom: place.nom,commune:place!.commune),
+        Place(
+            lat: place!.lat,
+            long: place.long,
+            nom: place.nom,
+            commune: place!.commune),
         state.value.user!.id);
 
     if (user != null) {

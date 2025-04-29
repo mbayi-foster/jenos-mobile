@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/models/principals/commune.dart';
 import 'package:jenos_app/models/principals/place.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/secondary_button.dart';
+import 'package:jenos_app/views/components/chargement.dart';
+import 'package:jenos_app/views/components/inputs/my_dropdown.dart';
 import 'package:jenos_app/views/components/inputs/my_input.dart';
 import 'package:jenos_app/views/pages/acceuil/profile/profile_ctrl.dart';
 import 'package:jenos_app/models/principals/user.dart';
@@ -15,6 +19,7 @@ import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/popups/my_dialogue.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/views/pages/acceuil/profile/profile_page_state.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page_state.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -58,21 +63,23 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [const PanierButton()],
       ),
       body: Obx(() {
-        return SingleChildScrollView(
+         
+        if(state.value.isVisible){
+          return
+        SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 _photo(width, user: state.value.user),
                 const SizedBox(height: 30),
-                _data(
-                  width,
-                  edit: state.value.edit,
-                  user: state.value.user,
-                )
+                _data(width, state: state)
               ],
             ),
           ),
         );
+        }
+        return Chargement(hasData: state.value.hasData, loading: state.value.isLoad,);
+        
       }),
       bottomNavigationBar: const MyBottomNavigationBar(
         index: 2,
@@ -114,11 +121,9 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _data(
-    width, {
-    required bool edit,
-    required User? user,
-  }) {
+  _data(width, {required Rx<ProfilePageState> state}) {
+    User? user = state.value.user;
+    bool edit = state.value.edit;
     double height = 15;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.075),
@@ -150,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 15), // Ajoutez un espace entre le texte et le bouton
                 TextButton(
                   onPressed: () {
-                    _dialogCarte();
+                    _dialogCarte(state);
                   },
                   child: const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,13 +301,13 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
 /* popup pour le choix de l'adresse */
-  _dialogCarte() {
+  _dialogCarte(Rx<ProfilePageState> state) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return Center(
             child: SizedBox(
-              height: 170,
+              height: 200,
               width: 400,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(5)),
@@ -330,7 +335,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               long: false,
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                _dialogueCarteBottom();
+                                _dialogueCarteBottom(state);
                               },
                               title: "Entrer au clavier")
                         ],
@@ -344,7 +349,7 @@ class _ProfilePageState extends State<ProfilePage> {
         });
   }
 
-  _dialogueCarteBottom() {
+  _dialogueCarteBottom(Rx<ProfilePageState> state) {
     String? adresse;
     final keyCarte = GlobalKey<FormState>();
     showModalBottomSheet(
@@ -377,12 +382,26 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(
                       height: 15,
                     ),
+                    5.ph,
+                    MyDropdown(
+                        communes: state.value.communes,
+                        commune: state.value.commune,
+                        onChange: (Commune? newValue) {
+                          state.update((val) {
+                            val?.commune = newValue;
+                          });
+                        }),
+                    7.5.ph,
                     PrimaryButton(
                         onPressed: () {
                           if (keyCarte.currentState!.validate()) {
                             keyCarte.currentState!.save();
                             ctrl.changerAdresse(
-                                Place(nom: adresse, lat: 0.0, long: 0.0),
+                                Place(
+                                    nom: adresse,
+                                    lat: 0.0,
+                                    long: 0.0,
+                                    commune: state.value.commune!.nom),
                                 context);
                           }
                         },
