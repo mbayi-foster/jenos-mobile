@@ -33,7 +33,7 @@ class CheckoutPageCtrl extends GetxController {
         val?.adresse = place;
       });
     }
-    AuthServiceNetworkImpl apiCommunes = AuthServiceNetworkImpl();
+    LocalisationServiceNetworkImpl apiCommunes = LocalisationServiceNetworkImpl();
     List<Commune> communes = await apiCommunes.getCommune();
     communes.forEach((item) {
       print('commune : ${item.nom}');

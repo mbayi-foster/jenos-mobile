@@ -80,21 +80,5 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
     return null;
   }
 
-  Future<List<Commune>> getCommune() async {
-    List<Commune> communes = [];
-    var url = Uri.parse("${baseUrl}communes");
-    var res = await http.get(url);
-    if (res.statusCode == 200) {
-      // Décodez la réponse JSON
-      List<dynamic> jsonData = json.decode(res.body);
-      /* jsonData.forEach((item){
-        print(item);
-      }); */
-      communes = jsonData.map((json) => Commune.fromJson(json)).toList();
 
-      return communes;
-    }
-
-    return communes;
-  }
 }

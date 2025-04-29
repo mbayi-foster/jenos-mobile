@@ -1,3 +1,4 @@
+import 'package:jenos_app/models/principals/commune.dart';
 import 'package:jenos_app/models/principals/user.dart';
 
 class ProfilePageState {
@@ -5,8 +6,9 @@ class ProfilePageState {
   User? user;
   bool isLoad;
   bool error;
+  List<Commune> communes;
   ProfilePageState(
-      {this.edit = true, this.user, this.isLoad = false, this.error = false});
+      {this.edit = true, this.communes = const [], this.user, this.isLoad = false, this.error = false});
 
   ProfilePageState copyWith(
           {bool? edit, User? user, bool? isLoad, bool? error}) =>

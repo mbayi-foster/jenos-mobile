@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:jenos_app/models/principals/commune.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +67,7 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
     var url = Uri.parse("${baseUrl}map");
     var response = await http.post(url, body: {
       "adresse": place.nom,
-      "commune":place.commune
+      "commune":place.commune,
       "location_lat": place.lat.toString(),
       "location_lon": place.long.toString(),
       "id": userID.toString()
@@ -78,5 +79,23 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
     }
 
     return null;
+  }
+
+    Future<List<Commune>> getCommune() async {
+    List<Commune> communes = [];
+    var url = Uri.parse("${baseUrl}communes");
+    var res = await http.get(url);
+    if (res.statusCode == 200) {
+      // Décodez la réponse JSON
+      List<dynamic> jsonData = json.decode(res.body);
+      /* jsonData.forEach((item){
+        print(item);
+      }); */
+      communes = jsonData.map((json) => Commune.fromJson(json)).toList();
+
+      return communes;
+    }
+
+    return communes;
   }
 }

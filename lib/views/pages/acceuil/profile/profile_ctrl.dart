@@ -18,7 +18,7 @@ class ProfileCtrl extends GetxController {
 
   void getUser() async {
     AuthServiceLocalImpl api = AuthServiceLocalImpl();
-
+  
     User? user = await api.getUser();
 
     state.update((val) {

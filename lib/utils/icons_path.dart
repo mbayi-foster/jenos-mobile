@@ -7,4 +7,5 @@ class IconsPath {
   static const etoiles2 = "assets/icons/etoiles2.png";
   static const etoiles3 = "assets/icons/etoiles3.png";
   static const etoiles4 = "assets/icons/etoiles4.png";
+  static const money = 'assets/icons/002-income.png';
 }

@@ -125,6 +125,7 @@ class _ConfigureAdressePageState extends State<ConfigureAdressePage> {
                         PrimaryButton(
                             long: false,
                             onPressed: () {
+                              // print("adresse : ${state.value.place!}");
                               ctrl.charger(state.value.place, context);
                             },
                             title: "Changer")

@@ -85,7 +85,7 @@ class ConfigureAdressePageCtrl extends GetxController {
       User? userLocal = await apiUser.getUser();
       LocalisationServiceNetworkImpl api = LocalisationServiceNetworkImpl();
       User? user = await api.changeAdresse(
-          Place(lat: place!.lat, long: place.long, nom: place.nom),
+          Place(lat: place!.lat, long: place.long, nom: place.nom, commune:place.commune),
           userLocal!.id);
 
       if (user != null) {

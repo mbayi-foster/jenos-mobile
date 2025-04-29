@@ -1,3 +1,4 @@
+import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/models/principals/user.dart';
 
@@ -8,6 +9,7 @@ class HomePageState {
   List<Plat> platRecents;
   List<Plat> platPops;
   List<Plat> platMostPops;
+  List<Menu> menus;
   User? user;
   HomePageState(
       {this.loading = false,
@@ -16,7 +18,8 @@ class HomePageState {
       this.platMostPops = const [],
       this.platPops = const [],
       this.platRecents = const [],
-      this.user = null
+      this.user,
+      this.menus = const []
       });
 
   HomePageState copyWith({

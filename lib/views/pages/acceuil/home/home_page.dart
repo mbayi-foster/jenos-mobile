@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/views/pages/acceuil/home/home_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
@@ -47,7 +48,9 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: TextTitle(title: "${LocalisationService.of(context)!.translate("home.hi")} ${state.value.user!.prenom} !"),
+          title: TextTitle(
+              title:
+                  "${LocalisationService.of(context)!.translate("home.hi")} ${state.value.user!.prenom} !"),
           automaticallyImplyLeading: false,
           // ignore: prefer_const_literals_to_create_immutables
           actions: [const PanierButton()],
@@ -63,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                         tap: () {},
                       ),
                     ),
-                    _offres(),
+                    _offres(state.value.menus),
                     _platPop(width, plats: platsPop),
                     _platMostPop(width, plats: mostPops),
                     _recents(width, plats: recents)
@@ -81,18 +84,20 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  _offres() {
+  _offres(List<Menu> menus) {
     return SizedBox(
       height: 150, // Hauteur fixe pour le ListView
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: menus.length,
         itemBuilder: (context, index) {
           return Row(
             children: [
               Offres(
-                offre: "items $index",
-                tap: () {},
+                offre: menus[index],
+                tap: () {
+                  Get.toNamed('/menu/${menus[index].id}');
+                },
               ),
               const SizedBox(
                 width: 25,
@@ -112,7 +117,9 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextTitle(title: LocalisationService.of(context)!.translate("home.pop")),
+              TextTitle(
+                  title:
+                      LocalisationService.of(context)!.translate("home.pop")),
               TextButton(
                   onPressed: () {},
                   child: Text(
@@ -149,11 +156,13 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextTitle(title: LocalisationService.of(context)!.translate("home.most")),
+              TextTitle(
+                  title:
+                      LocalisationService.of(context)!.translate("home.most")),
               TextButton(
                   onPressed: () {},
                   child: Text(
-                  LocalisationService.of(context)!.translate("home.all"),
+                    LocalisationService.of(context)!.translate("home.all"),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
@@ -206,11 +215,13 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextTitle(title:LocalisationService.of(context)!.translate("home.recents")),
+              TextTitle(
+                  title: LocalisationService.of(context)!
+                      .translate("home.recents")),
               TextButton(
                   onPressed: () {},
                   child: Text(
-                   LocalisationService.of(context)!.translate("home.all"),
+                    LocalisationService.of(context)!.translate("home.all"),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
