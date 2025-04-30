@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:jenos_app/models/principals/commande.dart';
 import 'package:jenos_app/models/principals/panier.dart';
+import 'package:jenos_app/models/requets/commande_request.dart';
 import 'package:jenos_app/services/network/panier_service_network.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,8 +45,23 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
   }
 
   @override
-  Future<bool> commander(List<int> paniers, int userId) async{
-    
-    return true;
+  Future<bool> commander(CommandeRequest commande) async {
+    var url = Uri.parse("${baseUrl}commandes");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type':
+              'application/json', // Indique que le corps est en JSON
+        },
+        body: jsonEncode(commande.toJson()));
+    if (response.statusCode == 201) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<List<Commande>> getAllCommandes(int id) async {
+    List<Commande> commandes = [];
+
+    return commandes;
   }
 }

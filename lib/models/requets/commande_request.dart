@@ -23,7 +23,7 @@ class CommandeRequest {
 
  Map<String, dynamic> toJson() => {
  
-    'paniers': paniers.map((e) => e).toList(),
+    'paniers': paniers,
     'client_id': clientId,
     'prix': prix,
     'delivery_coast': deliveryCoast,

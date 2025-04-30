@@ -1,15 +1,15 @@
-import 'package:jenos_app/models/principals/panier.dart';
+import 'package:jenos_app/models/principals/commande.dart';
 import 'package:jenos_app/models/principals/user.dart';
 
 class CommandesPageState {
-  List<Panier> paniers;
+  List<Commande> commandes;
   bool loading;
   bool hasData;
   bool visible;
   User? user;
 
   CommandesPageState(
-      {this.paniers = const [],
+      {this.commandes = const [],
       this.loading = false,
       this.hasData = false,
       this.user,

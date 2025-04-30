@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jenos_app/models/principals/commande.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/primary_button.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:intl/intl.dart';
 
 class CommandeItem extends StatefulWidget {
-  const CommandeItem({super.key});
+  CommandeItem({super.key, required this.commande});
+
+  Commande commande;
 
   @override
   State<CommandeItem> createState() => _CommandeItemState();
@@ -14,6 +18,37 @@ class CommandeItem extends StatefulWidget {
 class _CommandeItemState extends State<CommandeItem> {
   @override
   Widget build(BuildContext context) {
+    Commande commande = widget.commande;
+    String formattedDate =
+        DateFormat('dd MMM yyyy HH:mm').format(commande.createdAt);
+
+    Color getColor(String choice) {
+      switch (choice) {
+        case 'null':
+          return Colors.red;
+        case 'progress':
+          return Colors.green;
+        case 'finish':
+          return MyColors.primary;
+        default:
+          return MyColors
+              .primary; // Couleur par défaut si aucune correspondance
+      }
+    }
+
+    String getstatus(String choice) {
+      switch (choice) {
+        case 'null':
+          return "Disponible";
+        case 'progress':
+          return "En cours";
+        case 'finish':
+          return "Livré";
+        default:
+          return "Disponible"; // Couleur par défaut si aucune correspondance
+      }
+    }
+
     // return Container(
     //   padding: EdgeInsets.all(5),
     //   child: Column(
@@ -32,7 +67,6 @@ class _CommandeItemState extends State<CommandeItem> {
     //     ],
     //   ),
     // );
-    List<String> items = ['item1', 'item2'];
     return Card(
       elevation: 4, // Élévation pour l'ombre
       shape: RoundedRectangleBorder(
@@ -48,11 +82,11 @@ class _CommandeItemState extends State<CommandeItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'YNTJKK-FJD-EJZOZ',
+                  commande.ticket,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '25 Nov 2025 13:45',
+                  formattedDate,
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
               ],
@@ -61,10 +95,10 @@ class _CommandeItemState extends State<CommandeItem> {
             // Liste des items
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: items.map((item) {
+              children: commande.paniers.map((item) {
                 return Column(
                   children: [
-                    Text(item),
+                    Text("${item.plat?.nom} x${item.qte}"),
                     3.ph // Séparateur
                   ],
                 );
@@ -76,18 +110,18 @@ class _CommandeItemState extends State<CommandeItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TextTitle(title: "Status",),
+                TextTitle(
+                  title: "Status",
+                ),
                 5.ph,
                 Container(
-                  decoration: BoxDecoration(
-                    color: MyColors.primary,
-                  ),
-               
+                  decoration:
+                      BoxDecoration(color: getColor(commande.livraison)),
                   padding: EdgeInsets.all(10),
                   width: 350,
                   child: Center(
                     child: Text(
-                      'status',
+                      getstatus(commande.livraison),
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -99,7 +133,7 @@ class _CommandeItemState extends State<CommandeItem> {
             16.ph,
             // Bouton
             PrimaryButton(
-              onPressed: (){},
+              onPressed: () {},
               title: "Suivre ma commande",
             )
           ],

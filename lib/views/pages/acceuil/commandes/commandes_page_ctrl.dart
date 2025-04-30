@@ -12,7 +12,7 @@ class CommandesPageCtrl extends GetxController {
   @override
   void onInit() async {
     // Récupérer les arguments et les assigner à l'observable
-    state.value.paniers = [];
+    state.value.commandes = [];
     AuthServiceLocalImpl api = AuthServiceLocalImpl();
     User? user = await api.getUser();
     state.update((val) {

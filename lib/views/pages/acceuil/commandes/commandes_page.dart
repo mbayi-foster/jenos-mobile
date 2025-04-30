@@ -35,17 +35,19 @@ class _CommandesPageState extends State<CommandesPage> {
           // ignore: prefer_const_literals_to_create_immutables
           actions: [const PanierButton()],
         ),
-        body: (!state.value.visible)
+        body: (state.value.visible)
             ? SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
-                    children: [
-                      CommandeItem(),
-                      10.ph,
-                      CommandeItem(),
-                      10.ph,
-                    ],
+                    children: state.value.commandes.map((item) {
+                      return Column(
+                        children: [
+                          CommandeItem(commande: item),
+                          3.ph // Séparateur
+                        ],
+                      );
+                    }).toList(),
                   ),
                 ),
               )
@@ -53,7 +55,9 @@ class _CommandesPageState extends State<CommandesPage> {
                 loading: state.value.loading,
                 hasData: state.value.hasData,
               ),
-        bottomNavigationBar: const MyBottomNavigationBar(index: 1,),
+        bottomNavigationBar: const MyBottomNavigationBar(
+          index: 1,
+        ),
         floatingActionButton: const MyFloatingButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       );

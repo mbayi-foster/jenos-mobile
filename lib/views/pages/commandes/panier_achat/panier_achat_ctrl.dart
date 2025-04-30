@@ -31,9 +31,6 @@ class PanierAchatCtrl extends GetxController {
         val?.paniers = data;
         val?.visible = true;
       });
-      for (Panier panier in data) {
-        print("un panier est : ${panier.toJson()}");
-      }
     } else {
       state.update((val) {
         val?.loading = false;
