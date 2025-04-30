@@ -44,7 +44,7 @@ class _CommandesPageState extends State<CommandesPage> {
                       return Column(
                         children: [
                           CommandeItem(commande: item),
-                          3.ph // Séparateur
+                          10.ph // Séparateur
                         ],
                       );
                     }).toList(),
@@ -58,7 +58,7 @@ class _CommandesPageState extends State<CommandesPage> {
         bottomNavigationBar: const MyBottomNavigationBar(
           index: 1,
         ),
-        floatingActionButton: const MyFloatingButton(),
+        floatingActionButton: const MyFloatingButton(index: 1,),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       );
     });

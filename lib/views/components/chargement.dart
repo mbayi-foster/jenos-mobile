@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jenos_app/utils/colors.dart';
 
 class Chargement extends StatefulWidget {
@@ -13,7 +14,6 @@ class Chargement extends StatefulWidget {
 class _ChargementState extends State<Chargement> {
   @override
   Widget build(BuildContext context) {
-
     return Visibility(
       visible: (widget.loading || !widget.hasData) ? true : false,
       child: Center(
@@ -36,7 +36,7 @@ class _ChargementState extends State<Chargement> {
                 ),
               if (!widget.loading && !widget.hasData)
                 const Text(
-                  "Aucune donnée trouvée vérifiez votre connexion ou actualiser la page",
+                  "Aucune donnée à afficher",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15.00, color: Colors.black54),
                 ),
@@ -46,4 +46,6 @@ class _ChargementState extends State<Chargement> {
       ),
     );
   }
+
+ 
 }

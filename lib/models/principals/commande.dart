@@ -14,13 +14,13 @@ class Commande {
   String paiement;
   Place? adresse;
   List<Panier> paniers;
-  Livreur livreur;
+  Livreur? livreur;
   DateTime createdAt;
 
   Commande({
     this.id = 0,
     required this.paiement,
-    required this.livreur,
+    this.livreur,
     required this.ticket,
     required this.status,
     required this.prix,
@@ -43,9 +43,9 @@ class Commande {
     return Commande(
       id: json["id"] ?? 0,
       ticket: json['ticket'] ?? "",
-      prix: json["prix"] != null ? double.parse(json['prix']) : 0.0,
+      prix: json["prix"] != null ? json['prix'].toDouble() : 0.0,
       deliveryCoast: json["delivery_coast"] != null
-          ? double.parse(json['delivery_coast'])
+          ? json['delivery_coast'].toDouble()
           : 0.0,
       status: json['status'] == 1,
       confirm: json['confirm'] == 1,
@@ -54,7 +54,8 @@ class Commande {
       paiement: json['paiement'] ?? "",
       adresse: json['adresse'] != null ? Place.fromJson(json['adresse']) : null,
       paniers: panierList,
-      livreur: Livreur.fromJson(json['livreur']),
+      livreur:
+          json['livreur'] != null ? Livreur.fromJson(json['livreur']) : null,
       createdAt: json["created_at"] != null
           ? DateTime.parse(json["created_at"])
           : DateTime.now(),

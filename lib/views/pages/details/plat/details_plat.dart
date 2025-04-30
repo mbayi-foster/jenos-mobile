@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/pages/details/plat/details_plat_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
@@ -184,13 +185,9 @@ class _DetailsPlatState extends State<DetailsPlat> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 7.5,
-          ),
+          10.ph,
           Container(height: 1, color: Colors.black45),
-          const SizedBox(
-            height: 7.5,
-          ),
+          10.ph,
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

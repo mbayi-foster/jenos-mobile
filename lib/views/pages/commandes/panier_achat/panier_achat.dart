@@ -59,27 +59,25 @@ class _PanierAchatState extends State<PanierAchat> {
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: Column(
-                          children: [
-                            for (Panier panier in state.value.paniers)
-                              Column(
-                                children: [
-                                  PlatPanier(
-                                    isChecked:
-                                        (state.value.checkList.contains(panier))
-                                            ? true
-                                            : false,
-                                    panier: panier,
-                                    tap: () {
-                                      ctrl.check(panier);
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
+                            children: state.value.paniers.map((panier) {
+                          return Column(
+                            children: [
+                              PlatPanier(
+                                isChecked:
+                                    (state.value.checkList.contains(panier))
+                                        ? true
+                                        : false,
+                                panier: panier,
+                                tap: () {
+                                  ctrl.check(panier);
+                                },
                               ),
-                          ],
-                        ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          );
+                        }).toList()),
                       ),
                     ),
                     Align(

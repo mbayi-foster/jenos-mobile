@@ -25,6 +25,8 @@ class _CommandeItemState extends State<CommandeItem> {
     Color getColor(String choice) {
       switch (choice) {
         case 'null':
+          return Colors.yellowAccent;
+        case 'false':
           return Colors.red;
         case 'progress':
           return Colors.green;
@@ -40,6 +42,8 @@ class _CommandeItemState extends State<CommandeItem> {
       switch (choice) {
         case 'null':
           return "Disponible";
+        case 'false':
+          return 'Rejeté';
         case 'progress':
           return "En cours";
         case 'finish':
@@ -91,20 +95,36 @@ class _CommandeItemState extends State<CommandeItem> {
                 ),
               ],
             ),
-            16.ph,
+            7.5.ph,
+            Container(height: 1, color: Colors.black45),
+            7.5.ph,
             // Liste des items
+            Center(
+              child: TextTitle(
+                title: "Sur la commande",
+              ),
+            ),
+
+            5.ph,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: commande.paniers.map((item) {
                 return Column(
                   children: [
-                    Text("${item.plat?.nom} x${item.qte}"),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextTitle(title: item.plat?.nom ?? ""),
+                        TextTitle(title: "x${item.qte}")
+                      ],
+                    ),
                     3.ph // Séparateur
                   ],
                 );
               }).toList(),
             ),
-            16.ph,
+            15.ph,
             // Statut
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -130,15 +150,79 @@ class _CommandeItemState extends State<CommandeItem> {
                 ),
               ],
             ),
-            16.ph,
+            15.ph,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextTitle(title: "Addition"),
+                TextTitle(title: "${commande.prix} FC")
+              ],
+            ),
+            5.ph,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextTitle(title: "Frais de livraison"),
+                TextTitle(title: "${commande.deliveryCoast} FC")
+              ],
+            ),
+            7.5.ph,
+            Container(height: 1, color: Colors.black45),
+            7.5.ph,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextTitle(title: "Total"),
+                TextTitle(title: "${commande.deliveryCoast + commande.prix} FC")
+              ],
+            ),
+            15.ph,
+            Center(
+              child: TextTitle(
+                  title: getPaiement(commande.paiement, commande.facture)),
+            ),
+            15.ph,
             // Bouton
             PrimaryButton(
-              onPressed: () {},
-              title: "Suivre ma commande",
+              onPressed: (commande.livraison == 'progress') ? () {} : null,
+              title: getMotButton(commande.livraison),
             )
           ],
         ),
       ),
     );
+  }
+
+  String getMotButton(String mot) {
+    switch (mot) {
+      case 'progress':
+        return 'Suivre ma commande';
+      case 'null':
+        return 'Livraison en attente';
+      case 'finish':
+        return 'Livraison terminé';
+      default:
+        return 'Livraison en attente';
+    }
+  }
+
+  String getPaiement(String paiement, bool facture) {
+    switch (paiement) {
+      case 'cash':
+        if (facture) {
+          return "Paiement à la livraison (Effectué)";
+        }
+        return "Paiement à la livraison (A payer)";
+      case 'line':
+        if (facture) {
+          return "Paiement en ligne (Effectué)";
+        }
+        return "Paiement en ligne (A payer)";
+      default:
+        return "Paiement à la livraison (A payer)";
+    }
   }
 }

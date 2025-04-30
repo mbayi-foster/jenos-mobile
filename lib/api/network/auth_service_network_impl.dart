@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jenos_app/models/principals/commune.dart';
+import 'package:jenos_app/models/principals/notification.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/services/network/auth_service_network.dart';
 import 'package:http/http.dart' as http;
@@ -80,5 +81,15 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
     return null;
   }
 
-
+  Future<List<Notification>> getNotifications(int id) async {
+    List<Notification> notifications = [];
+    var url = Uri.parse("${baseUrl}notifications/${id.toString()}");
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      List<dynamic> res = json.decode(response.body);
+      notifications = res.map((item) => Notification.fromJson(item)).toList();
+      return notifications;
+    }
+    return notifications;
+  }
 }

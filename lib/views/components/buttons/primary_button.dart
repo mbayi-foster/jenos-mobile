@@ -7,7 +7,7 @@ class PrimaryButton extends StatefulWidget {
   final Color bg;
   final double fontSize;
   final double padding;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool status;
 
   const PrimaryButton({

@@ -61,7 +61,13 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
 
   Future<List<Commande>> getAllCommandes(int id) async {
     List<Commande> commandes = [];
-
+    var url = Uri.parse("${baseUrl}commandes/$id");
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      List<dynamic> jsonData = json.decode(response.body);
+      commandes = jsonData.map((json) => Commande.fromJson(json)).toList();
+      return commandes;
+    }
     return commandes;
   }
 }
