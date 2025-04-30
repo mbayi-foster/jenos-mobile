@@ -28,7 +28,7 @@ class _MorePageState extends State<MorePage> {
     {
       'icon': IconsPath.dollards,
       'text': "Langues",
-      'langues': true,
+      'langue': true,
       'lien': "/notifications"
     },
     {
@@ -36,7 +36,7 @@ class _MorePageState extends State<MorePage> {
       'text': "Changer le mot de passe",
       'lien': "/change-password"
     },
-    {'icon': IconsPath.dollards, 'text': 'Inbox', 'lien': "/notifications"},
+    // {'icon': IconsPath.dollards, 'text': 'Inbox', 'lien': "/notifications"},
     {
       'icon': IconsPath.dollards,
       'text': "A propos de nous",
@@ -83,47 +83,15 @@ class _MorePageState extends State<MorePage> {
           Column(children: [
             InfoItem(
               tap: () {
-                print("cliqué");
-                if (_content[i]['langue']) {
-                  AlertDialog(
-                    title: Text('Choisir la langue'),
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text('Français'),
-                            onTap: () {
-                              // Action pour sélectionner le français
-                              Navigator.of(context).pop();
-                              // _selectLanguage(context, 'Français');
-                            },
-                          ),
-                          ListTile(
-                            title: Text('English'),
-                            onTap: () {
-                              // Action pour sélectionner l'anglais
-                              Navigator.of(context).pop();
-                              // _selectLanguage(context, 'English');
-                            },
-                          ),
-                          ListTile(
-                            title: Text('Español'),
-                            onTap: () {
-                              // Action pour sélectionner l'espagnol
-                              Navigator.of(context).pop();
-                              // _selectLanguage(context, 'Español');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                // print("cliqué");
+                if (_content[i].containsKey("langue")) {
+                  _dialogueChangeLangue();
                 } else {
                   Get.toNamed(_content[i]['lien']);
                 }
               },
               icon: _content[i]['icon']!,
-              text: _content[i]['text'].myTr,
+              text: "${_content[i]['text']}",
               notifications: _content[i]['notifications'] ?? 0,
             ),
             SizedBox(
@@ -131,6 +99,42 @@ class _MorePageState extends State<MorePage> {
             )
           ])
       ],
+    );
+  }
+
+  _dialogueChangeLangue() {
+    return AlertDialog(
+      title: Text('Choisir la langue'),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: <Widget>[
+            ListTile(
+              title: Text('Français'),
+              onTap: () {
+                // Action pour sélectionner le français
+                Navigator.of(context).pop();
+                // _selectLanguage(context, 'Français');
+              },
+            ),
+            ListTile(
+              title: Text('English'),
+              onTap: () {
+                // Action pour sélectionner l'anglais
+                Navigator.of(context).pop();
+                // _selectLanguage(context, 'English');
+              },
+            ),
+            ListTile(
+              title: Text('Español'),
+              onTap: () {
+                // Action pour sélectionner l'espagnol
+                Navigator.of(context).pop();
+                // _selectLanguage(context, 'Español');
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
