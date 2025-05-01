@@ -55,6 +55,7 @@ dependencies:
   flutter_async_autocomplete: ^0.1.1
   web_socket_client: ^0.2.0
   socket_io_client: ^3.1.1
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   flutter_test:

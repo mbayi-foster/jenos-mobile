@@ -19,6 +19,7 @@ import 'package:jenos_app/views/pages/intro/access_page.dart';
 import 'package:jenos_app/views/pages/intro/info_page.dart';
 import 'package:jenos_app/views/pages/intro/intro_page.dart';
 import 'package:jenos_app/views/pages/maps/configure_adresse/configure_adresse_page.dart';
+import 'package:jenos_app/views/pages/mores/about_page.dart';
 import 'package:jenos_app/views/pages/notifications/notifications_pages/notifications_page.dart';
 import 'package:jenos_app/views/pages/plats/search/search_page.dart';
 
@@ -60,6 +61,9 @@ class AppRoutes {
           MiddlewareAuth(),
         ]),
     GetPage(name: '/more', page: () => const MorePage(), middlewares: [
+      MiddlewareAuth(),
+    ]),
+    GetPage(name: AboutPage.path, page: () =>  AboutPage(), middlewares: [
       MiddlewareAuth(),
     ]),
     GetPage(

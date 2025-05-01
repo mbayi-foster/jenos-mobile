@@ -8,7 +8,7 @@ import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/cards/info_item.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
-import 'package:jenos_app/utils/langues.dart';
+import 'package:jenos_app/views/pages/mores/about_page.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({super.key});
@@ -41,7 +41,7 @@ class _MorePageState extends State<MorePage> {
     {
       'icon': IconsPath.dollards,
       'text': "A propos de nous",
-      'lien': "/about-us"
+      'lien': AboutPage.path
     },
   ];
 
