@@ -5,21 +5,23 @@ import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/utils/langues.dart';
 
 class InputSearch extends StatefulWidget {
+  const InputSearch(
+      {super.key,
+      this.autoFocus = false,
+      this.onChange,
+      this.tap,
+      this.ctrl,
+      this.size = 15,
+      this.title = "home.search",
+      this.readOnly = true});
+
   final double size;
   final String title;
   final GestureTapCallback? tap;
   final bool readOnly;
   final bool autoFocus;
   final ValueChanged? onChange;
-  const InputSearch(
-      {super.key,
-      this.autoFocus = false,
-      this.onChange,
-      this.tap,
-      this.size = 15,
-      this.title = "home.search",
-      this.readOnly = true});
-
+  final TextEditingController? ctrl;
   @override
   State<InputSearch> createState() => _InputSearchState();
 }
@@ -28,11 +30,12 @@ class _InputSearchState extends State<InputSearch> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.ctrl,
       autofocus: widget.autoFocus,
       onChanged: widget.onChange,
       readOnly: widget.readOnly,
       onTap: () {
-        Get.toNamed("/search");
+        Get.toNamed("/search", arguments: {"auto_focus": widget.autoFocus});
       },
       style: TextStyle(
           color: Colors.black54,

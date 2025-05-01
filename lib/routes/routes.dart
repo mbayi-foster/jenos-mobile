@@ -69,7 +69,7 @@ class AppRoutes {
     GetPage(name: '/profile', page: () => const ProfilePage(), middlewares: [
       MiddlewareAuth(),
     ]),
-    GetPage(name: '/search', 
+    GetPage(name: SearchPage.path, 
     page: () => const SearchPage(), 
     middlewares: [
       MiddlewareAuth(),

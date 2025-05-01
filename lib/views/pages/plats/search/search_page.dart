@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jenos_app/models/principals/plat.dart';
+import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
+import 'package:jenos_app/views/components/cards/plats.dart';
+import 'package:jenos_app/views/components/chargement.dart';
 import 'package:jenos_app/views/components/inputs/input_search.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
 import 'package:jenos_app/views/pages/plats/search/search_page_ctrl.dart';
-import 'package:jenos_app/views/pages/plats/search/search_page_state.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
-
+  static String path = '/search';
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
   SearchPageCtrl ctrl = Get.put(SearchPageCtrl());
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     var state = ctrl.state;
     return Obx(() {
       return Scaffold(
@@ -28,27 +31,59 @@ class _SearchPageState extends State<SearchPage> {
           actions: const [PanierButton()],
         ),
         body: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(children: [
             InputSearch(
+              ctrl: controller,
               autoFocus: state.value.autoFocus,
-              onChange: (value) {},
+              onChange: (value) {
+                setState(() {
+                  controller.text = value;
+                });
+                ctrl.search(value);
+              },
               readOnly: false,
             ),
-            
+            25.ph,
+            if (state.value.isVisible)
+              Column(
+                children: state.value.plats.map((plat) {
+                  return Column(
+                    children: [
+                      Plats(
+                          tap: () {
+                            Get.toNamed('/plat/${plat.id}');
+                          },
+                          plat: plat),
+                      10.ph
+                    ],
+                  );
+                }).toList(),
+              ),
+            if (!state.value.isVisible)
+              SizedBox(
+                  height: height * 0.7,
+                  child: Center(
+                      child: Chargement(
+                    loading: state.value.loading,
+                    hasData: state.value.hasData,
+                    msg: (state.value.noGet)
+                        ? "Aucun plat trouvé pour ${state.value.search}"
+                        : "Aucun plat trouvé",
+                  )))
           ]),
         ),
       );
     });
   }
 
-  _plats(Rx<SearchPageState> state) {
-    List<Plat> plats = state.value.plats;
-    return ListView.builder(
-      itemCount: plats.length,
-      itemBuilder: (context, index) {
-        return Text(plats[index].nom);
-      },
-    );
-  }
+  // _plats(Rx<SearchPageState> state) {
+  //   List<Plat> plats = state.value.plats;
+  //   return ListView.builder(
+  //     itemCount: plats.length,
+  //     itemBuilder: (context, index) {
+  //       return Text(plats[index].nom);
+  //     },
+  //   );
+  // }
 }

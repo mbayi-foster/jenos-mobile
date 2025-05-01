@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/models/principals/menu.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/langues.dart';
 import 'package:jenos_app/views/pages/acceuil/home/home_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/colors.dart';
@@ -15,6 +16,7 @@ import 'package:jenos_app/views/components/cards/plat_recent.dart';
 import 'package:jenos_app/views/components/cards/plats.dart';
 import 'package:jenos_app/views/components/cards/plats_pop.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/views/pages/plats/search/search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,8 +51,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: TextTitle(
-              title:
-                  "${LocalisationService.of(context)!.translate("home.hi")} ${state.value.user!.prenom} !"),
+              title: "${"home.hi".myTr} ${state.value.user!.prenom} !"),
           automaticallyImplyLeading: false,
           // ignore: prefer_const_literals_to_create_immutables
           actions: [const PanierButton()],
@@ -66,6 +67,7 @@ class _HomePageState extends State<HomePage> {
                         tap: () {},
                       ),
                     ),
+                    
                     _offres(state.value.menus),
                     _platPop(width, plats: platsPop),
                     _platMostPop(width, plats: mostPops),
@@ -117,13 +119,15 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextTitle(
-                  title:
-                      LocalisationService.of(context)!.translate("home.pop")),
+              TextTitle(title: "home.pop".myTr),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(SearchPage.path, arguments: {
+                      'all':true
+                    });
+                  },
                   child: Text(
-                    LocalisationService.of(context)!.translate("home.all"),
+                    "home.all".myTr,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
@@ -158,11 +162,15 @@ class _HomePageState extends State<HomePage> {
             children: [
               TextTitle(
                   title:
-                      LocalisationService.of(context)!.translate("home.most")),
+                      "home.most".myTr),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(SearchPage.path, arguments: {
+                      'all':true
+                    });
+                  },
                   child: Text(
-                    LocalisationService.of(context)!.translate("home.all"),
+                    "home.all".myTr,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
@@ -216,12 +224,15 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextTitle(
-                  title: LocalisationService.of(context)!
-                      .translate("home.recents")),
+                  title:"home.recents".myTr),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                     Get.toNamed(SearchPage.path, arguments: {
+                      'all':true
+                    });
+                  },
                   child: Text(
-                    LocalisationService.of(context)!.translate("home.all"),
+                    "home.all".myTr,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(

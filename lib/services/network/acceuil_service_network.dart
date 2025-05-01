@@ -11,5 +11,5 @@ abstract class AcceuilServiceNetwork {
   Future<List<Plat>?> platByMenu(int menuId);
   Future<List<Plat>?> platByOffres(int menuId);
   Future<User?> profile(int id);
-  Future<List<Plat>?> recherchePlats(String motClef);
+  Future<List<Plat>> recherchePlats(String motClef);
 }

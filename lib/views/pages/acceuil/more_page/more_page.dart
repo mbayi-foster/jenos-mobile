@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/utils/icons_path.dart';
 import 'package:jenos_app/utils/lang/localisation_service.dart';
+import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/cards/info_item.dart';
@@ -78,63 +79,65 @@ class _MorePageState extends State<MorePage> {
 
   _items() {
     return Column(
-      children: [
-        for (var i = 0; i < _content.length; i++)
-          Column(children: [
-            InfoItem(
-              tap: () {
-                // print("cliqué");
-                if (_content[i].containsKey("langue")) {
-                  _dialogueChangeLangue();
-                } else {
-                  Get.toNamed(_content[i]['lien']);
-                }
-              },
-              icon: _content[i]['icon']!,
-              text: "${_content[i]['text']}",
-              notifications: _content[i]['notifications'] ?? 0,
-            ),
-            SizedBox(
-              height: 25.00,
-            )
-          ])
-      ],
-    );
+        children: _content.map((val) {
+      return Column(
+        children: [
+          InfoItem(
+            tap: () {
+              // print("cliqué");
+              if (val.containsKey("langue")) {
+                _dialogueChangeLangue();
+              } else {
+                Get.toNamed(val['lien']);
+              }
+            },
+            icon: val['icon']!,
+            text: "${val['text']}",
+            notifications: val['notifications'] ?? 0,
+          ),
+          25.00.ph
+        ],
+      );
+    }).toList());
   }
 
   _dialogueChangeLangue() {
-    return AlertDialog(
-      title: Text('Choisir la langue'),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: <Widget>[
-            ListTile(
-              title: Text('Français'),
-              onTap: () {
-                // Action pour sélectionner le français
-                Navigator.of(context).pop();
-                // _selectLanguage(context, 'Français');
-              },
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: TextTitle(title: "Choisir la langue de l'application"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Français'),
+                    onTap: () {
+                      // Action pour sélectionner le français
+                      Navigator.of(context).pop();
+                      // _selectLanguage(context, 'Français');
+                    },
+                  ),
+                  ListTile(
+                    title: Text('English'),
+                    onTap: () {
+                      // Action pour sélectionner l'anglais
+                      Navigator.of(context).pop();
+                      // _selectLanguage(context, 'English');
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Español'),
+                    onTap: () {
+                      // Action pour sélectionner l'espagnol
+                      Navigator.of(context).pop();
+                      // _selectLanguage(context, 'Español');
+                    },
+                  ),
+                ],
+              ),
             ),
-            ListTile(
-              title: Text('English'),
-              onTap: () {
-                // Action pour sélectionner l'anglais
-                Navigator.of(context).pop();
-                // _selectLanguage(context, 'English');
-              },
-            ),
-            ListTile(
-              title: Text('Español'),
-              onTap: () {
-                // Action pour sélectionner l'espagnol
-                Navigator.of(context).pop();
-                // _selectLanguage(context, 'Español');
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }

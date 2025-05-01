@@ -3,10 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:jenos_app/utils/colors.dart';
 
 class Chargement extends StatefulWidget {
-  final bool loading;
+ 
+  const Chargement({super.key, this.loading = true, this.hasData = false, this.msg = "Aucune donnée à afficher pour l'instant.."});
+ final bool loading;
   final bool hasData;
-  const Chargement({super.key, this.loading = true, this.hasData = false});
-
+  final String msg;
   @override
   State<Chargement> createState() => _ChargementState();
 }
@@ -35,8 +36,8 @@ class _ChargementState extends State<Chargement> {
                   style: TextStyle(fontSize: 15.00, color: Colors.black54),
                 ),
               if (!widget.loading && !widget.hasData)
-                const Text(
-                  "Aucune donnée à afficher",
+                 Text(
+                 widget.msg,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15.00, color: Colors.black54),
                 ),

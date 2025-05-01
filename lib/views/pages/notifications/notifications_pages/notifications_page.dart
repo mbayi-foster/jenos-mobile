@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-import 'package:get/utils.dart';
 import 'package:intl/intl.dart';
-import 'package:jenos_app/utils/colors.dart';
-import 'package:jenos_app/utils/lang/localisation_service.dart';
 import 'package:jenos_app/utils/langues.dart';
 import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
@@ -53,6 +49,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
             : Chargement(
                 loading: state.value.loading,
                 hasData: state.value.hasData,
+                msg:"Aucune notifications pour l'instant.."
               ),
       );
     });

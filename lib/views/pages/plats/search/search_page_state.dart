@@ -5,12 +5,16 @@ class SearchPageState {
   bool hasData;
   bool isVisible;
   bool autoFocus;
+  bool noGet;
+  String? search;
   List<Plat> plats;
 
   SearchPageState(
       {this.autoFocus = false,
       this.hasData = false,
       this.loading = false,
+      this.noGet = false,
+      this.search,
       this.isVisible = false,
       this.plats = const []});
 

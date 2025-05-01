@@ -24,7 +24,6 @@ class CheckoutPageCtrl extends GetxController {
     });
     // Récupérer les arguments et les assigner à l'observable
     var args = Get.arguments;
-    print('arguments : $args');
     AuthServiceLocalImpl apiUser = AuthServiceLocalImpl();
     User? user = await apiUser.getUser();
     Place? userPlace = user!.adresse;

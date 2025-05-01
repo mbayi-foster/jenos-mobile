@@ -79,8 +79,35 @@ class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
   }
 
   @override
-  Future<List<Plat>?> recherchePlats(String motClef) {
-    // TODO: implement recherchePlats
-    throw UnimplementedError();
+  Future<List<Plat>> recherchePlats(String motClef) async {
+    List<Plat> plats = [];
+
+    try {
+      var url = Uri.parse("${baseUrl}search/$motClef");
+      var res = await http.get(
+        url,
+      );
+      List<dynamic> results = jsonDecode(res.body);
+      plats = results.map((item) => Plat.fromJson(item)).toList();
+      return plats;
+    } catch (e) {
+      return plats;
+    }
+  }
+
+  Future<List<Plat>> plats() async {
+    List<Plat> plats = [];
+
+    try {
+      var url = Uri.parse("${baseUrl}search");
+      var res = await http.get(
+        url,
+      );
+      List<dynamic> results = jsonDecode(res.body);
+      plats = results.map((item) => Plat.fromJson(item)).toList();
+      return plats;
+    } catch (e) {
+      return plats;
+    }
   }
 }
