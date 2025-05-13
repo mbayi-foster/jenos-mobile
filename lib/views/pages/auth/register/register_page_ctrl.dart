@@ -31,7 +31,7 @@ class RegisterPageCtrl extends GetxController {
       if (data.containsKey("code")) {
         //  print("la clef existe et c'est ${data["code"]}");
         int code = data['code'];
-        await prefs.setString('user', jsonEncode(user.toJson()));
+        await prefs.setString('new_user', jsonEncode(user.toJson()));
         await prefs.setString('password', password);
         await prefs.setInt('code', code);
         state.update((val) {

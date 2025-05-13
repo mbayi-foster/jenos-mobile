@@ -11,31 +11,33 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
   var baseUrl = dotenv.env['BASE_URL'] ?? "";
   @override
   Future<bool> ajouter(Map<String, dynamic> data) async {
-    var url = Uri.parse("${baseUrl}paniers");
+    try {
+      var url = Uri.parse("${baseUrl}paniers");
 
-    var response = await http.post(url, body: data);
+      var response = await http.post(url, body: data);
 
-    if (response.statusCode == 201) {
       //  Map<String, dynamic> res = json.decode(response.body);
       return true;
+    } catch (e) {
+      return false;
     }
-
-    return false;
   }
 
   @override
   Future<List<Panier>?>? getAll(int userId) async {
-    var url = Uri.parse("${baseUrl}paniers/$userId");
-    List<Panier> paniers = [];
-    var response = await http.get(
-      url,
-    );
-    if (response.statusCode == 200) {
+    try {
+      var url = Uri.parse("${baseUrl}paniers/$userId");
+      List<Panier> paniers = [];
+      var response = await http.get(
+        url,
+      );
+
       List<dynamic> jsonData = json.decode(response.body);
       paniers = jsonData.map((json) => Panier.fromJson(json)).toList();
       return paniers;
+    } catch (e) {
+      return null;
     }
-    return null;
   }
 
   @override
@@ -46,28 +48,32 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
 
   @override
   Future<bool> commander(CommandeRequest commande) async {
-    var url = Uri.parse("${baseUrl}commandes");
-    var response = await http.post(url,
-        headers: {
-          'Content-Type':
-              'application/json', // Indique que le corps est en JSON
-        },
-        body: jsonEncode(commande.toJson()));
-    if (response.statusCode == 201) {
+    try {
+      var url = Uri.parse("${baseUrl}commandes");
+      var response = await http.post(url,
+          headers: {
+            'Content-Type':
+                'application/json', // Indique que le corps est en JSON
+          },
+          body: jsonEncode(commande.toJson()));
+
       return true;
+    } catch (e) {
+      return false;
     }
-    return false;
   }
 
   Future<List<Commande>> getAllCommandes(int id) async {
-    List<Commande> commandes = [];
-    var url = Uri.parse("${baseUrl}commandes/$id");
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
+    try {
+      List<Commande> commandes = [];
+      var url = Uri.parse("${baseUrl}commandes/$id");
+      var response = await http.get(url);
+
       List<dynamic> jsonData = json.decode(response.body);
       commandes = jsonData.map((json) => Commande.fromJson(json)).toList();
       return commandes;
+    } catch (e) {
+      return [];
     }
-    return commandes;
   }
 }

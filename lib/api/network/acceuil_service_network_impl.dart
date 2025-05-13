@@ -12,34 +12,37 @@ class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
 
   @override
   Future<dynamic> home() async {
-    var response = null;
-    var url = Uri.parse("${baseUrl}mobile-home");
-    var res = await http.get(
-      url,
-    );
+    try {
+      var response = null;
+      var url = Uri.parse("${baseUrl}mobile-home");
+      var res = await http.get(
+        url,
+      );
 
-    if (res.statusCode == 200) {
       // Décodez la réponse JSON
       final Map<String, dynamic> jsonData = json.decode(res.body);
       response = jsonData;
+    } catch (e) {
+      return null;
     }
-
-    return response;
   }
 
   @override
   Future<List<Menu>?> getMenus() async {
-    List<Menu> menus = [];
-    var url = Uri.parse("${baseUrl}mobile-menu");
-    var res = await http.get(
-      url,
-    );
-    if (res.statusCode == 200) {
-      List<dynamic> jsonData = json.decode(res.body);
-      menus = jsonData.map((json) => Menu.fromJson(json)).toList();
-      return menus;
+    try {
+      List<Menu> menus = [];
+      var url = Uri.parse("${baseUrl}mobile-menu");
+      var res = await http.get(
+        url,
+      );
+      if (res.statusCode == 200) {
+        List<dynamic> jsonData = json.decode(res.body);
+        menus = jsonData.map((json) => Menu.fromJson(json)).toList();
+        return menus;
+      }
+    } catch (e) {
+      return null;
     }
-    return null;
   }
 
   @override

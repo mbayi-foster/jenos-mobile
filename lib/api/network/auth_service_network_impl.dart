@@ -11,34 +11,35 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   var baseUrl = dotenv.env['BASE_URL'] ?? "";
   @override
   Future<User?> login(String email, String password) async {
-    var url = Uri.parse("${baseUrl}login");
-    var response =
-        await http.post(url, body: {"email": email, "password": password});
+    try {
+      var url = Uri.parse("${baseUrl}login");
+      var response =
+          await http.post(url, body: {"email": email, "password": password});
 
-    if (response.statusCode == 200) {
       Map<String, dynamic> res = json.decode(response.body);
       return User.fromJson(res);
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
   @override
   Future<User?> register(User user, String password) async {
-    var url = Uri.parse("${baseUrl}clients");
-    var response = await http.post(url, body: {
-      "nom": user.nom,
-      "prenom": user.prenom,
-      "email": user.email,
-      "phone": user.phone,
-      "password": password,
-    });
-    if (response.statusCode == 201) {
+    try {
+      var url = Uri.parse("${baseUrl}clients");
+      var response = await http.post(url, body: {
+        "nom": user.nom,
+        "prenom": user.prenom,
+        "email": user.email,
+        "phone": user.phone,
+        "password": password,
+      });
+
       Map<String, dynamic> res = json.decode(response.body);
       return User.fromJson(res);
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
   @override
@@ -55,41 +56,43 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
 
   @override
   Future<dynamic> newUser(String nom, String email) async {
-    var url = Uri.parse("${baseUrl}new-client");
-    var response = await http.post(url, body: {'nom': nom, 'email': email});
+    try {
+      var url = Uri.parse("${baseUrl}new-client");
+      var response = await http.post(url, body: {'nom': nom, 'email': email});
 
-    if (response.statusCode == 200) {
       Map<String, dynamic> res = json.decode(response.body);
 
       return res;
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
   @override
   Future<User?> updateUser(User user) async {
-    var url = Uri.parse("${baseUrl}clients/${user.id.toString()}");
-    var response = await http.put(url,
-        body: {"nom": user.nom, "prenom": user.prenom, "phone": user.phone});
+    try {
+      var url = Uri.parse("${baseUrl}clients/${user.id.toString()}");
+      var response = await http.put(url,
+          body: {"nom": user.nom, "prenom": user.prenom, "phone": user.phone});
 
-    if (response.statusCode == 201) {
       Map<String, dynamic> res = json.decode(response.body);
 
       return User.fromJson(res);
+    } catch (e) {
+      return null;
     }
-    return null;
   }
 
   Future<List<Notification>> getNotifications(int id) async {
     List<Notification> notifications = [];
-    var url = Uri.parse("${baseUrl}notifications/${id.toString()}");
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
+    try {
+      var url = Uri.parse("${baseUrl}notifications/${id.toString()}");
+      var response = await http.get(url);
       List<dynamic> res = json.decode(response.body);
       notifications = res.map((item) => Notification.fromJson(item)).toList();
       return notifications;
+    } catch (e) {
+      return notifications;
     }
-    return notifications;
   }
 }

@@ -12,37 +12,30 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
   var baseUrl = dotenv.env['BASE_URL'] ?? "";
   @override
   Future<Place?> getPlace(double lat, double long) async {
-    var url = Uri.parse(
-        "https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=json&addressdetails=1");
-    var response = await http.get(url);
+    try {
+      var url = Uri.parse(
+          "https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=json&addressdetails=1");
+      var response = await http.get(url);
 
-    if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       return Place(
           nom: data["display_name"],
           commune: data['address']['municipality'] ?? '',
           lat: double.parse(data["lat"]),
           long: double.parse(data["lon"]));
-    }
-
-    return null;
-    /* ry {
-      if(response.statusCode)
-      return Place()
     } catch (e) {
-       // TODO: implement getNamePlace
-    throw UnimplementedError();
-    } */
+      return null;
+    }
   }
 
   @override
   Future<List<Place>> searchPlaces(String nom) async {
-    var url = Uri.parse(
-        "https://nominatim.openstreetmap.org/search?q=$nom&format=json&addressdetails=1&limit=5");
-    var response = await http.get(url);
-    List<Place> result = [];
+    try {
+      var url = Uri.parse(
+          "https://nominatim.openstreetmap.org/search?q=$nom&format=json&addressdetails=1&limit=5");
+      var response = await http.get(url);
+      List<Place> result = [];
 
-    if (response.statusCode == 200) {
       debugPrint("Suucces " + response.body);
       var data = jsonDecode(response.body);
 
@@ -55,47 +48,47 @@ class LocalisationServiceNetworkImpl implements LocalisationNetworkService {
                 long: double.parse(p["lon"]))),
           )
           .toList();
-    } else {
-      debugPrint("Error " + response.body);
-    }
 
-    return result;
+      return result;
+    } catch (e) {
+      return [];
+    }
   }
 
   @override
   Future<User?> changeAdresse(Place place, int userID) async {
-    var url = Uri.parse("${baseUrl}map");
-    var response = await http.post(url, body: {
-      "adresse": place.nom,
-      "commune":place.commune,
-      "location_lat": place.lat.toString(),
-      "location_lon": place.long.toString(),
-      "id": userID.toString()
-    });
+    try {
+      var url = Uri.parse("${baseUrl}map");
+      var response = await http.post(url, body: {
+        "adresse": place.nom,
+        "commune": place.commune,
+        "location_lat": place.lat.toString(),
+        "location_lon": place.long.toString(),
+        "id": userID.toString()
+      });
 
-    if (response.statusCode == 201) {
-      Map<String, dynamic> res = json.decode(response.body);
-      return User.fromJson(res);
+      if (response.statusCode == 201) {
+        Map<String, dynamic> res = json.decode(response.body);
+        return User.fromJson(res);
+      }
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
-    Future<List<Commune>> getCommune() async {
-    List<Commune> communes = [];
-    var url = Uri.parse("${baseUrl}communes");
-    var res = await http.get(url);
-    if (res.statusCode == 200) {
+  Future<List<Commune>> getCommune() async {
+    try {
+      List<Commune> communes = [];
+      var url = Uri.parse("${baseUrl}communes");
+      var res = await http.get(url);
+
       // Décodez la réponse JSON
       List<dynamic> jsonData = json.decode(res.body);
-      /* jsonData.forEach((item){
-        print(item);
-      }); */
       communes = jsonData.map((json) => Commune.fromJson(json)).toList();
 
       return communes;
+    } catch (e) {
+      return [];
     }
-
-    return communes;
   }
 }

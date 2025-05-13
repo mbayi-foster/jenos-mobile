@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
@@ -24,7 +23,7 @@ class OtpCtrl extends GetxController {
     AuthServiceNetworkImpl apiNetwork = AuthServiceNetworkImpl();
 
     bool check = await apiLocal.verifyOtp(code);
-    String? userStore = prefs.getString('user');
+    String? userStore = prefs.getString('new_user');
     String? passwordStore = prefs.getString('password');
     if (check && userStore != null && passwordStore != null) {
       Map<String, dynamic> userMap = jsonDecode(userStore);
@@ -34,6 +33,7 @@ class OtpCtrl extends GetxController {
       var data = await apiNetwork.register(user, passwordStore);
       if (data != null) {
         await prefs.setString('user', jsonEncode(data.toJson()));
+        await prefs.remove("new_user");
         state.update((val) {
           val?.loading = false;
           val?.error = false;

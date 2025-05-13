@@ -11,35 +11,39 @@ class DetailsServiceNetworkImpl implements DetailsServiceNetwork {
 
   @override
   Future<Menu?> getMenu(String id) async {
-    var url = Uri.parse("${baseUrl}mobile-menu/$id");
-    var res = await http.get(
-      url,
-    );
+    try {
+      var url = Uri.parse("${baseUrl}mobile-menu/$id");
+      var res = await http.get(
+        url,
+      );
 
-    if (res.statusCode == 200) {
-      // Décodez la réponse JSON
-      Map<String, dynamic> response = json.decode(res.body);
-      Menu menu = Menu.fromJson(response);
-      return menu;
+      if (res.statusCode == 200) {
+        // Décodez la réponse JSON
+        Map<String, dynamic> response = json.decode(res.body);
+        Menu menu = Menu.fromJson(response);
+        return menu;
+      }
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
   @override
   Future<dynamic> getPlat(String id) async {
-    var url = Uri.parse("${baseUrl}mobile-plat/$id");
-    var res = await http.get(
-      url,
-    );
+    try {
+      var url = Uri.parse("${baseUrl}mobile-plat/$id");
+      var res = await http.get(
+        url,
+      );
 
-    if (res.statusCode == 200) {
-      // Décodez la réponse JSON
-      Map<String, dynamic> response = json.decode(res.body);
+      if (res.statusCode == 200) {
+        // Décodez la réponse JSON
+        Map<String, dynamic> response = json.decode(res.body);
 
-      return response;
+        return response;
+      }
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 }
