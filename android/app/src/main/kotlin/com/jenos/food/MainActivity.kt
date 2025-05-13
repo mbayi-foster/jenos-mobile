@@ -1,4 +1,4 @@
-package com.example.jenos_app
+package com.jenos.food
 
 import io.flutter.embedding.android.FlutterActivity
 
