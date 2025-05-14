@@ -45,5 +45,16 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+	<string>fetch</string>
+	<string>remote-notification</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Votre application a besoin d'accéder à votre localisation.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Votre application a besoin d'accéder à votre localisation même en arrière-plan.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Votre application a besoin d'accéder à votre localisation.</string>
 </dict>
 </plist>
