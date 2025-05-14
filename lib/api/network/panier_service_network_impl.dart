@@ -16,6 +16,7 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
 
       var response = await http.post(url, body: data);
 
+      print('reponse ${response.body}');
       //  Map<String, dynamic> res = json.decode(response.body);
       return true;
     } catch (e) {
@@ -24,7 +25,7 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
   }
 
   @override
-  Future<List<Panier>?>? getAll(int userId) async {
+  Future<List<Panier>> getAll(int userId) async {
     try {
       var url = Uri.parse("${baseUrl}paniers/$userId");
       List<Panier> paniers = [];
@@ -33,10 +34,15 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
       );
 
       List<dynamic> jsonData = json.decode(response.body);
+      print('succes : $jsonData');
       paniers = jsonData.map((json) => Panier.fromJson(json)).toList();
+      print("paniers");
+    paniers.map((val) {
+      print('panier : ${val.toJson()}');
+    });
       return paniers;
     } catch (e) {
-      return null;
+      return [];
     }
   }
 

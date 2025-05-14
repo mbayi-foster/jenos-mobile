@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/details_service_network_impl.dart';
@@ -89,7 +90,7 @@ class DetailsPlatCtrl extends GetxController {
       state.update((val) {
         val?.traitement = false;
       });
-      MyAlert.show(text: "Plat rajouté au panier !");
+      MyAlert.show(text: "Plat rajouté au panier !", bg: Colors.green);
       Get.offNamed("/panier");
     } else {
       state.update((val) {

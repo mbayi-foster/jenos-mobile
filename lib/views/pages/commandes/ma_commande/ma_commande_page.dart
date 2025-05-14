@@ -93,7 +93,6 @@ class _MaCommandePageState extends State<MaCommandePage> {
                   },
                   title: LocalisationService.of(context)!
                       .translate("commande.btn"),
-                  padding: 23,
                 ),
               )
             ],

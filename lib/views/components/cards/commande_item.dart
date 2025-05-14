@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jenos_app/models/principals/commande.dart';
 import 'package:jenos_app/utils/colors.dart';
 import 'package:jenos_app/utils/padding.dart';
@@ -25,7 +26,7 @@ class _CommandeItemState extends State<CommandeItem> {
     Color getColor(String choice) {
       switch (choice) {
         case 'null':
-          return Colors.yellowAccent;
+          return const Color.fromARGB(255, 112, 152, 170);
         case 'false':
           return Colors.red;
         case 'progress':
@@ -85,13 +86,12 @@ class _CommandeItemState extends State<CommandeItem> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  commande.ticket,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                TextTitle(
+                  title: commande.ticket,
                 ),
                 Text(
                   formattedDate,
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ],
             ),
@@ -102,6 +102,7 @@ class _CommandeItemState extends State<CommandeItem> {
             Center(
               child: TextTitle(
                 title: "Sur la commande",
+                fontSize: 15,
               ),
             ),
 
@@ -115,8 +116,8 @@ class _CommandeItemState extends State<CommandeItem> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextTitle(title: item.plat?.nom ?? ""),
-                        TextTitle(title: "x${item.qte}")
+                        TextTitle(title: item.plat?.nom ?? "", fontSize: 15,),
+                        TextTitle(title: "x${item.qte}", fontSize: 15,)
                       ],
                     ),
                     3.ph // Séparateur
@@ -124,71 +125,67 @@ class _CommandeItemState extends State<CommandeItem> {
                 );
               }).toList(),
             ),
-            15.ph,
+            7.5.ph,
+            Container(height: 1, color: Colors.black45),
+            7.5.ph,
             // Statut
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextTitle(
                   title: "Status",
+                  fontSize: 15,
                 ),
                 5.ph,
-                Container(
-                  decoration:
-                      BoxDecoration(color: getColor(commande.livraison)),
-                  padding: EdgeInsets.all(10),
-                  width: 350,
-                  child: Center(
-                    child: Text(
-                      getstatus(commande.livraison),
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
+                Text(
+                  getstatus(commande.livraison),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: getColor(commande.livraison)
                   ),
                 ),
               ],
             ),
-            15.ph,
+            // 15.ph,
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     TextTitle(title: "Addition"),
+            //     TextTitle(title: "${commande.prix} FC")
+            //   ],
+            // ),
+            // 5.ph,
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     TextTitle(title: "Frais de livraison"),
+            //     TextTitle(title: "${commande.deliveryCoast} FC")
+            //   ],
+            // ),
+           15.ph,
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextTitle(title: "Addition"),
-                TextTitle(title: "${commande.prix} FC")
-              ],
-            ),
-            5.ph,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextTitle(title: "Frais de livraison"),
-                TextTitle(title: "${commande.deliveryCoast} FC")
-              ],
-            ),
-            7.5.ph,
-            Container(height: 1, color: Colors.black45),
-            7.5.ph,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextTitle(title: "Total"),
-                TextTitle(title: "${commande.deliveryCoast + commande.prix} FC")
+                TextTitle(title: "Total", fontSize: 15,),
+                TextTitle(title: "${commande.deliveryCoast + commande.prix} FC", fontSize: 15,)
               ],
             ),
             15.ph,
             Center(
               child: TextTitle(
-                  title: getPaiement(commande.paiement, commande.facture)),
+                  title: getPaiement(commande.paiement, commande.facture), fontSize: 15,),
             ),
             15.ph,
             // Bouton
             PrimaryButton(
-              onPressed: (commande.livraison == 'progress') ? () {} : null,
-              title: getMotButton(commande.livraison),
+              onPressed: (){
+                  Get.toNamed("/suivre-commande/${commande.id}");
+              },
+              title: "Suivre ma commande",
             )
           ],
         ),

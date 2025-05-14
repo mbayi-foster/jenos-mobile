@@ -22,9 +22,12 @@ class PanierAchatCtrl extends GetxController {
 
     PanierServiceNetworkImpl api = PanierServiceNetworkImpl();
 
-    var data = await api.getAll(state.value.user!.id);
-
-    if (data != null) {
+    List<Panier> data = await api.getAll(state.value.user!.id);
+    print("paniers");
+    data.map((val) {
+      print('panier : ${val.toJson()}');
+    });
+    if (data.isNotEmpty) {
       state.update((val) {
         val?.loading = false;
         val?.hasData = true;
