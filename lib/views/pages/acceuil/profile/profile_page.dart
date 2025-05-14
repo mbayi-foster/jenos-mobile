@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(IconsPath.profile),
+        Image.asset(IconsPath.profile, height: 100,),
         TextTitle(
             title:
                 "${LocalisationService.of(context)!.translate("profile.hi")} ${user!.prenom} !"),

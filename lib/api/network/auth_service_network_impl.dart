@@ -43,15 +43,28 @@ class AuthServiceNetworkImpl implements AuthServiceNetwork {
   }
 
   @override
-  Future<bool> verifyEmail(String email) {
-    // TODO: implement verifyEmail
-    throw UnimplementedError();
+  Future<int?> verifyEmail(String email) async {
+    try {
+      var url = Uri.parse("${baseUrl}check-mail");
+      var response = await http.post(url, body: {"email": email});
+      Map<String, dynamic> res = json.decode(response.body);
+      int code = res['code'].toInt();
+      return code;
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
-  Future<bool> changePassword(int opt) {
-    // TODO: implement verifyOtp
-    throw UnimplementedError();
+  Future<bool> changePassword(String password, String email) async {
+    try {
+      var url = Uri.parse("${baseUrl}update-password");
+      var response =
+          await http.post(url, body: {"email": email, "password": password});
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   @override

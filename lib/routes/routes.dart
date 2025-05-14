@@ -33,7 +33,7 @@ class AppRoutes {
     GetPage(name: '/login', page: () => const LoginPage()),
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/otp', page: () => const VerifyOtp()),
-    GetPage(name: '/new-password', page: () => const NewPassword()),
+    GetPage(name: NewPassword.path, page: () => const NewPassword()),
     GetPage(name: '/forget-password', page: () => const ForgetPassword()),
     GetPage(
       name: '/enter',
@@ -63,7 +63,7 @@ class AppRoutes {
     GetPage(name: '/more', page: () => const MorePage(), middlewares: [
       MiddlewareAuth(),
     ]),
-    GetPage(name: AboutPage.path, page: () =>  AboutPage(), middlewares: [
+    GetPage(name: AboutPage.path, page: () => AboutPage(), middlewares: [
       MiddlewareAuth(),
     ]),
     GetPage(
@@ -73,11 +73,12 @@ class AppRoutes {
     GetPage(name: '/profile', page: () => const ProfilePage(), middlewares: [
       MiddlewareAuth(),
     ]),
-    GetPage(name: SearchPage.path, 
-    page: () => const SearchPage(), 
-    middlewares: [
-      MiddlewareAuth(),
-    ]),
+    GetPage(
+        name: SearchPage.path,
+        page: () => const SearchPage(),
+        middlewares: [
+          MiddlewareAuth(),
+        ]),
     //fin routes acceuil
 
     GetPage(

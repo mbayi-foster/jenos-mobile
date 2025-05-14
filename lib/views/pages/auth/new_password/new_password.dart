@@ -7,7 +7,7 @@ import 'package:jenos_app/views/components/texts/text_title.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});
-
+  static const String path = '/update-password';
   @override
   State<NewPassword> createState() => _NewPasswordState();
 }

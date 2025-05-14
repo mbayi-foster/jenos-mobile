@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jenos_app/api/locale/auth_service_local_impl.dart';
 import 'package:jenos_app/api/network/auth_service_network_impl.dart';
+import 'package:jenos_app/views/pages/auth/new_password/new_password.dart';
 import 'package:jenos_app/views/pages/auth/otp/otp_state.dart';
 import 'package:jenos_app/models/principals/user.dart';
 import 'package:jenos_app/views/components/my_alert.dart';
@@ -11,6 +12,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpCtrl extends GetxController {
   var state = OtpState().obs;
+
+  @override
+  onInit() {
+    final args = Get.arguments;
+    if (args == null || !args.containsKey('page')) {
+      state.value.lastPage = 'check';
+    } else {
+      state.value.lastPage = 'register';
+    }
+    super.onInit();
+  }
 
   void checkOtp(int code) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,7 +52,7 @@ class OtpCtrl extends GetxController {
           val?.msg = "Félicitations ! Bienvenue chez Jenos-Food";
         });
         MyAlert.show(text: state.value.msg, bg: Colors.green);
-         Get.offAllNamed('/home');
+        Get.offAllNamed('/home');
       } else {
         state.update((val) {
           val?.loading = false;
@@ -52,7 +64,6 @@ class OtpCtrl extends GetxController {
         Get.back();
       }
     } else {
-      await Future.delayed(Duration(seconds: 2));
       state.update((val) {
         val?.loading = false;
         val?.error = true;
@@ -61,36 +72,22 @@ class OtpCtrl extends GetxController {
       });
       MyAlert.show(text: state.value.msg);
     }
+  }
 
-/*         if (data != null) {
-          state.update((val) {
-            val?.loading = false;
-            val?.error = false;
-          });
-          Get.toNamed('/home');
-        } else {
-          state.update((val) {
-            val?.loading = false;
-            val?.error = true;
-            val?.msg =
-                "Une erreur s'est produite chechez votre connection et réessayé";
-          });
-        } 
-       else {
-        state.update((val) {
-          val?.loading = false;
-          val?.error = true;
-          val?.msg =
-              "Excusez nous pour ce petit désagréement viellez rédemarrer l'application et récommencez";
-        });
-      }  
-    } else {
-      state.update((val) {
-        val?.loading = false;
-        val?.error = true;
-        val?.msg =
-            "Vous avez entré le mauvais code si vous n'avez pas réussi des code cliqué sur renvoyer";
-      });
-    } */
+  void check(int code) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    state.update((val) {
+      val?.loading = true;
+      val?.error = false;
+    });
+
+    AuthServiceLocalImpl apiLocal = AuthServiceLocalImpl();
+
+    bool check = await apiLocal.verifyOtp(code);
+    if (check) {
+      String? email = await prefs.getString('email');
+      prefs.remove("email");
+      Get.toNamed(NewPassword.path, arguments: {'email': email});
+    } else {}
   }
 }
