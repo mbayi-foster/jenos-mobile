@@ -63,9 +63,8 @@ class _VerifyOtpState extends State<VerifyOtp> {
                 if (!state.value.loading)
                   PrimaryButton(
                       onPressed: () {
-                        print("last page : ${state.value.lastPage}");
                         _keyForm.currentState!.save();
-                        int code = int.parse(_code!);
+                        int code = int.parse(_code ?? '0');
                         if (state.value.lastPage == 'register') {
                           ctrl.checkOtp(code);
                         } else {

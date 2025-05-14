@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/utils/padding.dart';
 import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/cards/plats.dart';
@@ -30,10 +31,10 @@ class _SearchPageState extends State<SearchPage> {
           title: TextTitle(title: "Rechercher des plats"),
           actions: const [PanierButton()],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(children: [
-            InputSearch(
+        body: Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: InputSearch(
               ctrl: controller,
               autoFocus: state.value.autoFocus,
               onChange: (value) {
@@ -44,35 +45,38 @@ class _SearchPageState extends State<SearchPage> {
               },
               readOnly: false,
             ),
-            25.ph,
-            if (state.value.isVisible)
-              Column(
-                children: state.value.plats.map((plat) {
-                  return Column(
-                    children: [
-                      Plats(
-                          tap: () {
-                            Get.toNamed('/plat/${plat.id}');
-                          },
-                          plat: plat),
-                      10.ph
-                    ],
-                  );
-                }).toList(),
-              ),
-            if (!state.value.isVisible)
-              SizedBox(
-                  height: height * 0.7,
-                  child: Center(
-                      child: Chargement(
-                    loading: state.value.loading,
-                    hasData: state.value.hasData,
-                    msg: (state.value.noGet)
-                        ? "Aucun plat trouvé pour ${state.value.search}"
-                        : "Aucun plat trouvé",
-                  )))
-          ]),
-        ),
+          ),
+          25.ph,
+          if (state.value.isVisible)
+            Expanded(
+              child: ListView.builder(
+                  itemCount: state.value.plats.length,
+                  itemBuilder: (context, index) {
+                    Plat plat = state.value.plats[index];
+                    return Column(
+                      children: [
+                        Plats(
+                            tap: () {
+                              Get.toNamed('/plat/${plat.id}');
+                            },
+                            plat: plat),
+                        10.ph
+                      ],
+                    );
+                  }),
+            ),
+          if (!state.value.isVisible)
+            SizedBox(
+                height: height * 0.7,
+                child: Center(
+                    child: Chargement(
+                  loading: state.value.loading,
+                  hasData: state.value.hasData,
+                  msg: (state.value.noGet)
+                      ? "Aucun plat trouvé pour ${state.value.search}"
+                      : "Aucun plat trouvé",
+                )))
+        ]),
       );
     });
   }

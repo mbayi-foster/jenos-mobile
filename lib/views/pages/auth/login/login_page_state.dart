@@ -4,7 +4,7 @@ class LoginPageState {
   bool showPassword;
 
   LoginPageState(
-      {this.error = false, this.loading = false, this.showPassword = false});
+      {this.error = false, this.loading = false, this.showPassword = true});
 
   LoginPageState copyWith({bool? error, bool? loading, bool? showPassword}) =>
       LoginPageState(

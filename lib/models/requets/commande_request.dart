@@ -9,6 +9,7 @@ class CommandeRequest {
   Place adresse;
   bool facture;
   String note;
+  String zone;
 
   CommandeRequest({
     this.paniers = const [],
@@ -19,20 +20,18 @@ class CommandeRequest {
     required this.adresse,
     required this.facture,
     required this.note,
+    required this.zone,
   });
 
- Map<String, dynamic> toJson() => {
- 
-    'paniers': paniers,
-    'client_id': clientId,
-    'prix': prix,
-    'delivery_coast': deliveryCoast,
-    'paiement': paiement,
-    'adresse': adresse.toJson(),
-    'facture': facture,
-    'note': note
- 
-};
-
-
+  Map<String, dynamic> toJson() => {
+        'paniers': paniers,
+        'client_id': clientId,
+        'prix': prix,
+        'delivery_coast': deliveryCoast,
+        'paiement': paiement,
+        'adresse': adresse.toJson(),
+        'facture': facture,
+        'note': note,
+        'zone':zone
+      };
 }

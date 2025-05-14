@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jenos_app/utils/padding.dart';
+import 'package:jenos_app/views/components/cards/plats.dart';
 import 'package:jenos_app/views/pages/details/menu/details_menu_ctrl.dart';
 import 'package:jenos_app/models/principals/plat.dart';
 import 'package:jenos_app/views/components/buttons/my_floating_button.dart';
@@ -77,15 +79,18 @@ class _DetailsMenuPageState extends State<DetailsMenuPage> {
         for (Plat plat in plats!)
           Column(
             children: [
-              PlatMenu(
-                tap: () {
-                  _goPlat(plat.id);
-                },
-                plat: plat,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
+              Plats(
+                  tap: () {
+                    Get.toNamed('/plat/${plat.id}');
+                  },
+                  plat: plat),
+              // PlatMenu(
+              //   tap: () {
+              //     _goPlat(plat.id);
+              //   },
+              //   plat: plat,
+              // ),
+              10.ph
             ],
           ),
       ],

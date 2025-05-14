@@ -13,7 +13,7 @@ class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
   @override
   Future<dynamic> home() async {
     try {
-      var response = null;
+      var response;
       var url = Uri.parse("${baseUrl}mobile-home");
       var res = await http.get(
         url,
@@ -22,6 +22,7 @@ class AcceuilServiceNetworkImpl extends AcceuilServiceNetwork {
       // Décodez la réponse JSON
       final Map<String, dynamic> jsonData = json.decode(res.body);
       response = jsonData;
+      return response;
     } catch (e) {
       return null;
     }

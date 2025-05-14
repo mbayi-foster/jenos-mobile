@@ -57,7 +57,11 @@ class PanierServiceNetworkImpl implements PanierServiceNetwork {
           },
           body: jsonEncode(commande.toJson()));
 
-      return true;
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       return false;
     }

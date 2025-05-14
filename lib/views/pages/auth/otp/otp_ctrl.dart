@@ -17,9 +17,9 @@ class OtpCtrl extends GetxController {
   onInit() {
     final args = Get.arguments;
     if (args == null || !args.containsKey('page')) {
-      state.value.lastPage = 'check';
-    } else {
       state.value.lastPage = 'register';
+    } else {
+      state.value.lastPage = 'check';
     }
     super.onInit();
   }
@@ -80,14 +80,21 @@ class OtpCtrl extends GetxController {
       val?.loading = true;
       val?.error = false;
     });
-
     AuthServiceLocalImpl apiLocal = AuthServiceLocalImpl();
 
     bool check = await apiLocal.verifyOtp(code);
     if (check) {
-      String? email = await prefs.getString('email');
+      String? email = prefs.getString('email');
       prefs.remove("email");
       Get.toNamed(NewPassword.path, arguments: {'email': email});
-    } else {}
+    } else {
+       state.update((val) {
+        val?.loading = false;
+        val?.error = true;
+        val?.msg =
+            "Vous avez entré le mauvais code si vous n'avez pas réussi des code cliqué sur renvoyer";
+      });
+      MyAlert.show(text: state.value.msg);
+    }
   }
 }

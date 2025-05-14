@@ -283,7 +283,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   _dialogueCarteBottom(Rx<CheckoutPageState> state) {
     String? adresse;
     final keyCarte = GlobalKey<FormState>();
-    Commune? _commune = state.value.commune;
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -296,9 +295,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 child: Column(
                   children: [
                     TextTitle(title: "Entrez votre adresse complète"),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    15.ph,
                     MyInput(
                         hint: "Adresse",
                         onSaved: (value) {
@@ -311,26 +308,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           return null;
                         },
                         keyboardType: TextInputType.text),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    5.ph,
+                    15.ph,
                     MyDropdown(
                         communes: state.value.communes,
-                        commune: _commune,
+                        commune: state.value.commune,
                         onChange: (Commune? newValue) {
-                          setState(() {
-                            _commune = newValue;
+                          state.update((val) {
+                            val?.commune = newValue;
                           });
                         }),
-                    7.5.ph,
+                    15.ph,
                     PrimaryButton(
                         onPressed: () {
                           if (keyCarte.currentState!.validate()) {
                             keyCarte.currentState!.save();
                             state.update((val) {
-                              val?.commune = _commune;
-                              val?.deliveryCoast = _commune?.frais ?? 0.0;
+                              val?.deliveryCoast = state.value.commune?.frais ?? 0.0;
                               val?.adresse = Place(
                                   nom: adresse,
                                   lat: 0.0,

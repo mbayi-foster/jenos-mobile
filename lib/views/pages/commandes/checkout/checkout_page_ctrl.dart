@@ -114,13 +114,14 @@ class CheckoutPageCtrl extends GetxController {
         adresse: state.value.adresse!,
         paniers: state.value.paniers,
         facture: false,
+        zone: state.value.commune!.zone,
         note: state.value.note);
     PanierServiceNetworkImpl api = PanierServiceNetworkImpl();
     bool payer = await api.commander(commande);
+    print('commande ${commande.toJson()}');
     if (ctx.mounted) {
       ctx.loaderOverlay.hide();
     }
-
     return payer;
   }
 }

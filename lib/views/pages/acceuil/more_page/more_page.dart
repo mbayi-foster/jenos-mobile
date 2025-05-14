@@ -8,6 +8,7 @@ import 'package:jenos_app/views/components/buttons/panier_button.dart';
 import 'package:jenos_app/views/components/cards/info_item.dart';
 import 'package:jenos_app/views/components/my_bottom_navigation_bar.dart';
 import 'package:jenos_app/views/components/texts/text_title.dart';
+import 'package:jenos_app/views/pages/auth/new_password/new_password.dart';
 import 'package:jenos_app/views/pages/mores/about_page.dart';
 
 class MorePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MorePageState extends State<MorePage> {
     {
       'icon': IconsPath.dollards,
       'text': "Changer le mot de passe",
-      'lien': "/change-password"
+      'lien': NewPassword.path
     },
     // {'icon': IconsPath.dollards, 'text': 'Inbox', 'lien': "/notifications"},
     {
