@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
-class TextTitle extends StatefulWidget {
+class TextTitle extends StatelessWidget {
+  TextTitle({
+    super.key,
+    this.maxLines = 1,
+    this.overflow,
+    required this.title,
+    this.color = Colors.black,
+    this.fontSize = 17.5,
+  });
+
   String title;
   double fontSize;
   TextOverflow? overflow;
   int maxLines;
-  Color color;
-  TextTitle(
-      {super.key,
-      this.color = Colors.black,
-      this.maxLines = 1,
-      this.overflow,
-      required this.title,
-      this.fontSize = 17.5});
+  final Color color;
 
-  @override
-  State<TextTitle> createState() => _TextTitleState();
-}
-
-class _TextTitleState extends State<TextTitle> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      overflow: widget.overflow,
-      maxLines: widget.maxLines,
-      widget.title,
+      overflow: overflow,
+      maxLines: maxLines,
+      title,
       style: TextStyle(
-          fontSize: widget.fontSize,
-          fontWeight: FontWeight.w500,
-          color: widget.color),
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
     );
+    ;
   }
 }
